@@ -32,11 +32,11 @@
 include 'usuario.php';
 include 'habitacion.php';
 include 'reserva.php';
-include 'reservamanager.php'; // Incluye el archivo de la clase ReservaManager
+include 'reservasGestor.php';
 
-$usuariosManager = new Usuarios(); // Clase para manejar usuarios
-$habitacionesManager = new Habitacion(); // Clase para manejar habitaciones
-$reservasManager = new ReservaManager(); // Clase para manejar reservas
+$usuariosGestor = new Usuarios(); // Clase para manejar usuarios
+$habitacionesGestor = new Habitacion(); // Clase para manejar habitaciones
+$reservasGestor = new ReservasGestor(); // Clase para manejar reservas
 
 while (true) {
     echo "=== Menú Principal ===\n";
@@ -62,13 +62,13 @@ while (true) {
             $email = trim(fgets(STDIN));
             echo "Ingrese el teléfono del usuario: ";
             $telefono = trim(fgets(STDIN));
-            $usuariosManager->crearUsuario($nombreApellido, $dni, $email, $telefono);
+            $usuariosGestor->crearUsuario($nombreApellido, $dni, $email, $telefono);
             echo "Usuario agregado exitosamente.\n";
             break;
 
         case 2:
             // Mostrar Usuarios
-            $usuarios = $usuariosManager->obtenerUsuarios();
+            $usuarios = $usuariosGestor->obtenerUsuarios();
             foreach ($usuarios as $usuario) {
                 echo $usuario . "\n";
             }
@@ -82,13 +82,13 @@ while (true) {
             $tipo = trim(fgets(STDIN));
             echo "Ingrese el precio por noche: ";
             $precio = trim(fgets(STDIN));
-            $habitacionesManager->agregarHabitacion(new Habitacion($numero, $tipo, $precio, true));
+            $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio, true));
             echo "Habitación agregada exitosamente.\n";
             break;
 
         case 4:
             // Mostrar Habitaciones
-            $habitaciones = $habitacionesManager->obtenerHabitaciones();
+            $habitaciones = $habitacionesGestor->obtenerHabitaciones();
             foreach ($habitaciones as $habitacion) {
                 echo $habitacion . "\n";
             }
@@ -98,23 +98,23 @@ while (true) {
             // Crear Reserva
             echo "Ingrese el ID del usuario: ";
             $usuarioId = trim(fgets(STDIN));
-            $usuario = $usuariosManager->obtenerUsuarioPorId($usuarioId);
+            $usuario = $usuariosGestor->obtenerUsuarioPorId($usuarioId);
 
             if ($usuario) {
                 echo "Ingrese el tipo de habitación para la reserva: ";
                 $tipoHabitacion = trim(fgets(STDIN));
-                $habitacion = $habitacionesManager->buscarHabitacion($tipoHabitacion);
+                $habitacion = $habitacionesGestor->buscarPorDisponibilidad($tipoHabitacion);
 
                 if ($habitacion) {
                     echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
                     $fechaInicio = trim(fgets(STDIN));
                     echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
                     $fechaFin = trim(fgets(STDIN));
-                    $reservaId = $reservasManager->generarNuevoId();
+                    $reservaId = $reservasGestor->generarNuevoId();
                     $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0);
                     $reserva->setHabitacion($habitacion); // Asignar la habitación a la reserva
-                    $reserva->calcularCosto($habitacion->getPrecio()); // Calcular costo basado en el precio de la habitación
-                    $reservasManager->agregarReserva($reserva);
+                    $reserva->calcularCosto($this->habitacion->getPrecio()); // Calcular costo basado en el precio de la habitación
+                    $reservasgestor->agregarReserva($reserva);
                     echo "Reserva creada exitosamente.\n";
                 } else {
                     echo "No se encontró una habitación disponible de ese tipo.\n";
@@ -126,7 +126,7 @@ while (true) {
 
         case 6:
             // Mostrar Reservas
-            $reservas = $reservasManager->obtenerReservas();
+            $reservas = $reservasGestor->obtenerReservas();
             foreach ($reservas as $reserva) {
                 echo $reserva . "\n";
             }
