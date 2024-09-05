@@ -1,6 +1,6 @@
 <?php
 include 'habitacion.php';
-include 'usuario.php'; // Asegúrate de incluir la clase Usuario si se usa en Reserva
+include 'usuario.php'; 
 
 class Reserva {
     private $id;
@@ -76,7 +76,7 @@ class Reserva {
     }
 
     public function mostrarCosto() {
-        return "Costo de la reserva: $" . $this->costo;
+         return "Costo de la reserva: $" . $this->costo;
     }
 
     public function mostrarEstado() {
