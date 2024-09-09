@@ -1,4 +1,5 @@
-<?php 
+<?php
+ 
 class Usuarios {
     private $usuarios = [];
     private $usuarioJson = 'usuario.json';
@@ -14,7 +15,7 @@ class Usuarios {
             $usuariosArray = json_decode($jsonUsuarios, true) ?? [];
 
             foreach ($usuariosArray as $usuarioData) {
-                $usuario = new Usuario(
+                $usuario = new Usuarios(
                     $usuarioData['id'],
                     $usuarioData['nombre_apellido'],
                     $usuarioData['dni'],

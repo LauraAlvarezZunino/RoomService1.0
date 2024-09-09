@@ -1,6 +1,6 @@
 <?php
-include 'habitacion.php';
-include 'usuario.php'; 
+require_once 'habitaciones.php';
+require_once 'usuarios.php'; 
 
 class Reserva {
     private $id;

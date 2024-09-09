@@ -1,5 +1,10 @@
-[
-    {"numero": 1, "tipo": "simple", "precio": "50.000", "disponibilidad": "disponible"},
-    {"numero": 2, "tipo": "familiar", "precio": "90.000", "disponibilidad": "disponible"},
-    {"numero": 3, "tipo": "doble", "precio": "70.000", "disponibilidad": "disponible"}
-]
+{
+    "habitacion": [
+        {
+            "numero": null,
+            "tipo": null,
+            "precio": null,
+            "disponibilidad": null
+        }
+    ]
+}
