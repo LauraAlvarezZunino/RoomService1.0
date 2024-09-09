@@ -1,5 +1,7 @@
 <?php
-class Habitaciones {
+
+class Habitacion {
+
     private $habitaciones = [];
     private $archivoJson = 'habitacion.json';
     private $numero;
@@ -7,8 +9,13 @@ class Habitaciones {
     private $precio;
     private $disponibilidad;
 
-    public function __construct() {
-        $this->cargarDesdeJSON();
+
+    public function __construct($numero = null, $tipo = null, $precio = null, $disponibilidad = null) {
+        $this->numero = $numero;
+        $this->tipo = $tipo;
+        $this->precio = $precio;
+        $this->disponibilidad = $disponibilidad;
+
     }
 
     // Getters y Setters
@@ -119,11 +126,11 @@ class Habitaciones {
 
     function guardarEnJSON() {
         $habitacionesArray = [];
-    
+
         foreach ($this->habitaciones as $habitacion) {
             $habitacionesArray[] = $this->habitacionToArray($habitacion);
         }
-    
+
         $jsonHabitacion = json_encode(['habitacion' => $habitacionesArray], JSON_PRETTY_PRINT);
         file_put_contents($this->archivoJson, $jsonHabitacion);
     }
@@ -133,8 +140,10 @@ class Habitaciones {
         if (file_exists($this->archivoJson)) {
             $jsonHabitacion = file_get_contents($this->archivoJson);
             $habitacionesArray = json_decode($jsonHabitacion, true)['habitacion'] ?? [];
+            $this->habitaciones = []; // Asegúrate de vaciar el array antes de cargar los datos
             foreach ($habitacionesArray as $habitacionData) {
-                $habitacion = new Habitaciones();
+                $habitacion = new Habitacion();
+
                 $habitacion->setNumero($habitacionData['numero']);
                 $habitacion->setTipo($habitacionData['tipo']);
                 $habitacion->setPrecio($habitacionData['precio']);

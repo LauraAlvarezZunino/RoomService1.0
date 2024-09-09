@@ -25,15 +25,24 @@
         //una vez elegida la accion se ejecuta y una vez realizada se pregunta:
             //hacer más cambios (vuelve al menu habitacioens, clientes, reservas)
             //salir del sistema
-<?php
-require_once 'usuarios.php';
-include 'habitaciones.php';
+
+            <?php
+include 'usuarios.php';
+include_once 'habitaciones.php';
 include 'reserva.php';
 include 'reservasGestor.php';
 
 $usuariosGestor = new Usuario(); // Clase para manejar usuarios
 $habitacionesGestor = new Habitaciones(); // Clase para manejar habitaciones
 $reservasGestor = new ReservasGestor(); // Clase para manejar reservas
+
+$habitacionesGestor->cargarDesdeJSON();
+
+function agregarHabitacion($habitacion) {
+    $this->habitaciones[] = $habitacion;
+    $this->guardarEnJSON();
+    print_r($this->habitaciones); // Verifica si la habitación se agrega correctamente
+}
 
 while (true) {
     echo "=== Menú Principal ===\n";

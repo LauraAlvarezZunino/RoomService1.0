@@ -12,18 +12,28 @@ class Usuarios {
     private function cargarDesdeJSON() {
         if (file_exists($this->usuarioJson)) {
             $jsonUsuarios = file_get_contents($this->usuarioJson);
-            $usuariosArray = json_decode($jsonUsuarios, true) ?? [];
 
-            foreach ($usuariosArray as $usuarioData) {
-                $usuario = new Usuarios(
-                    $usuarioData['id'],
-                    $usuarioData['nombre_apellido'],
-                    $usuarioData['dni'],
-                    $usuarioData['email'],
-                    $usuarioData['telefono']
-                );
-                $this->usuarios[] = $usuario;
+            $data = json_decode($jsonUsuarios, true);
+    
+            if (isset($data['usuarios'])) {  // Verifica si existe la clave 'usuarios'
+                $usuariosArray = $data['usuarios'];
+    
+                foreach ($usuariosArray as $usuarioData) {
+                        $usuario = new Usuario(
+                        $usuarioData['id'],
+                        $usuarioData['nombre_apellido'],
+                        $usuarioData['dni'],
+                        $usuarioData['email'],
+                        $usuarioData['telefono']
+                    );
+                    $this->usuarios[] = $usuario;
+                }
+            } else {
+                echo "No se encontró la clave 'usuarios' en el archivo JSON.\n";
+
             }
+        } else {
+            echo "No se encontró el archivo JSON.\n";
         }
     }
 
@@ -121,6 +131,10 @@ class Usuario {
         $this->dni = $dni;
         $this->email = $email;
         $this->telefono = $telefono;
+    }
+
+    public function __toString() {
+        return "ID: " . $this->id . ", Nombre: " . $this->nombre_apellido . ", DNI: " . $this->dni . ", Email: " . $this->email . ", Teléfono: " . $this->telefono;
     }
 
     // Getters y Setters

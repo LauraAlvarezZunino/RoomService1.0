@@ -23,10 +23,19 @@
         },
         {
             "id": 4,
-            "nombre_apellido": "laura alvarez",
-            "dni": "435353",
-            "email": "2rfdv",
-            "telefono": "3453"
+
+            "nombre_apellido": "mariano martinez",
+            "dni": "24567890",
+            "email": "mariano@gmail.com",
+            "telefono": "2494698754"
+        },
+        {
+            "id": 5,
+            "nombre_apellido": "diego rodriguez",
+            "dni": "34538690",
+            "email": "skljghdljgb",
+            "telefono": "24353656"
+
         }
     ]
 }

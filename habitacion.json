@@ -1,10 +1,19 @@
 {
     "habitacion": [
         {
-            "numero": null,
-            "tipo": null,
-            "precio": null,
-            "disponibilidad": null
+
+
+            "numero": "2",
+            "tipo": "simple",
+            "precio": "45000",
+            "disponibilidad": true
+        },
+        {
+            "numero": "4",
+            "tipo": "familiar",
+            "precio": "34",
+            "disponibilidad": true
+
         }
     ]
 }
