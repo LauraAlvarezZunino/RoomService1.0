@@ -1,4 +1,5 @@
-<?php 
+<?php
+ 
 class Usuarios {
     private $usuarios = [];
     private $usuarioJson = 'usuario.json';
@@ -11,6 +12,7 @@ class Usuarios {
     private function cargarDesdeJSON() {
         if (file_exists($this->usuarioJson)) {
             $jsonUsuarios = file_get_contents($this->usuarioJson);
+
             $data = json_decode($jsonUsuarios, true);
     
             if (isset($data['usuarios'])) {  // Verifica si existe la clave 'usuarios'
@@ -28,6 +30,7 @@ class Usuarios {
                 }
             } else {
                 echo "No se encontró la clave 'usuarios' en el archivo JSON.\n";
+
             }
         } else {
             echo "No se encontró el archivo JSON.\n";

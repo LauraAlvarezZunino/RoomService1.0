@@ -1,7 +1,4 @@
-
-
 //aca ponemos las opciones que deberia tener el menu
-
 // bienvenida y elegir entre cliente o administrativo
     //cliente
         // preguntarle si es nuevo o si ya esta registrado
@@ -28,14 +25,15 @@
         //una vez elegida la accion se ejecuta y una vez realizada se pregunta:
             //hacer más cambios (vuelve al menu habitacioens, clientes, reservas)
             //salir del sistema
+
             <?php
 include 'usuarios.php';
 include_once 'habitaciones.php';
 include 'reserva.php';
 include 'reservasGestor.php';
 
-$usuariosGestor = new Usuarios(); // Clase para manejar usuarios
-$habitacionesGestor = new Habitacion(); // Clase para manejar habitaciones
+$usuariosGestor = new Usuario(); // Clase para manejar usuarios
+$habitacionesGestor = new Habitaciones(); // Clase para manejar habitaciones
 $reservasGestor = new ReservasGestor(); // Clase para manejar reservas
 
 $habitacionesGestor->cargarDesdeJSON();
@@ -90,7 +88,7 @@ while (true) {
             $tipo = trim(fgets(STDIN));
             echo "Ingrese el precio por noche: ";
             $precio = trim(fgets(STDIN));
-            $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio, true));
+            $habitacionesGestor->agregarHabitacion(new Habitaciones($numero, $tipo, $precio, true));
             echo "Habitación agregada exitosamente.\n";
             break;
 

@@ -1,6 +1,8 @@
 {
     "habitacion": [
         {
+
+
             "numero": "2",
             "tipo": "simple",
             "precio": "45000",
@@ -11,6 +13,7 @@
             "tipo": "familiar",
             "precio": "34",
             "disponibilidad": true
+
         }
     ]
 }
