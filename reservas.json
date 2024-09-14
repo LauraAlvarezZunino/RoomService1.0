@@ -1,0 +1,11 @@
+
+[
+    {
+        "id": 1,
+        "fecha_inicio": "2024-05-23",
+        "fecha_fin": "2024-05-24",
+        "habitacion": {}, 
+        "estado": "Reservado",
+        "costo": 45000
+    }
+]

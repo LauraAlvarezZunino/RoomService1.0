@@ -1,11 +1,7 @@
 <?php
+include_once 'habitaciones.php';
+class Reserva {
 
-// include_once 'habitaciones.php';
-// include 'usuarios.php'; 
-
-
-class Reserva
-{
     private $id;
     private $fecha_inicio;
     private $fecha_fin;
@@ -68,8 +64,8 @@ class Reserva
         return $this->habitacion;
     }
 
-    public function setHabitacion($habitacion)
-    {
+   
+    public function setHabitacion(Habitacion $habitacion) {
         $this->habitacion = $habitacion;
     }
 
@@ -83,12 +79,15 @@ class Reserva
         $this->estado = $estado;
     }
 
-    public function calcularCosto($precio_por_noche)
-    {
+    public function calcularCosto($precio_por_noche) {
         $inicio = new DateTime($this->fecha_inicio);
         $fin = new DateTime($this->fecha_fin);
+
+        // Calcular la diferencia en días
         $diferencia = $inicio->diff($fin);
         $dias = $diferencia->days;
+
+        // Calcular el costo total
         $this->costo = $dias * $precio_por_noche;
     }
 
@@ -104,6 +103,10 @@ class Reserva
 
     public function __toString()
     {
-        return "ID: {$this->id}, Fecha Inicio: {$this->fecha_inicio}, Fecha Fin: {$this->fecha_fin}, Estado: {$this->estado}, Costo: $" . $this->costo;
+        return "ID: {$this->id}, Fecha Inicio: {$this->fecha_inicio}, Fecha Fin: {$this->fecha_fin}, Estado: {$this->estado},Habitacion: {$this->habitacion} Costo: $" . $this->costo;
     }
 }
+
+   
+
+

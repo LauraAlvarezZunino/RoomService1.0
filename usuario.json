@@ -23,7 +23,6 @@
         },
         {
             "id": 4,
-
             "nombre_apellido": "mariano martinez",
             "dni": "24567890",
             "email": "mariano@gmail.com",
@@ -35,7 +34,13 @@
             "dni": "34538690",
             "email": "skljghdljgb",
             "telefono": "24353656"
-
+        },
+        {
+            "id": 6,
+            "nombre_apellido": "lalala",
+            "dni": "3435",
+            "email": "ldsfllsfs",
+            "telefono": "2424"
         }
     ]
 }

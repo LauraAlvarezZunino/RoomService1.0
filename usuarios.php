@@ -97,7 +97,7 @@ class Usuarios
         return null;
     }
 
-    // Actualizar un usuario existente
+    // Actualizar un usuario existente 
     public function actualizarUsuario($id, $nuevosDatos)
     {
         foreach ($this->usuarios as &$usuario) {

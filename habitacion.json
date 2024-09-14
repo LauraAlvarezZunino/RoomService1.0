@@ -23,6 +23,12 @@
             "tipo": "simple",
             "precio": "45",
             "disponibilidad": true
+        },
+        {
+            "numero": "5",
+            "tipo": "5",
+            "precio": "5",
+            "disponibilidad": true
         }
     ]
 }
