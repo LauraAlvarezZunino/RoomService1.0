@@ -24,7 +24,7 @@ class Usuarios
                 foreach ($usuariosArray as $usuarioData) {
                     $usuario = new Usuario(
                         $usuarioData['id'],
-                        $usuarioData['nombreApellido'],
+                        $usuarioData['nombre'],
                         $usuarioData['dni'],
                         $usuarioData['email'],
                         $usuarioData['telefono']
@@ -52,7 +52,7 @@ class Usuarios
     {
         return [
             'id' => $usuario->getId(),
-            'nombre_apellido' => $usuario->getNombreApellido(),
+            'nombre' => $usuario->getNombreApellido(),
             'dni' => $usuario->getDni(),
             'email' => $usuario->getEmail(),
             'telefono' => $usuario->getTelefono()
@@ -60,10 +60,10 @@ class Usuarios
     }
 
     // Crear (Agregar) un nuevo usuario con ID autogenerado
-    public function crearUsuario($nombre_apellido, $dni, $email, $telefono)
+    public function crearUsuario($nombreApellido, $dni, $email, $telefono)
     {
         $nuevoId = $this->generarNuevoId();
-        $usuario = new Usuario($nuevoId, $nombre_apellido, $dni, $email, $telefono);
+        $usuario = new Usuario($nuevoId, $nombreApellido, $dni, $email, $telefono);
         $this->usuarios[] = $usuario;
         $this->guardarEnJSON();
     }
@@ -102,8 +102,8 @@ class Usuarios
     {
         foreach ($this->usuarios as &$usuario) {
             if ($usuario->getId() == $id) {
-                if (isset($nuevosDatos['nombre_apellido'])) {
-                    $usuario->setNombreApellido($nuevosDatos['nombre_apellido']);
+                if (isset($nuevosDatos['nombre'])) {
+                    $usuario->setNombreApellido($nuevosDatos['nombre']);
                 } else {
                     $usuario->setNombreApellido($usuario->getNombreApellido());
                 }
@@ -155,15 +155,15 @@ class Usuarios
 class Usuario
 {
     private $id;
-    private $nombre_apellido;
+    private $nombreApellido;
     private $dni;
     private $email;
     private $telefono;
 
-    public function __construct($id, $nombre_apellido, $dni, $email, $telefono)
+    public function __construct($id, $nombreApellido, $dni, $email, $telefono)
     {
         $this->id = $id;
-        $this->nombre_apellido = $nombre_apellido;
+        $this->nombreApellido = $nombreApellido;
         $this->dni = $dni;
         $this->email = $email;
         $this->telefono = $telefono;
@@ -171,7 +171,7 @@ class Usuario
 
     public function __toString()
     {
-        return "ID: " . $this->id . ", Nombre: " . $this->nombre_apellido . ", DNI: " . $this->dni . ", Email: " . $this->email . ", Teléfono: " . $this->telefono;
+        return "ID: " . $this->id . ", Nombre: " . $this->nombreApellido . ", DNI: " . $this->dni . ", Email: " . $this->email . ", Teléfono: " . $this->telefono;
     }
 
     // Getters y Setters
@@ -187,12 +187,12 @@ class Usuario
 
     public function getNombreApellido()
     {
-        return $this->nombre_apellido;
+        return $this->nombreApellido;
     }
 
-    public function setNombreApellido($nombre_apellido)
+    public function setNombreApellido($nombreApellido)
     {
-        $this->nombre_apellido = $nombre_apellido;
+        $this->nombreApellido = $nombreApellido;
     }
 
     public function getDni()
