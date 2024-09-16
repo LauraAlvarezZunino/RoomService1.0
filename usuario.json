@@ -1,25 +1,25 @@
 {
-    "usuarios": {
-        "1": {
+    "usuarios": [
+        {
             "id": 3,
             "nombre": null,
             "dni": "111111",
             "email": "22222",
             "telefono": "2494673455"
         },
-        "2": {
+        {
             "id": 4,
             "nombre": null,
             "dni": "24567890",
             "email": "mariano@gmail.com",
             "telefono": "2494698754"
         },
-        "3": {
+        {
             "id": 5,
             "nombre": null,
             "dni": "34538690",
             "email": "skljghdljgb",
             "telefono": "24353656"
         }
-    }
+    ]
 }
