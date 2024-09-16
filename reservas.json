@@ -1,10 +1,17 @@
-
 [
     {
         "id": 1,
         "fechaInicio": "2024-05-23",
         "fechaFin": "2024-05-24",
-        "habitacion": {}, 
+        "habitacion": null,
+        "estado": [],
+        "costo": "Reservado"
+    },
+    {
+        "id": 2,
+        "fechaInicio": "2024-09-16",
+        "fechaFin": "2024-09-17",
+        "habitacion": {},
         "estado": "Reservado",
         "costo": 45000
     }
