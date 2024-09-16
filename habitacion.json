@@ -1,8 +1,6 @@
 {
     "habitacion": [
         {
-
-
             "numero": "2",
             "tipo": "simple",
             "precio": "45000",
@@ -13,7 +11,24 @@
             "tipo": "familiar",
             "precio": "34",
             "disponibilidad": true
-
+        },
+        {
+            "numero": "4",
+            "tipo": "simple",
+            "precio": "40",
+            "disponibilidad": true
+        },
+        {
+            "numero": "4",
+            "tipo": "simple",
+            "precio": "45",
+            "disponibilidad": true
+        },
+        {
+            "numero": "5",
+            "tipo": "5",
+            "precio": "5",
+            "disponibilidad": true
         }
     ]
 }

@@ -1,92 +1,116 @@
 <?php
-
-// include_once 'habitaciones.php';
-// include 'usuarios.php'; 
-
-
+include_once 'habitaciones.php';
 class Reserva {
+
     private $id;
-    private $fecha_inicio;
-    private $fecha_fin;
+    private $fechaInicio;
+    private $fechaFin;
     private $habitacion;
     private $estado;
     private $costo;
 
-    public function __construct($id, $fecha_inicio, $fecha_fin, $estado, $costo) {
+    public function __construct($id, $fechaInicio, $fechaFin, $estado, $costo)
+    {
         $this->id = $id;
-        $this->fecha_inicio = $fecha_inicio;
-        $this->fecha_fin = $fecha_fin;
+        $this->fechaInicio = $fechaInicio;
+        $this->fechaFin = $fechaFin;
         $this->estado = $estado;
         $this->costo = $costo;
     }
 
     // Getters y Setters
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
 
-    public function getFechaInicio() {
-        return $this->fecha_inicio;
+    public function getFechaInicio()
+    {
+        return $this->fechaInicio;
     }
 
-    public function setFechaInicio($fecha_inicio) {
-        $this->fecha_inicio = $fecha_inicio;
+    public function setFechaInicio($fecha_inicio)
+    {
+        $this->fechaInicio = $fecha_inicio;
     }
 
-    public function getFechaFin() {
-        return $this->fecha_fin;
+    public function getFechaFin()
+    {
+        return $this->fechaFin;
     }
 
-    public function setFechaFin($fecha_fin) {
-        $this->fecha_fin = $fecha_fin;
+    public function setFechaFin($fechaFin)
+    {
+        $this->fechaFin = $fechaFin;
     }
 
-    public function getCosto() {
+    public function getCosto()
+    {
         return $this->costo;
     }
 
-    public function setCosto($costo) {
+    public function setCosto($costo)
+    {
         $this->costo = $costo;
     }
 
-    public function getHabitacion() {
+    public function getHabitacion()
+    {
         return $this->habitacion;
     }
 
-    public function setHabitacion($habitacion) {
+   
+    public function setHabitacion(Habitacion $habitacion) {
         $this->habitacion = $habitacion;
     }
 
-    public function getEstado() {
+    public function getEstado()
+    {
         return $this->estado;
     }
 
-    public function setEstado($estado) {
+    public function setEstado($estado)
+    {
         $this->estado = $estado;
     }
 
-    public function calcularCosto($precio_por_noche) {
-        $inicio = new DateTime($this->fecha_inicio);
-        $fin = new DateTime($this->fecha_fin);
+    public function calcularCosto($precioPorNoche) {
+        $inicio = new DateTime($this->fechaInicio);
+        $fin = new DateTime($this->fechaFin);
+
+        // Calcular la diferencia en días
         $diferencia = $inicio->diff($fin);
         $dias = $diferencia->days;
-        $this->costo = $dias * $precio_por_noche;
+
+        // Calcular el costo total
+        $this->costo = $dias * $precioPorNoche;
     }
 
-    public function mostrarCosto() {
-         return "Costo de la reserva: $" . $this->costo;
+ 
+    /*function reservaToArray($reserva)
+    {
+        return [
+            'id' => $reserva->getId(),
+            'Fecha inicio' => $reserva->getFechaInicio(),
+            'Fecha fin' => $reserva->getFechaFin(),
+            'Estado' => $reserva->getEstado(),
+            'Habitacion'=>$reserva->getHabitacion(),
+            'Costo'=>$reserva->getCosto()
+        ];
     }
 
-    public function mostrarEstado() {
-        return "Estado de la reserva: " . $this->estado;
-    }
-
-    public function __toString() {
-        return "ID: {$this->id}, Fecha Inicio: {$this->fecha_inicio}, Fecha Fin: {$this->fecha_fin}, Estado: {$this->estado}, Costo: $" . $this->costo;
+*/
+    public function __toString()
+    {
+      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin}, Estado: {$this->estado},Habitacion:{$this->habitacion}, Costo: $" . $this->costo;
     }
 }
-?>
+
+   
+
+
