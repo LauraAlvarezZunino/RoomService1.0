@@ -67,7 +67,7 @@ class Habitacion
     {
         $this->habitaciones[] = $habitacion;
         $this->guardarEnJSON();
-        print_r($this->habitaciones);  // Imprime las habitaciones ojo solo para ver que este funcionando!
+      
     }
 
     public function obtenerHabitaciones()
