@@ -120,7 +120,7 @@ class Habitacion
 
 
 
-    private function eliminarHabitacion($numero)
+    public function eliminarHabitacion($numero)
     {
         $nuevasHabitaciones = [];
 

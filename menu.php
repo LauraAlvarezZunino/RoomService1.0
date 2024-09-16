@@ -307,10 +307,54 @@ function menuHabitaciones()
                 echo "Habitación agregada exitosamente.\n";
                 break;
             case 3:
-                //  modificar habitacion
+                echo "Ingrese el número de la habitación que desea modificar: ";
+                $numero = trim(fgets(STDIN));
+                
+                // Verificar si la habitación existe
+                $habitacion = null;
+                foreach ($habitacionesGestor->obtenerHabitaciones() as $h) {
+                    if ($h->getNumero() == $numero) {
+                        $habitacion = $h;
+                        break;
+                    }
+                }
+                
+                if ($habitacion) {
+                    echo "Modificando habitación número: $numero\n";
+                    
+                    echo "Ingrese el nuevo tipo de habitación (deje vacío para mantener el actual: {$habitacion->getTipo()}): ";
+                    $nuevoTipo = trim(fgets(STDIN));
+                    
+                    echo "Ingrese el nuevo precio (deje vacío para mantener el actual: {$habitacion->getPrecio()}): ";
+                    $nuevoPrecio = trim(fgets(STDIN));
+                    
+                    echo "¿Está disponible? (1 para Sí, 0 para No, deje vacío para mantener el actual): ";
+                    $nuevaDisponibilidad = trim(fgets(STDIN));
+
+                    // Actualizar los datos de la habitación
+                    $nuevosDatos = [
+                        'tipo' => $nuevoTipo ?: $habitacion->getTipo(),
+                        'precio' => $nuevoPrecio ?: $habitacion->getPrecio(),
+                        'disponibilidad' => $nuevaDisponibilidad !== '' ? (bool) $nuevaDisponibilidad : $habitacion->getDisponibilidad(),
+                    ];
+
+                    if ($habitacionesGestor->actualizarHabitacion($numero, $nuevosDatos)) {
+                        echo "Habitación actualizada correctamente.\n";
+                    } else {
+                        echo "Error al actualizar la habitación.\n";
+                    }
+                } else {
+                    echo "Habitación no encontrada.\n";
+                }
                 break;
             case 4:
-                // eliminar habitacion
+                echo "Ingrese el número de la habitación que desea eliminar: ";
+                $numero = trim(fgets(STDIN));
+                if ($habitacionesGestor->eliminarHabitacion($numero)) {
+                    echo "Habitación eliminada correctamente.\n";
+                } else {
+                    echo "Error al eliminar la habitación.\n";
+                }
                 break;
             case 5:
                 return;
@@ -320,7 +364,6 @@ function menuHabitaciones()
         }
     }
 }
-
 
 function menuReservas()
 {
