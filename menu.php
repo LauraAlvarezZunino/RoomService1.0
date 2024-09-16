@@ -68,7 +68,18 @@ function menuUsuario()
             registrarse($usuariosGestor);
             break;
         case 2:
-            menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor);
+            echo "Ingrese su DNI para continuar: ";
+            $dni = trim(fgets(STDIN));
+
+            // Buscar usuario por DNI
+            $usuario = $usuariosGestor->obtenerUsuarioPorDni($dni);
+
+            if ($usuario) {
+                menuUsuarioRegistrado($usuario, $usuariosGestor, $habitacionesGestor, $reservasGestor);
+            } else {
+                echo "DNI no encontrado. Inténtelo de nuevo.\n";
+                menuUsuario();
+            }
             break;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -97,7 +108,9 @@ function registrarse($usuariosGestor)
 }
 
 function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor)
-{
+{//aca deberia pedir el dni o algo
+    
+
     echo "=== Menú Usuario Registrado ===\n";
     echo "1. Ver Habitaciones\n";
     echo "2. Crear Reserva\n";
