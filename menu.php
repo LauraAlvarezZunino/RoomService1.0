@@ -209,11 +209,51 @@ function menuUsuarios()
                 }
                 break;
             case 2:
+
                 echo 'Ingrese el ID del usuario que quiere modificar: ';
-                $usuarioModificable= trim(fgets(STDIN));
-                $usuariosGestor->actualizarUsuario($usuarioModificable); //lo estoy haciendooo
-                 
-                // modificar usuario
+                $id= trim(fgets(STDIN));
+                $usuario= $usuariosGestor->obtenerUsuarioPorId($id);
+
+                if (!$usuario) {
+                    echo "Usuario no encontrado.\n";
+                    return false;
+                }
+            
+                // Mostrar información actual del usuario
+                echo "Modificando al usuario con ID: {$usuario->getId()}\n";
+                echo "Nombre actual: " . $usuario->getNombreApellido() . "\n";
+                echo "DNI actual: " . $usuario->getDni() . "\n";
+                echo "Email actual: " . $usuario->getEmail() . "\n";
+                echo "Teléfono actual: " . $usuario->getTelefono() . "\n";
+            
+                // Pedir nuevos datos (o mantener los actuales si no se ingresan)
+                echo "Introduce el nuevo nombre (deja vacío para mantener el actual): ";
+                $nombreApellido = trim(fgets(STDIN)); // Capturar entrada del usuario
+            
+                echo "Introduce el nuevo DNI (deja vacío para mantener el actual): ";
+                $dni = trim(fgets(STDIN));
+            
+                echo "Introduce el nuevo email (deja vacío para mantener el actual): ";
+                $email = trim(fgets(STDIN));
+            
+                echo "Introduce el nuevo teléfono (deja vacío para mantener el actual): ";
+                $telefono = trim(fgets(STDIN));
+            
+                // Preparar array de nuevos datos
+                $nuevosDatos = [
+                    'nombre' => $nombreApellido ?: null,  // Si está vacío, se deja null
+                    'dni' => $dni ?: null,
+                    'email' => $email ?: null,
+                    'telefono' => $telefono ?: null,
+                ];
+            
+                // Llamar a la función para actualizar el usuario
+                if ($usuariosGestor->actualizarUsuario($id, $nuevosDatos)) {
+                    echo "Usuario actualizado correctamente.\n";
+                } else {
+                    echo "No se pudo actualizar el usuario.\n";
+                }
+            
                 break;
             case 3:
                 echo 'Ingrese el ID a eliminar: ';

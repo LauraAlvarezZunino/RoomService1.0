@@ -1,32 +1,25 @@
 {
-    "usuarios": [
-        {
-            "id": 1,
-            "nombreApellido": "Diego Rodriguez",
-            "dni": "25.356.893",
-            "email": "dr@gmail.com",
-            "telefono": "2494009876"
-        },
-        {
+    "usuarios": {
+        "1": {
             "id": 3,
-            "nombreApellido": "Lucas Salvatori",
-            "dni": "27.887.900",
-            "email": "ls@gmail.com",
+            "nombre": null,
+            "dni": "111111",
+            "email": "22222",
             "telefono": "2494673455"
         },
-        {
+        "2": {
             "id": 4,
-            "nombreApellido": "mariano martinez",
+            "nombre": null,
             "dni": "24567890",
             "email": "mariano@gmail.com",
             "telefono": "2494698754"
         },
-        {
+        "3": {
             "id": 5,
-            "nombreApellido": "diego rodriguez",
+            "nombre": null,
             "dni": "34538690",
             "email": "skljghdljgb",
             "telefono": "24353656"
         }
-    ]
+    }
 }

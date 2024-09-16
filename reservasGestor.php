@@ -74,8 +74,8 @@ class ReservasGestor
         foreach ($this->reservas as $reserva) {
             $reservasArray[] = [
                 'id' => $reserva->getId(),
-                'fecha_inicio' => $reserva->getFechaInicio(),
-                'fecha_fin' => $reserva->getFechaFin(),
+                'fechaInicio' => $reserva->getFechaInicio(),
+                'fechaFin' => $reserva->getFechaFin(),
                 'habitacion' => $reserva->getHabitacion(),
                 'estado' => $reserva->getEstado(),
                 'costo' => $reserva->getCosto()
