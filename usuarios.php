@@ -97,6 +97,15 @@ class Usuarios
         return null;
     }
 
+    public function obtenerUsuarioPorDni($dni)
+    {
+        foreach ($this->usuarios as $usuario) {
+            if ($usuario->getDni() == $dni) {
+                return $usuario;
+            }
+        }
+        return null;
+    }
     // Actualizar un usuario existente, el isset es para ver si existe el valor  
     public function actualizarUsuario($id, $nuevosDatos)
     {
