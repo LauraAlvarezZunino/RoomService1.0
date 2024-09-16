@@ -130,7 +130,7 @@ class Habitacion
             }
         }
 
-        $this->habitaciones = $nuevasHabitaciones; // Asigna el nuevo array
+        $this->habitaciones = $nuevasHabitaciones; 
         $this->guardarEnJSON();
 
         return true;
@@ -159,7 +159,6 @@ class Habitacion
             $this->habitaciones = []; // Asegúrate de vaciar el array antes de cargar los datos
             foreach ($habitacionesArray as $habitacionData) {
                 $habitacion = new Habitacion();
-
                 $habitacion->setNumero($habitacionData['numero']);
                 $habitacion->setTipo($habitacionData['tipo']);
                 $habitacion->setPrecio($habitacionData['precio']);

@@ -10,13 +10,10 @@ class ReservasGestor
     {
         $this->cargarDesdeJSON();
     }
-
-    // Generar un nuevo ID automáticamente
     public function generarNuevoId()
     {
         return $this->id++;
     }
-
     // Agrega una nueva reserva pero hay que ver porque no esta modficando la disponibilidad de ;a habiracion cuando 
     public function agregarReserva(Reserva $reserva)
     {
@@ -24,14 +21,11 @@ class ReservasGestor
         $this->guardarEnJSON();
         echo "Reserva agregada exitosamente.\n";
     }
-
-    // Obtener todas las reservas
     public function obtenerReservas()
     {
         return $this->reservas;
     }
-
-    // Modificar una reserva existente por ID
+    //modifica una reserva existente por ID
     public function modificarReserva($id, $nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion, $nuevoEstado, $nuevoCosto)
     {
         $reserva = $this->buscarReservaPorId($id);
@@ -47,7 +41,7 @@ class ReservasGestor
         }
     }
 
-    // Eliminar una reserva por ID
+    //eliminar una reserva por ID
     public function eliminarReserva($id)
     {
         foreach ($this->reservas as $indice => $reserva) {
@@ -61,7 +55,7 @@ class ReservasGestor
         return false;
     }
 
-    // Buscar una reserva por su ID
+    //uscar una reserva por su ID
     public function buscarReservaPorId($id)
     {
         foreach ($this->reservas as $reserva) {
@@ -101,8 +95,8 @@ class ReservasGestor
             foreach ($reservasArray as $reservaData) {
                 $reserva = new Reserva(
                     $reservaData['id'],
-                    $reservaData['fecha_inicio'],
-                    $reservaData['fecha_fin'],
+                    $reservaData['fechaInicio'],
+                    $reservaData['fechaFin'],
                     $reservaData['habitacion'],
                     $reservaData['estado'],
                     $reservaData['costo']

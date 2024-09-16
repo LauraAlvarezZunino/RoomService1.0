@@ -58,7 +58,7 @@ function menuUsuario()
 
 
     echo "=== Menú Usuario ===\n";
-    echo "1. Registrarme\n";
+    echo "1. Registrarme\n"; //separarlo de lo demas y dsp llamar a menu usuario
     echo "2. Soy Usuario\n";
     echo "3. Ver Habitaciones\n";
     echo "4. Crear Reserva\n";
@@ -209,11 +209,18 @@ function menuUsuarios()
                 }
                 break;
             case 2:
-                //armar $usuarios=$usuariosGestor->actualizarUsuario();
+                echo 'Ingrese el ID del usuario que quiere modificar: ';
+                $usuarioModificable= trim(fgets(STDIN));
+                $usuariosGestor->actualizarUsuario($usuarioModificable); //lo estoy haciendooo
+                 
                 // modificar usuario
                 break;
             case 3:
+                echo 'Ingrese el ID a eliminar: ';
+                $idEliminado= trim(fgets(STDIN));
+                $usuariosGestor->eliminarUsuario($idEliminado);
                 //  eliminar usuario
+                echo "Usuario {$idEliminado} eliminado correctamente.\n";
                 break;
             case 4:
                 return; // Vuelve al menú principal

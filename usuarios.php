@@ -24,7 +24,7 @@ class Usuarios
                 foreach ($usuariosArray as $usuarioData) {
                     $usuario = new Usuario(
                         $usuarioData['id'],
-                        $usuarioData['nombre_apellido'],
+                        $usuarioData['nombreApellido'],
                         $usuarioData['dni'],
                         $usuarioData['email'],
                         $usuarioData['telefono']
@@ -68,7 +68,7 @@ class Usuarios
         $this->guardarEnJSON();
     }
 
-    // Generar un nuevo ID basado en el último ID existente
+    // Generar un nuevo ID basado en el último ID existente 
     private function generarNuevoId()
     {
         if (empty($this->usuarios)) {
@@ -80,13 +80,13 @@ class Usuarios
     }
 
 
-    // Leer (Obtener) todos los usuarios
+    // mostrar todos los usuarios
     public function obtenerUsuarios()
     {
         return $this->usuarios;
     }
 
-    // Leer (Obtener) un usuario por ID
+    //  un usuario por ID?necesario?
     public function obtenerUsuarioPorId($id)
     {
         foreach ($this->usuarios as $usuario) {
@@ -97,33 +97,57 @@ class Usuarios
         return null;
     }
 
-    // Actualizar un usuario existente 
+    // Actualizar un usuario existente, el isset es para ver si existe el valor  
     public function actualizarUsuario($id, $nuevosDatos)
     {
         foreach ($this->usuarios as &$usuario) {
             if ($usuario->getId() == $id) {
-                $usuario->setNombreApellido($nuevosDatos['nombre_apellido'] ?? $usuario->getNombreApellido());
-                $usuario->setDni($nuevosDatos['dni'] ?? $usuario->getDni());
-                $usuario->setEmail($nuevosDatos['email'] ?? $usuario->getEmail());
-                $usuario->setTelefono($nuevosDatos['telefono'] ?? $usuario->getTelefono());
+                if (isset($nuevosDatos['nombre_apellido'])) {
+                    $usuario->setNombreApellido($nuevosDatos['nombre_apellido']);
+                } else {
+                    $usuario->setNombreApellido($usuario->getNombreApellido());
+                }
+        
+                if (isset($nuevosDatos['dni'])) {
+                    $usuario->setDni($nuevosDatos['dni']);
+                } else {
+                    $usuario->setDni($usuario->getDni());
+                }
+        
+                if (isset($nuevosDatos['email'])) {
+                    $usuario->setEmail($nuevosDatos['email']);
+                } else {
+                    $usuario->setEmail($usuario->getEmail());
+                }
+        
+                if (isset($nuevosDatos['telefono'])) {
+                    $usuario->setTelefono($nuevosDatos['telefono']);
+                } else {
+                    $usuario->setTelefono($usuario->getTelefono());
+                }
+        
                 $this->guardarEnJSON();
                 return true;
             }
         }
+        
+        
         return false;
     }
 
     // Eliminar un usuario
     public function eliminarUsuario($id)
     {
-        foreach ($this->usuarios as $key => $usuario) {
+        foreach ($this->usuarios as $idEliminar => $usuario) {
             if ($usuario->getId() == $id) {
-                unset($this->usuarios[$key]);
-                $this->usuarios = array_values($this->usuarios);
-                $this->guardarEnJSON();
+                unset($this->usuarios[$idEliminar]); 
+                $this->guardarEnJSON();  
                 return true;
             }
-        }
+        
+
+            }
+    
         return false;
     }
 }
