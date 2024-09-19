@@ -117,7 +117,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
 
     switch ($opcion) {
         case 1:
-            verHabitaciones($habitacionesGestor);
+            verHabitaciones();// falta que muestre disponibilidad;
             break;
         case 2:
             crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor);
@@ -141,8 +141,17 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
     }
 }
 
-// Función para ver habitaciones ..... aca ver porque tmb la usamos en admin que ahi si anda
-function verHabitaciones($habitacionesGestor)
+// Función para ver habitaciones .....
+function verHabitaciones(){
+
+$habitacionesGestor = new Habitacion();
+$habitacionesGestor->cargarDesdeJSON();
+$habitaciones = $habitacionesGestor->obtenerHabitaciones();
+foreach ($habitaciones as $habitacion) {
+    echo $habitacion . "\n";
+}
+}
+
 {
     $habitaciones = $habitacionesGestor->obtenerHabitaciones(); // Obtener habitaciones
 
@@ -341,10 +350,7 @@ function menuAdminHabitaciones()
 
         switch ($opcion) {
             case 1: //mostrar habs
-                $habitaciones = $habitacionesGestor->obtenerHabitaciones();
-                foreach ($habitaciones as $habitacion) {
-                    echo $habitacion . "\n";
-                }
+                verHabitaciones();
                 break;
             case 2:
                 // agregar una habitacion
