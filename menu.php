@@ -105,7 +105,7 @@ function registrarse($usuariosGestor)
     menuUsuario(); // Volver al menú principal
 }
 
-function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor)
+function menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor)
 {
     
 
@@ -125,7 +125,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
             verHabitaciones();// falta que muestre cuando esta ocupado
             break;
         case 2:
-            crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor);
+            crearReserva($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor);
             break;
         case 3:
             // Mostrar reservas
@@ -141,7 +141,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
             exit;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
-            menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor);
+            menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor);
             break;
     }
 }
@@ -172,53 +172,62 @@ foreach ($habitaciones as $habitacion) {
 // Función para crear reserva
 function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
 {
-    echo "Ingrese el ID del usuario: ";
-    $usuarioId = trim(fgets(STDIN));
-    $usuario = $usuariosGestor->obtenerUsuarioPorId($usuarioId);
+    // Paso 1: Pedir DNI del usuario
+    echo "Ingrese su DNI para realizar la reserva: ";
+    $dniUsuario = trim(fgets(STDIN));
 
-    if ($usuario) {
-        echo "Ingrese el tipo de habitación para la reserva: ";
-        $tipoHabitacion = trim(fgets(STDIN));
-
-        // Buscar habitaciones disponibles del tipo indicado
-        $habitacionesDisponibles = $habitacionesGestor->buscarPorDisponibilidad($tipoHabitacion);
-
-        if (!empty($habitacionesDisponibles)) {
-            // Si hay habitaciones disponibles, usar la primera
-            $habitacion = $habitacionesDisponibles[0];
-
-            echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
-            $fechaInicio = trim(fgets(STDIN));
-            echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
-            $fechaFin = trim(fgets(STDIN));
-
-            $reservaId = $reservasGestor->generarNuevoId();
-
-            // Crear la reserva
-            $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0);
-
-            // Asignar la habitación a la reserva
-            $reserva->setHabitacion($habitacion);
-
-            // Calcular el costo de la reserva en función del precio de la habitación
-            $reserva->calcularCosto($habitacion->getPrecio());
-
-            // Agregar la reserva al gestor de reservas
-            $reservasGestor->agregarReserva($reserva);
-
-            // Cambiar la disponibilidad de la habitación
-            $habitacion->setDisponible(false);
-
-            echo "Reserva creada exitosamente.\n";
-        } else {
-            echo "No se encontró una habitación disponible de ese tipo.\n";
-        }
-    } else {
-        echo "Usuario no encontrado.\n";
+    // Paso 2: Buscar el usuario por su DNI
+    $usuario = $usuariosGestor->buscarUsuarioPorDni($dniUsuario);
+    if (!$usuario) {
+        echo "No se encontró un usuario con ese DNI.\n";
+        return; // Salir si no se encuentra el usuario
     }
 
-    menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor); // Volver al menú
+    // Paso 3: Continuar con el proceso de reserva
+    echo "Ingrese el tipo de habitación para la reserva: ";
+    $tipoHabitacion = trim(fgets(STDIN));
+
+    // Buscar habitaciones disponibles del tipo indicado
+    $habitacionesDisponibles = $habitacionesGestor->buscarPorDisponibilidad($tipoHabitacion);
+
+    if (!empty($habitacionesDisponibles)) {
+        // Si hay habitaciones disponibles, usar la primera
+        $habitacion = $habitacionesDisponibles[0];
+
+        echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
+        $fechaInicio = trim(fgets(STDIN));
+        echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
+        $fechaFin = trim(fgets(STDIN));
+
+        $reservaId = $reservasGestor->generarNuevoId();
+
+        // Crear la reserva
+        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0);
+
+        // Asignar la habitación a la reserva
+        $reserva->setHabitacion($habitacion);
+
+        // Asignar el DNI del usuario a la reserva
+        $reserva->setUsuarioDni($dniUsuario);
+
+        // Calcular el costo de la reserva en función del precio de la habitación
+        $reserva->calcularCosto($habitacion->getPrecio());
+
+        // Agregar la reserva al gestor de reservas
+        $reservasGestor->agregarReserva($reserva);
+
+        // Cambiar la disponibilidad de la habitación
+        $habitacion->setDisponible("Reservado");
+
+        echo "Reserva creada exitosamente.\n";
+    } else {
+        echo "No se encontró una habitación disponible de ese tipo.\n";
+    }
+
+    // Volver al menú de usuario registrado
+    menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor);
 }
+
 
 
 function menuAdmin()
@@ -365,7 +374,8 @@ function menuAdminHabitaciones()
                 $tipo = trim(fgets(STDIN));
                 echo "Ingrese el precio por noche: ";
                 $precio = trim(fgets(STDIN));
-                $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio, true));
+                $disponibilidad= "Disponible";
+                $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio, $disponibilidad));
                 echo "Habitación agregada exitosamente.\n";
                 break;
             case 3:

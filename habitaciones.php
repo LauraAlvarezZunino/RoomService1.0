@@ -9,7 +9,7 @@ class Habitacion
     private $tipo;
     private $precio;
     private $disponibilidad;
-  //  private $diasReservado;
+    private $diasReservado =[];
 
 
     public function __construct($numero = null, $tipo = null, $precio = null, $disponibilidad = null)
@@ -18,7 +18,7 @@ class Habitacion
         $this->tipo = $tipo;
         $this->precio = $precio;
         $this->disponibilidad = $disponibilidad;
-     //   $this->diasReservado;
+        $this->diasReservado=[];
     }
 
     // Getters y Setters
@@ -62,15 +62,16 @@ class Habitacion
     {
         $this->disponibilidad = $disponibilidad;
     }
-    //public function getDiasReservado()
-    //{
-      //  return $this->diasReservado;
-   // }
+   
+    public function getDiasReservados()
+    {
+        return $this->diasReservado;
+    }
 
-    //public function setDiasReservado($diasReservado)
-    //{
-      //  $this->diasReservado = $diasReservado;
-    //}
+    public function setDiasReservados(array $dias)
+    {
+        $this->diasReservado = $dias;
+    }
 
     // CRUD
 
@@ -85,6 +86,17 @@ class Habitacion
     {
         return $this->habitaciones;
     }
+    // Añadir días reservados
+    // Añadir días reservados
+public function agregarDiasReservados(array $dias)
+{
+    $this->diasReservado += $dias;
+}
+
+public function __toString()
+{
+    return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio, Disponibilidad: $this->disponibilidad, Días reservados: " . ($this->diasReservado ? implode(", ", $this->diasReservado) : "No reservada");
+}
 
   /*  public function buscarPorDisponibilidad($disponibilidad)
     {
@@ -189,9 +201,9 @@ class Habitacion
             'disponibilidad' => $habitacion->getDisponibilidad(),
         ];
     }
-
-    public function __toString()
-    {
-        return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio, Disponibilidad: $this->disponibilidad";
-    }
 }
+   // public function __toString()
+  //  {
+   //     return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio, Disponibilidad: $this->disponibilidad";
+   // }
+//

@@ -6,16 +6,16 @@ class Reserva {
     private $fechaInicio;
     private $fechaFin;
     private $habitacion;
-    private $estado;
     private $costo;
+    private $usuarioDni;
 
-    public function __construct($id, $fechaInicio, $fechaFin, $estado, $costo)
+    public function __construct($id, $fechaInicio, $fechaFin, $costo,$usuarioDni)
     {
         $this->id = $id;
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
-        $this->estado = $estado;
         $this->costo = $costo;
+        $this->usuarioDni = $usuarioDni; 
     }
 
     // Getters y Setters
@@ -69,14 +69,13 @@ class Reserva {
         $this->habitacion = $habitacion;
     }
 
-    public function getEstado()
-    {
-        return $this->estado;
+   
+    public function setUsuarioDni($dni) {
+        $this->usuarioDni = $dni;
     }
 
-    public function setEstado($estado)
-    {
-        $this->estado = $estado;
+    public function getUsuarioDni() {
+        return $this->usuarioDni;
     }
 
     public function calcularCosto($precioPorNoche) {
@@ -107,7 +106,7 @@ class Reserva {
 */
     public function __toString()
     {
-      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin}, Estado: {$this->estado},Habitacion:{$this->habitacion}, Costo: $" . $this->costo;
+      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin},Habitacion:{$this->habitacion}, Costo: $" . $this->costo;
     }
 }
 
