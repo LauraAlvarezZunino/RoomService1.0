@@ -1,8 +1,5 @@
 
 <?php
-//cliente
-// preguntarle si es nuevo o si ya esta registrado
-// si esta registrado ingresar con dni
 
 
 include 'usuarios.php';
@@ -148,19 +145,18 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
     }
 }
 
-// Función para ver habitaciones
+// Función para ver habitaciones ..... aca ver porque tmb la usamos en admin que ahi si anda
 function verHabitaciones($habitacionesGestor)
 {
     $habitaciones = $habitacionesGestor->obtenerHabitaciones(); // Obtener habitaciones
-    if (!empty($habitaciones)) {
+
         echo "=== Habitaciones Disponibles ===\n";
-        foreach ($habitaciones as $habitacion) {
-            echo $habitacion . "\n";
-        }
-    } else {
-        echo "No hay habitaciones disponibles.\n";
+foreach ($habitaciones as $habitacion) {
+        echo $habitacion . "\n";
     }
-    return; 
+} $habitaciones = $habitacionesGestor->obtenerHabitaciones();
+foreach ($habitaciones as $habitacion) {
+    echo $habitacion . "\n";
 }
 
 // Función para crear reserva
