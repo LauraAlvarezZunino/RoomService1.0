@@ -106,7 +106,7 @@ class Reserva {
 */
     public function __toString()
     {
-      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin},Habitacion:{$this->habitacion}, Costo: $" . $this->costo;
+      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin},Habitacion:{$this->habitacion}, Costo: $ . $this->costo, Reservado por dni:{$this->usuarioDni}";
     }
 }
 

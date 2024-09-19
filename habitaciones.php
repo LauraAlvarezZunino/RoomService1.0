@@ -88,6 +88,15 @@ class Habitacion
     }
     // Añadir días reservados
     // Añadir días reservados
+    public function buscarHabitacionPorNumero($numero)
+    {
+        foreach ($this->habitaciones as $habitacion) {
+            if ($habitacion->getNumero() == $numero) {
+                return $habitacion;
+            }
+        }
+        return null; // Retorna null si no se encuentra la habitación
+    }
 public function agregarDiasReservados(array $dias)
 {
     $this->diasReservado += $dias;

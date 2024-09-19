@@ -86,7 +86,7 @@ class Usuarios
         return $this->usuarios;
     }
 
-    //  un usuario por ID?necesario?
+    //  un usuario por ID para el menu de admin
     public function obtenerUsuarioPorId($id)
     {
         foreach ($this->usuarios as $usuario) {
@@ -96,7 +96,8 @@ class Usuarios
         }
         return null;
     }
-
+  
+    
     public function obtenerUsuarioPorDni($dni)
     {
         foreach ($this->usuarios as $usuario) {

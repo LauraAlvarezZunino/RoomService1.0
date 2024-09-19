@@ -105,7 +105,7 @@ function registrarse($usuariosGestor)
     menuUsuario(); // Volver al menú principal
 }
 
-function menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor)
+function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor)
 {
     
 
@@ -125,7 +125,7 @@ function menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $r
             verHabitaciones();// falta que muestre cuando esta ocupado
             break;
         case 2:
-            crearReserva($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor);
+            crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor);
             break;
         case 3:
             // Mostrar reservas
@@ -141,7 +141,7 @@ function menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $r
             exit;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
-            menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor);
+            menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor);
             break;
     }
 }
@@ -175,10 +175,9 @@ function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
     // Paso 1: Pedir DNI del usuario
     echo "Ingrese su DNI para realizar la reserva: ";
     $dniUsuario = trim(fgets(STDIN));
-
-    // Paso 2: Buscar el usuario por su DNI
-    $usuario = $usuariosGestor->buscarUsuarioPorDni($dniUsuario);
-    if (!$usuario) {
+    $usuarioEncontrado = $usuariosGestor->buscarUsuarioPorDni($dniUsuario);
+    
+    if (!$usuarioEncontrado) {
         echo "No se encontró un usuario con ese DNI.\n";
         return; // Salir si no se encuentra el usuario
     }
@@ -202,7 +201,7 @@ function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
         $reservaId = $reservasGestor->generarNuevoId();
 
         // Crear la reserva
-        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0);
+        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0,$usuarioEncontrado);
 
         // Asignar la habitación a la reserva
         $reserva->setHabitacion($habitacion);
@@ -225,7 +224,7 @@ function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
     }
 
     // Volver al menú de usuario registrado
-    menuUsuarioRegistrado($usuario,$usuariosGestor, $habitacionesGestor, $reservasGestor);
+    menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor);
 }
 
 
