@@ -10,10 +10,6 @@ include_once 'habitaciones.php';
 include 'reserva.php';
 include 'reservasGestor.php';
 
-
-
-
-
 while (true) {
     $clave = 111;
     echo "===Bienvenido===\n";
