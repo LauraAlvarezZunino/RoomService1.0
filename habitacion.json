@@ -35,6 +35,24 @@
             "tipo": "simple",
             "precio": "45",
             "disponibilidad": "Disponible"
+        },
+        {
+            "numero": "5",
+            "tipo": "simple",
+            "precio": "9876",
+            "disponibilidad": true
+        },
+        {
+            "numero": "99",
+            "tipo": "simple",
+            "precio": "00",
+            "disponibilidad": true
+        },
+        {
+            "numero": "98",
+            "tipo": "simple",
+            "precio": "34",
+            "disponibilidad": true
         }
     ]
 }

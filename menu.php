@@ -89,6 +89,11 @@ function registrarse($usuariosGestor)
     $nombreApellido = trim(fgets(STDIN));
     echo "Ingrese el DNI del usuario: ";
     $dni = trim(fgets(STDIN));
+    if ($usuariosGestor->obtenerUsuarioPorDni($dni)) {
+        echo "El DNI ingresado ya está registrado. Intente nuevamente con otro DNI.\n";
+        menuUsuario();
+        return;
+    }
     echo "Ingrese el email del usuario: ";
     $email = trim(fgets(STDIN));
     echo "Ingrese el teléfono del usuario: ";
