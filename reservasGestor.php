@@ -14,13 +14,47 @@ class ReservasGestor
     {
         return $this->id++;
     }
-    // Agrega una nueva reserva pero hay que ver porque no esta modficando la disponibilidad de ;a habiracion cuando 
-    public function agregarReserva(Reserva $reserva)
+    public function agregarReserva(Reserva $reserva, $habitacionesGestor)
     {
-        $this->reservas[] = $reserva;
-        $this->guardarEnJSON();
-        echo "Reserva agregada exitosamente.\n";
+        // Obtenemos la habitación asociada a la reserva desde el archivo JSON
+        $habitacion = $habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
+        
+        if ($habitacion && $habitacion->getDisponibilidad() === 'Disponible') {
+            // Calcular los días entre la fecha de inicio y la fecha de fin
+            $fechaInicio = new DateTime($reserva->getFechaInicio());
+            $fechaFin = new DateTime($reserva->getFechaFin());
+            $intervalo = new DateInterval('P1D');
+            $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFin->modify('+1 day'));
+    
+            $diasReservados = [];
+            foreach ($periodo as $fecha) {
+                $diasReservados[] = $fecha->format('Y-m-d');
+            }
+    
+            // Actualizar los días reservados y la disponibilidad en la habitación
+            $habitacion->agregarDiasReservados($diasReservados);
+            $habitacion->setDisponibilidad('No disponible');
+    
+            // Guardar la reserva y actualizar las habitaciones en el JSON
+            $this->reservas[] = $reserva;
+            $this->guardarEnJSON();
+            $habitacionesGestor->actualizarHabitacionesEnJSON();
+    
+            echo "Reserva agregada exitosamente y la habitación ahora está no disponible.\n";
+        } else {
+            echo "La habitación ya está reservada o no está disponible.\n";
+        }
     }
+    
+    
+
+
+//   public function agregarReserva(Reserva $reserva)
+  //  {
+    //    $this->reservas[] = $reserva;
+      //  $this->guardarEnJSON();
+        //echo "Reserva agregada exitosamente.\n";
+   // }
     public function obtenerReservas()
     {
         return $this->reservas;
@@ -33,7 +67,6 @@ class ReservasGestor
             $reserva->setFechaInicio($nuevaFechaInicio);
             $reserva->setFechaFin($nuevaFechaFin);
             $reserva->setHabitacion($nuevaHabitacion);
-            $reserva->setEstado($nuevoEstado);
             $reserva->setCosto($nuevoCosto);
             $this->guardarEnJSON();
         } else {
@@ -55,8 +88,7 @@ class ReservasGestor
         return false;
     }
 
-    //uscar una reserva por su ID
-    public function buscarReservaPorId($id)
+   public function buscarReservaPorId($id)
     {
         foreach ($this->reservas as $reserva) {
             if ($reserva->getId() == $id) {
@@ -77,7 +109,6 @@ class ReservasGestor
                 'fechaInicio' => $reserva->getFechaInicio(),
                 'fechaFin' => $reserva->getFechaFin(),
                 'habitacion' => $reserva->getHabitacion(),
-                'estado' => $reserva->getEstado(),
                 'costo' => $reserva->getCosto()
             ];
         }
@@ -98,7 +129,6 @@ class ReservasGestor
                     $reservaData['fechaInicio'],
                     $reservaData['fechaFin'],
                     $reservaData['habitacion'],
-                    $reservaData['estado'],
                     $reservaData['costo']
                 );
                 $this->reservas[] = $reserva;
