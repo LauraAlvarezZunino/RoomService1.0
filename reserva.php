@@ -92,7 +92,7 @@ class Reserva {
     }
 
  
-    /*function reservaToArray($reserva)
+    /*function reservaToArray($reserva)    es necesaria?
     {
         return [
             'id' => $reserva->getId(),

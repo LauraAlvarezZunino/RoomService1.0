@@ -4,37 +4,37 @@
             "numero": "2",
             "tipo": "simple",
             "precio": "45000",
-            "disponibilidad": true
+            "disponibilidad": "Disponible"
         },
         {
             "numero": "4",
             "tipo": "familiar",
             "precio": "34",
-            "disponibilidad": true
+            "disponibilidad": "Disponible"
         },
         {
             "numero": "4",
             "tipo": "simple",
             "precio": "40",
-            "disponibilidad": true
+            "disponibilidad": "Reservada"
         },
         {
             "numero": "4",
             "tipo": "simple",
             "precio": "45",
-            "disponibilidad": true
+            "disponibilidad": "Reservada"
         },
         {
             "numero": "5",
             "tipo": "5",
             "precio": "5",
-            "disponibilidad": true
+            "disponibilidad": "Disponible"
         },
         {
             "numero": "34",
             "tipo": "simple",
             "precio": "45",
-            "disponibilidad": true
+            "disponibilidad": "Disponible"
         }
     ]
 }

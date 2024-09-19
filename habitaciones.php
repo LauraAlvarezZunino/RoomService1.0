@@ -9,6 +9,7 @@ class Habitacion
     private $tipo;
     private $precio;
     private $disponibilidad;
+  //  private $diasReservado;
 
 
     public function __construct($numero = null, $tipo = null, $precio = null, $disponibilidad = null)
@@ -17,6 +18,7 @@ class Habitacion
         $this->tipo = $tipo;
         $this->precio = $precio;
         $this->disponibilidad = $disponibilidad;
+     //   $this->diasReservado;
     }
 
     // Getters y Setters
@@ -60,6 +62,15 @@ class Habitacion
     {
         $this->disponibilidad = $disponibilidad;
     }
+    //public function getDiasReservado()
+    //{
+      //  return $this->diasReservado;
+   // }
+
+    //public function setDiasReservado($diasReservado)
+    //{
+      //  $this->diasReservado = $diasReservado;
+    //}
 
     // CRUD
 
@@ -75,7 +86,7 @@ class Habitacion
         return $this->habitaciones;
     }
 
-    public function buscarPorDisponibilidad($disponibilidad)
+  /*  public function buscarPorDisponibilidad($disponibilidad)
     {
         $resultados = [];
         foreach ($this->habitaciones as $habitacion) {
@@ -85,7 +96,7 @@ class Habitacion
         }
         return $resultados;
     }
-
+*/
 
 
 
@@ -156,13 +167,14 @@ class Habitacion
         if (file_exists($this->archivoJson)) {
             $jsonHabitacion = file_get_contents($this->archivoJson);
             $habitacionesArray = json_decode($jsonHabitacion, true)['habitacion'] ?? [];
-            $this->habitaciones = []; // Asegúrate de vaciar el array antes de cargar los datos
+            $this->habitaciones = []; // Asegura que se vacie el array antes de cargar los datos
             foreach ($habitacionesArray as $habitacionData) {
                 $habitacion = new Habitacion();
                 $habitacion->setNumero($habitacionData['numero']);
                 $habitacion->setTipo($habitacionData['tipo']);
                 $habitacion->setPrecio($habitacionData['precio']);
                 $habitacion->setDisponibilidad($habitacionData['disponibilidad']);
+               // $habitacion->setDiasReservado($habitacionData['diasReservado']);
                 $this->habitaciones[] = $habitacion;
             }
         }
@@ -180,6 +192,6 @@ class Habitacion
 
     public function __toString()
     {
-        return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio";
+        return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio, Disponibilidad: $this->disponibilidad";
     }
 }

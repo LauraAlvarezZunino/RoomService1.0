@@ -3,9 +3,9 @@
         "id": 1,
         "fechaInicio": "2024-05-23",
         "fechaFin": "2024-05-24",
-        "habitacion": null,
-        "estado": [],
-        "costo": "Reservado"
+        "habitacion":{},
+        "estado": "Reservado",
+        "costo": 5636
     },
     {
         "id": 2,

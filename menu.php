@@ -101,7 +101,7 @@ function registrarse($usuariosGestor)
 }
 
 function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor)
-{//aca deberia pedir el dni o algo
+{
     
 
     echo "=== Menú Usuario Registrado ===\n";
@@ -117,7 +117,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
 
     switch ($opcion) {
         case 1:
-            verHabitaciones();// falta que muestre disponibilidad;
+            verHabitaciones();// falta que muestre cuando esta ocupado
             break;
         case 2:
             crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor);
@@ -253,7 +253,7 @@ function menuAdminUsuarios()
 {
     $usuariosGestor = new Usuarios(); // Clase para manejar usuarios
     while (true) {
-        echo "=== Menú de Usuarios ===\n";
+        echo "=== Menú Administrar Usuarios ===\n";
         echo "1. Mostrar Usuarios\n";
         echo "2. Modificar Usuario\n";
         echo "3. Eliminar Usuario\n";
@@ -338,7 +338,7 @@ function menuAdminHabitaciones()
     $habitacionesGestor->cargarDesdeJSON();
 
     while (true) {
-        echo "=== Menú de Habitaciones ===\n";
+        echo "=== Menú Administrar Habitaciones ===\n";
         echo "1. Mostrar Habitaciones\n";
         echo "2. Agregar Habitación\n";
         echo "3. Modificar Habitación\n";
@@ -429,7 +429,7 @@ function menuAdminReservas()
     $reservasGestor = new ReservasGestor();
 
     while (true) {
-        echo "=== Menú de Reservas ===\n";
+        echo "=== Menú Administrar Reservas ===\n";
         echo "1. Mostrar Reservas\n";
         echo "2. Volver al Menú Principal\n";
         echo "Seleccione una opción: ";
