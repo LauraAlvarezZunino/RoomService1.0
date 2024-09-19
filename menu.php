@@ -370,6 +370,12 @@ function menuAdminHabitaciones()
                 // agregar una habitacion
                 echo "Ingrese el número de la habitación: ";
                 $numero = trim(fgets(STDIN));
+                foreach ($habitacionesGestor->obtenerHabitaciones() as $h) {
+                    if ($h->getNumero() == $numero) {
+                        echo "La habitación con el número $numero ya existe. No se puede duplicar.\n";
+                        break 2;  // Salir del foreach y del case para regresar al menú
+                    }
+                }
                 echo "Ingrese el tipo de habitación: ";
                 $tipo = trim(fgets(STDIN));
                 echo "Ingrese el precio por noche: ";

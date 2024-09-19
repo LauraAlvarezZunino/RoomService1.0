@@ -53,6 +53,18 @@
             "tipo": "simple",
             "precio": "34",
             "disponibilidad": true
+        },
+        {
+            "numero": "4",
+            "tipo": "simple",
+            "precio": "55",
+            "disponibilidad": "Disponible"
+        },
+        {
+            "numero": "4",
+            "tipo": "",
+            "precio": "",
+            "disponibilidad": "Disponible"
         }
     ]
 }
