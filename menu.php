@@ -3,7 +3,7 @@
 
 
 include 'usuarios.php';
-include_once 'habitaciones.php';
+include_once 'habitacionesGestor.php';
 include 'reserva.php';
 include 'reservasGestor.php';
 
@@ -44,7 +44,7 @@ while (true) {
 function menuUsuario()
 {
     $usuariosGestor = new Usuarios(); // Clase para manejar usuarios
-    $habitacionesGestor = new Habitacion(); // Clase para manejar habitaciones
+    $habitacionesGestor = new HabitacionGestor(); // Clase para manejar habitaciones
     $reservasGestor = new ReservasGestor(); // Clase para manejar reservas
 
     $habitacionesGestor->cargarDesdeJSON();
@@ -149,7 +149,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
 // Función para ver habitaciones .....
 function verHabitaciones(){
 
-$habitacionesGestor = new Habitacion();
+$habitacionesGestor = new HabitacionGestor();
 $habitacionesGestor->cargarDesdeJSON();
 $habitaciones = $habitacionesGestor->obtenerHabitaciones();
 foreach ($habitaciones as $habitacion) {
@@ -347,7 +347,7 @@ function menuAdminUsuarios()
 
 function menuAdminHabitaciones()
 {
-    $habitacionesGestor = new Habitacion();
+    $habitacionesGestor = new HabitacionGestor();
     $habitacionesGestor->cargarDesdeJSON();
 
     while (true) {

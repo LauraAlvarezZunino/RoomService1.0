@@ -65,6 +65,12 @@
             "tipo": "",
             "precio": "",
             "disponibilidad": "Disponible"
+        },
+        {
+            "numero": "12",
+            "tipo": "simple",
+            "precio": "4500",
+            "disponibilidad": "Disponible"
         }
     ]
 }

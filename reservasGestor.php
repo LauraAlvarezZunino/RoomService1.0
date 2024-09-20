@@ -2,7 +2,7 @@
 include_once 'reserva.php';
 include_once 'usuarios.php';
 
-class ReservasGestor
+class ReservasGestor extends Reserva
 {
     private $reservas = [];
     private $reservaJson = 'reservas.json';
@@ -119,8 +119,8 @@ class ReservasGestor
             $reservasArray = json_decode($json, true);
 
             foreach ($reservasArray as $reservaData) {
-                // Se asume que tienes un método para obtener la habitación por su número
-                $habitacion = $habitacionesGestor->buscarHabitacionPorNumero($reservaData['habitacion']);
+                //veeeeerrr !!!!!!
+                $habitacion = $habitacionesGestor ->buscarHabitacionPorNumero($reservaData['habitacion']);
                 $reserva = new Reserva(
                     $reservaData['id'],
                     $reservaData['fechaInicio'],
