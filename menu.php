@@ -45,7 +45,7 @@ function menuUsuario()
 {
     $usuariosGestor = new Usuarios(); // Clase para manejar usuarios
     $habitacionesGestor = new HabitacionGestor(); // Clase para manejar habitaciones
-    $reservasGestor = new ReservasGestor(); // Clase para manejar reservas
+    $reservasGestor = new ReservasGestor($habitacionesGestor); // Clase para manejar reservas
 
     $habitacionesGestor->cargarDesdeJSON();
 
@@ -68,10 +68,10 @@ function menuUsuario()
             $usuario = $usuariosGestor->obtenerUsuarioPorDni($dni);
 
             if ($usuario) {
-                menuUsuarioRegistrado($usuario, $usuariosGestor, $habitacionesGestor, $reservasGestor);
+                menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
             } else {
                 echo "DNI no encontrado. Inténtelo de nuevo.\n";
-                menuUsuario();
+                menuUsuario($usuario);
             }
             break;
         default:
@@ -105,7 +105,7 @@ function registrarse($usuariosGestor)
     menuUsuario(); // Volver al menú principal
 }
 
-function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor)
+function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
 {
     
 
@@ -125,7 +125,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
             verHabitaciones();// falta que muestre cuando esta ocupado
             break;
         case 2:
-            crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor);
+            crearReserva($usuario, $habitacionesGestor, $reservasGestor);
             break;
         case 3:
             // Mostrar reservas
@@ -141,7 +141,7 @@ function menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGe
             exit;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
-            menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor);
+            menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
             break;
     }
 }
@@ -164,23 +164,17 @@ foreach ($habitaciones as $habitacion) {
 foreach ($habitaciones as $habitacion) {
         echo $habitacion . "\n";
     }
-} $habitaciones = $habitacionesGestor->obtenerHabitaciones();
-foreach ($habitaciones as $habitacion) {
-    echo $habitacion . "\n";
-}
+} 
 
 // Función para crear reserva
-function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
+function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
 {
     // Paso 1: Pedir DNI del usuario
-    echo "Ingrese su DNI para realizar la reserva: ";
-    $dniUsuario = trim(fgets(STDIN));
-    $usuarioEncontrado = $usuariosGestor->buscarUsuarioPorDni($dniUsuario);
+  //  echo "Ingrese su DNI para realizar la reserva: ";
+    //$dniUsuario = trim(fgets(STDIN));
     
-    if (!$usuarioEncontrado) {
-        echo "No se encontró un usuario con ese DNI.\n";
-        return; // Salir si no se encuentra el usuario
-    }
+
+
 
     // Paso 3: Continuar con el proceso de reserva
     echo "Ingrese el tipo de habitación para la reserva: ";
@@ -201,13 +195,13 @@ function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
         $reservaId = $reservasGestor->generarNuevoId();
 
         // Crear la reserva
-        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0,$usuarioEncontrado);
+        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0,$usuario);
 
         // Asignar la habitación a la reserva
         $reserva->setHabitacion($habitacion);
-
+        $usuario->getDni();
         // Asignar el DNI del usuario a la reserva
-        $reserva->setUsuarioDni($dniUsuario);
+        $reserva->setUsuarioDni($usuario);
 
         // Calcular el costo de la reserva en función del precio de la habitación
         $reserva->calcularCosto($habitacion->getPrecio());
@@ -216,7 +210,7 @@ function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
         $reservasGestor->agregarReserva($reserva);
 
         // Cambiar la disponibilidad de la habitación
-        $habitacion->setDisponible("Reservado");
+        $habitacion->setDisponibilidad("Reservado");
 
         echo "Reserva creada exitosamente.\n";
     } else {
@@ -224,7 +218,7 @@ function crearReserva($usuariosGestor, $habitacionesGestor, $reservasGestor)
     }
 
     // Volver al menú de usuario registrado
-    menuUsuarioRegistrado($usuariosGestor, $habitacionesGestor, $reservasGestor);
+    menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
 }
 
 
@@ -405,14 +399,14 @@ function menuAdminHabitaciones()
                     echo "Ingrese el nuevo precio (deje vacío para mantener el actual: {$habitacion->getPrecio()}): ";
                     $nuevoPrecio = trim(fgets(STDIN));
                     
-                    echo "¿Está disponible? (1 para Sí, 0 para No, deje vacío para mantener el actual): ";
+                    echo "¿Está disponible? (Deje vacío para mantener el actual): ";
                     $nuevaDisponibilidad = trim(fgets(STDIN));
 
                     // Actualizar los datos de la habitación
                     $nuevosDatos = [
                         'tipo' => $nuevoTipo ?: $habitacion->getTipo(),
                         'precio' => $nuevoPrecio ?: $habitacion->getPrecio(),
-                        'disponibilidad' => $nuevaDisponibilidad !== '' ? (bool) $nuevaDisponibilidad : $habitacion->getDisponibilidad(),
+                        'disponibilidad' => $nuevaDisponibilidad ?: $habitacion->getDisponibilidad(),
                     ];
 
                     if ($habitacionesGestor->actualizarHabitacion($numero, $nuevosDatos)) {
@@ -446,7 +440,9 @@ function menuAdminHabitaciones()
 function menuAdminReservas()
 
 {
-    $reservasGestor = new ReservasGestor();
+    $habitacionesGestor = new HabitacionGestor();
+    $habitacionesGestor->cargarDesdeJSON();
+    $reservasGestor = new ReservasGestor($habitacionesGestor);
 
     while (true) {
         echo "=== Menú Administrar Reservas ===\n";

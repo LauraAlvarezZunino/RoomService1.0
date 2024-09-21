@@ -3,16 +3,64 @@
         "id": 1,
         "fechaInicio": "2024-05-23",
         "fechaFin": "2024-05-24",
-        "habitacion":{},
-        "estado": "Reservado",
-        "costo": 5636
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": null
     },
     {
         "id": 2,
         "fechaInicio": "2024-09-16",
         "fechaFin": "2024-09-17",
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": null
+    },
+    {
+        "id": 3,
+        "fechaInicio": "24-05-2025",
+        "fechaFin": "27-05-2024",
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": null
+    },
+    {
+        "id": 4,
+        "fechaInicio": "24-05-2025",
+        "fechaFin": "27-05-2025",
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": null
+    },
+    {
+        "id": 5,
+        "fechaInicio": "24-05-2025",
+        "fechaFin": "27-05-2024",
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": null
+    },
+    {
+        "id": 6,
+        "fechaInicio": "24-05-2025",
+        "fechaFin": "27-05-2024",
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": null
+    },
+    {
+        "id": 7,
+        "fechaInicio": "24-05-2024",
+        "fechaFin": "27-05-2024",
+        "habitacion": null,
+        "costo": null,
+        "usuarioDni": 29628
+    },
+    {
+        "id": 8,
+        "fechaInicio": "24-05-2024",
+        "fechaFin": "27-05-2024",
         "habitacion": {},
-        "estado": "Reservado",
-        "costo": 45000
+        "costo": 29628,
+        "usuarioDni": {}
     }
 ]

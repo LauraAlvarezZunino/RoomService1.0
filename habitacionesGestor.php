@@ -31,17 +31,17 @@ class HabitacionGestor extends Habitacion {
         }
         return null; // Retorna null si no se encuentra la habitación
     }
-/*public function agregarDiasReservados(array $dias)
-//{
-  //  $this->diasReservado += $dias;
+public function agregarDiasReservados(array $dias)
+{
+   $this->diasReservado += $dias;
 }
 
-public function __toString()
+/*public function __toString()
 {
     return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio, Disponibilidad: $this->disponibilidad, Días reservados: " . ($this->diasReservado ? implode(", ", $this->diasReservado) : "No reservada");
 }
 */
-  /*  public function buscarPorDisponibilidad($disponibilidad)
+    public function buscarPorDisponibilidad($disponibilidad)
     {
         $resultados = [];
         foreach ($this->habitaciones as $habitacion) {
@@ -51,7 +51,7 @@ public function __toString()
         }
         return $resultados;
     }
-*/
+
 
 
 
@@ -129,7 +129,7 @@ public function __toString()
                 $habitacion->setTipo($habitacionData['tipo']);
                 $habitacion->setPrecio($habitacionData['precio']);
                 $habitacion->setDisponibilidad($habitacionData['disponibilidad']);
-               // $habitacion->setDiasReservado($habitacionData['diasReservado']);
+               //$habitacion->setDiasReservado($habitacionData['diasReservado']);
                 $this->habitaciones[] = $habitacion;
             }
         }
