@@ -4,73 +4,63 @@
             "numero": "2",
             "tipo": "simple",
             "precio": "45000",
-            "disponibilidad": "Disponible"
-        },
-        {
-            "numero": "4",
-            "tipo": "familiar",
-            "precio": "34",
-            "disponibilidad": "Disponible"
+            "disponibilidad": "Disponible",
+            "diasReservado": []
         },
         {
             "numero": "4",
             "tipo": "simple",
             "precio": "40",
-            "disponibilidad": "Reservada"
-        },
-        {
-            "numero": "4",
-            "tipo": "simple",
-            "precio": "45",
-            "disponibilidad": "Reservada"
-        },
-        {
-            "numero": "5",
-            "tipo": "5",
-            "precio": "5",
-            "disponibilidad": "Disponible"
+            "disponibilidad": "Disponible",
+            "diasReservado": []
         },
         {
             "numero": "34",
             "tipo": "simple",
             "precio": "45",
-            "disponibilidad": "Disponible"
+            "disponibilidad": "Disponible",
+            "diasReservado": []
         },
         {
             "numero": "5",
             "tipo": "simple",
             "precio": "9876",
-            "disponibilidad": true
+            "disponibilidad": "Reservada",
+            "diasReservado": [
+                "1",
+                "1"
+            ]
         },
         {
             "numero": "99",
             "tipo": "simple",
             "precio": "00",
-            "disponibilidad": true
+            "disponibilidad": "Disponible",
+            "diasReservado": []
         },
         {
             "numero": "98",
             "tipo": "simple",
             "precio": "34",
-            "disponibilidad": true
-        },
-        {
-            "numero": "4",
-            "tipo": "simple",
-            "precio": "55",
-            "disponibilidad": "Disponible"
-        },
-        {
-            "numero": "4",
-            "tipo": "",
-            "precio": "",
-            "disponibilidad": "Disponible"
+            "disponibilidad": "Disponible",
+            "diasReservado": []
         },
         {
             "numero": "12",
             "tipo": "simple",
             "precio": "4500",
-            "disponibilidad": false
+            "disponibilidad": "Reservada",
+            "diasReservado": [
+                "1",
+                "1"
+            ]
+        },
+        {
+            "numero": "13",
+            "tipo": "doble",
+            "precio": "34",
+            "disponibilidad": "Disponible",
+            "diasReservado": []
         }
     ]
 }

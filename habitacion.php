@@ -52,12 +52,25 @@ class Habitacion
         return $this->diasReservado; 
     }
     
-    public function setDiasReservados(array $dias) { 
-        $this->diasReservado = $dias; 
+    public function setDiasReservados($diasReservado) { 
+       
+        $this->diasReservado = $diasReservado; 
     }
 
-    public function __toString()
-    {
-        return "Habitación Número: $this->numero, Tipo: $this->tipo, Precio: $this->precio, Disponibilidad: $this->disponibilidad, Días reservados: " . ($this->diasReservado ? implode(", ", $this->diasReservado) : "No reservada");
-    }
-}
+
+            
+    
+            public function __toString()
+            {
+                // Asegúrate de que 'diasReservado' sea un array antes de utilizar implode.
+                $diasReservadosStr = is_array($this->diasReservado) ? implode(', ', $this->diasReservado) : 'Ninguno';
+            
+                return "Habitación Número: {$this->numero}, Tipo: {$this->tipo}, Precio: {$this->precio}, Disponibilidad: {$this->disponibilidad}, Días reservados: {$diasReservadosStr}";
+            }
+            
+             
+            }
+    
+            
+    
+

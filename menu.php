@@ -2,10 +2,10 @@
 <?php
 
 
-include 'usuarios.php';
+include_once 'usuarios.php';
 include_once 'habitacionesGestor.php';
-include 'reserva.php';
-include 'reservasGestor.php';
+include_once 'reserva.php';
+include_once 'reservasGestor.php';
 
 while (true) {
     $clave = 111;
@@ -179,9 +179,9 @@ function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
     // Paso 3: Continuar con el proceso de reserva
     echo "Ingrese el tipo de habitación para la reserva: ";
     $tipoHabitacion = trim(fgets(STDIN));
-
+    $disponibilidad= "Disponible";
     // Buscar habitaciones disponibles del tipo indicado
-    $habitacionesDisponibles = $habitacionesGestor->buscarPorDisponibilidad($tipoHabitacion);
+    $habitacionesDisponibles = $habitacionesGestor->buscarPorDisponibilidadYTipo($disponibilidad,$tipoHabitacion);
 
     if (!empty($habitacionesDisponibles)) {
         // Si hay habitaciones disponibles, usar la primera
@@ -195,7 +195,7 @@ function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
         $reservaId = $reservasGestor->generarNuevoId();
 
         // Crear la reserva
-        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, 'Reservado', 0,$usuario);
+        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacion,0,$usuario);
 
         // Asignar la habitación a la reserva
         $reserva->setHabitacion($habitacion);
@@ -211,7 +211,7 @@ function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
 
         // Cambiar la disponibilidad de la habitación
         $habitacion->setDisponibilidad("Reservado");
-
+     
         echo "Reserva creada exitosamente.\n";
     } else {
         echo "No se encontró una habitación disponible de ese tipo.\n";
@@ -374,7 +374,8 @@ function menuAdminHabitaciones()
                 echo "Ingrese el precio por noche: ";
                 $precio = trim(fgets(STDIN));
                 $disponibilidad= "Disponible";
-                $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio, $disponibilidad));
+                $diasReservado=[];
+                $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio, $disponibilidad,$diasReservado));
                 echo "Habitación agregada exitosamente.\n";
                 break;
             case 3:
@@ -413,11 +414,12 @@ function menuAdminHabitaciones()
                         echo "Habitación actualizada correctamente.\n";
                     } else {
                         echo "Error al actualizar la habitación.\n";
-                    }
-                } else {
-                    echo "Habitación no encontrada.\n";
-                }
+                   
+                } //else {
+                  //  echo "Habitación no encontrada.\n";
+                //}
                 break;
+                }
             case 4:
                 echo "Ingrese el número de la habitación que desea eliminar: ";
                 $numero = trim(fgets(STDIN));

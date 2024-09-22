@@ -1,6 +1,6 @@
 <?php
-include_once 'usuario.php';
-class Usuarios extends Usuario
+require_once 'usuario.php';
+class Usuarios 
 {
     private $usuarios = [];
     private $usuarioJson = 'usuario.json';

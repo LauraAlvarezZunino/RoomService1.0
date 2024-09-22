@@ -30,16 +30,14 @@ class ReservasGestor
             // Calcular los días entre la fecha de inicio y la fecha de fin
             $fechaInicio = new DateTime($reserva->getFechaInicio());
             $fechaFin = new DateTime($reserva->getFechaFin());
-            $intervalo = new DateInterval('P1D');
-            $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFin->modify('+1 day'));
-
+         
             $diasReservados = [];
-            foreach ($periodo as $fecha) {
-                $diasReservados[] = $fecha->format('Y-m-d');
+            {
+                $diasReservados[] =["Reservado ",$fechaInicio,"a",$fechaFin] ;
             }
 
             // Actualizar los días reservados y la disponibilidad en la habitación
-            $this->habitacionesGestor->agregarDiasReservados($diasReservados);
+            $this->habitacionesGestor->agregarDiasReservados($diasReservados,$habitacion);
             $habitacion->setDisponibilidad('No disponible');
 
             // Guardar la reserva y actualizar las habitaciones en el JSON
@@ -48,6 +46,7 @@ class ReservasGestor
             $this->habitacionesGestor ->actualizarHabitacion($habitacion,$diasReservados);
 
             echo "Reserva agregada exitosamente y la habitación ahora está no disponible.\n";
+        
         } else {
             echo "La habitación ya está reservada o no está disponible.\n";
         }
@@ -130,7 +129,7 @@ class ReservasGestor
                 $reservaData['id'],
                 $reservaData['fechaInicio'],
                 $reservaData['fechaFin'],
-                $habitacion, // Pasamos la habitación completa
+               $habitacion, // Pasamos la habitación completa
                 $reservaData['costo'],
                 $usuarioDni // Asignamos el DNI del usuario o null si no existe
             );
