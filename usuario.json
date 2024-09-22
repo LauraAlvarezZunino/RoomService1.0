@@ -2,31 +2,24 @@
     "usuarios": [
         {
             "id": 3,
-            "nombre": null,
+            "nombre": "laalalal",
             "dni": "111111",
             "email": "22222",
             "telefono": "2494673455"
         },
         {
             "id": 4,
-            "nombre": null,
+            "nombre": "josesito",
             "dni": "24567890",
             "email": "mariano@gmail.com",
             "telefono": "2494698754"
         },
         {
             "id": 5,
-            "nombre": null,
+            "nombre": "Roberto Rodriguez",
             "dni": "34538690",
             "email": "skljghdljgb",
             "telefono": "24353656"
-        },
-        {
-            "id": 6,
-            "nombre": "111111",
-            "dni": "",
-            "email": "",
-            "telefono": ""
         }
     ]
 }

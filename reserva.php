@@ -1,5 +1,5 @@
 <?php
-include_once 'habitaciones.php';
+include_once 'habitacionesGestor.php';
 class Reserva {
 
     private $id;
@@ -91,7 +91,7 @@ class Reserva {
     }
 
  
-    /*function reservaToArray($reserva)    es necesaria?
+    function reservaToArray($reserva) 
     {
         return [
             'id' => $reserva->getId(),
@@ -99,11 +99,12 @@ class Reserva {
             'Fecha fin' => $reserva->getFechaFin(),
             'Estado' => $reserva->getEstado(),
             'Habitacion'=>$reserva->getHabitacion(),
-            'Costo'=>$reserva->getCosto()
+            'Costo'=>$reserva->getCosto(),
+            'Reservado por DNI'=>$reserva->getUsuarioDni()
         ];
     }
 
-*/
+
     public function __toString()
     {
       return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin},Habitacion:{$this->habitacion}, Costo: $ . $this->costo, Reservado por dni:{$this->usuarioDni}";
