@@ -27,19 +27,15 @@ class ReservasGestor
         $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
 
         if ($habitacion && $habitacion->getDisponibilidad() === 'Disponible') {
-            // Calcular los días entre la fecha de inicio y la fecha de fin
-            $fechaInicio = new DateTime($reserva->getFechaInicio());
+         
+            $fechaInicio = new DateTime($reserva->getFechaInicio());//datetime representacion de fechas 
             $fechaFin = new DateTime($reserva->getFechaFin());
          
             $diasReservados = [];
-            {
-                $diasReservados[] =["Reservado ",$fechaInicio,"a",$fechaFin] ;
-            }
-
+            $diasReservados[] = ["Reservada ",$fechaInicio,"a",$fechaFin] ;
             // Actualizar los días reservados y la disponibilidad en la habitación
             $this->habitacionesGestor->agregarDiasReservados($diasReservados,$habitacion);
-            $habitacion->setDisponibilidad('No disponible');
-
+            $habitacion->setDisponibilidad('Reservada');
             // Guardar la reserva y actualizar las habitaciones en el JSON
             $this->reservas[] = $reserva;
             $this->guardarEnJSON();
@@ -49,7 +45,7 @@ class ReservasGestor
         
         } else {
             echo "La habitación ya está reservada o no está disponible.\n";
-        }
+         }
     }
 
     public function obtenerReservas()
@@ -57,9 +53,8 @@ class ReservasGestor
         return $this->reservas;
     }
 
-    public function modificarReserva($id, $nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion, $nuevoCosto)
-    {
-        $reserva = $this->buscarReservaPorId($id);
+    public function modificarReserva($id, $nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion, $nuevoCosto){
+        $reserva = $this->buscarReservaPorId($id); //pendienteeeeee 
         if ($reserva) {
             $reserva->setFechaInicio($nuevaFechaInicio);
             $reserva->setFechaFin($nuevaFechaFin);
@@ -76,7 +71,7 @@ class ReservasGestor
         foreach ($this->reservas as $indice => $reserva) {
             if ($reserva->getId() == $id) {
                 unset($this->reservas[$indice]);
-                $this->reservas = array_values($this->reservas); // reindexamos el array
+                $this->reservas = array_values($this->reservas); // reposicionamos el array para que no quede un lugar vacio
                 $this->guardarEnJSON();
                 return true;
             }
@@ -84,7 +79,7 @@ class ReservasGestor
         return false;
     }
 
-    public function buscarReservaPorId($id)
+    public function buscarReservaPorId($id) 
     {
         foreach ($this->reservas as $reserva) {
             if ($reserva->getId() == $id) {
@@ -92,6 +87,20 @@ class ReservasGestor
             }
         }
         return null;
+    }
+    
+ 
+    function reservaToArray($reserva) 
+    {
+        return [
+            'id' => $reserva->getId(),
+            'Fecha inicio' => $reserva->getFechaInicio(),
+            'Fecha fin' => $reserva->getFechaFin(),
+            'Estado' => $reserva->getEstado(),
+            'Habitacion'=>$reserva->getHabitacion(),
+            'Costo'=>$reserva->getCosto(),
+            'Reservado por DNI'=>$reserva->getUsuarioDni()
+        ];
     }
 
     // Guardar reservas en el archivo JSON
@@ -118,7 +127,7 @@ class ReservasGestor
 {
     if (file_exists($this->reservaJson)) {
         $json = file_get_contents($this->reservaJson);
-        $reservasArray = json_decode($json, true);
+        $reservasArray = json_decode($json, true)['reservas'];
 
         foreach ($reservasArray as $reservaData) {
             // Verificamos si la clave 'usuarioDni' existe antes de usarla

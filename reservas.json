@@ -1,4 +1,5 @@
-[
+{
+    "reservas": [
     {
         "id": 1,
         "fechaInicio": "2024-05-23",
@@ -104,3 +105,4 @@
         "usuarioDni": {}
     }
 ]
+}

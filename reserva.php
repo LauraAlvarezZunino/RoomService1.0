@@ -9,8 +9,7 @@ class Reserva {
     private $costo;
     private $usuarioDni;
 
-    public function __construct($id, $fechaInicio, $fechaFin, $costo,$usuarioDni)
-    {
+    public function __construct($id, $fechaInicio, $fechaFin, $costo,$usuarioDni) {
         $this->id = $id;
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
@@ -19,48 +18,39 @@ class Reserva {
     }
 
     // Getters y Setters
-    public function getId()
-    {
+    public function getId(){
         return $this->id;
     }
 
-    public function setId($id)
-    {
+    public function setId($id){
         $this->id = $id;
     }
 
-    public function getFechaInicio()
-    {
+    public function getFechaInicio(){
         return $this->fechaInicio;
     }
 
-    public function setFechaInicio($fecha_inicio)
-    {
+    public function setFechaInicio($fecha_inicio){
         $this->fechaInicio = $fecha_inicio;
     }
 
-    public function getFechaFin()
-    {
+    public function getFechaFin(){
         return $this->fechaFin;
     }
 
-    public function setFechaFin($fechaFin)
-    {
+    public function setFechaFin($fechaFin){
         $this->fechaFin = $fechaFin;
     }
 
-    public function getCosto()
-    {
+    public function getCosto() {
         return $this->costo;
     }
 
-    public function setCosto($costo)
-    {
+    public function setCosto($costo){
         $this->costo = $costo;
     }
 
-    public function getHabitacion()
-    {
+    public function getHabitacion(){
         return $this->habitacion;
     }
 
@@ -90,23 +80,8 @@ class Reserva {
         $this->costo = $dias * $precioPorNoche;
     }
 
- 
-    function reservaToArray($reserva) 
-    {
-        return [
-            'id' => $reserva->getId(),
-            'Fecha inicio' => $reserva->getFechaInicio(),
-            'Fecha fin' => $reserva->getFechaFin(),
-            'Estado' => $reserva->getEstado(),
-            'Habitacion'=>$reserva->getHabitacion(),
-            'Costo'=>$reserva->getCosto(),
-            'Reservado por DNI'=>$reserva->getUsuarioDni()
-        ];
-    }
 
-
-    public function __toString()
-    {
+    public function __toString() {
       return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin},Habitacion:{$this->habitacion}, Costo: $ . $this->costo, Reservado por dni:{$this->usuarioDni}";
     }
 }

@@ -146,7 +146,6 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
     }
 }
 
-// Función para ver habitaciones .....
 function verHabitaciones(){
 
 $habitacionesGestor = new HabitacionGestor();
@@ -158,29 +157,18 @@ foreach ($habitaciones as $habitacion) {
 }
 
 {
-    $habitaciones = $habitacionesGestor->obtenerHabitaciones(); // Obtener habitaciones
-
+    $habitaciones = $habitacionesGestor->obtenerHabitaciones(); 
         echo "=== Habitaciones Disponibles ===\n";
 foreach ($habitaciones as $habitacion) {
         echo $habitacion . "\n";
     }
 } 
 
-// Función para crear reserva
 function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
 {
-    // Paso 1: Pedir DNI del usuario
-  //  echo "Ingrese su DNI para realizar la reserva: ";
-    //$dniUsuario = trim(fgets(STDIN));
-    
-
-
-
-    // Paso 3: Continuar con el proceso de reserva
     echo "Ingrese el tipo de habitación para la reserva: ";
     $tipoHabitacion = trim(fgets(STDIN));
     $disponibilidad= "Disponible";
-    // Buscar habitaciones disponibles del tipo indicado
     $habitacionesDisponibles = $habitacionesGestor->buscarPorDisponibilidadYTipo($disponibilidad,$tipoHabitacion);
 
     if (!empty($habitacionesDisponibles)) {
@@ -193,31 +181,22 @@ function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
         $fechaFin = trim(fgets(STDIN));
 
         $reservaId = $reservasGestor->generarNuevoId();
-
-        // Crear la reserva
         $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacion,0,$usuario);
-
-        // Asignar la habitación a la reserva
         $reserva->setHabitacion($habitacion);
         $usuario->getDni();
-        // Asignar el DNI del usuario a la reserva
         $reserva->setUsuarioDni($usuario);
-
-        // Calcular el costo de la reserva en función del precio de la habitación
         $reserva->calcularCosto($habitacion->getPrecio());
 
-        // Agregar la reserva al gestor de reservas
+      
         $reservasGestor->agregarReserva($reserva);
 
-        // Cambiar la disponibilidad de la habitación
-        $habitacion->setDisponibilidad("Reservado");
+        $habitacion->setDisponibilidad("Reservada");
      
         echo "Reserva creada exitosamente.\n";
     } else {
         echo "No se encontró una habitación disponible de ese tipo.\n";
     }
 
-    // Volver al menú de usuario registrado
     menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
 }
 
@@ -258,7 +237,7 @@ function menuAdmin()
 
 function menuAdminUsuarios()
 {
-    $usuariosGestor = new Usuarios(); // Clase para manejar usuarios
+    $usuariosGestor = new Usuarios(); 
     while (true) {
         echo "=== Menú Administrar Usuarios ===\n";
         echo "1. Mostrar Usuarios\n";
@@ -287,16 +266,15 @@ function menuAdminUsuarios()
                     return false;
                 }
             
-                // Mostrar información actual del usuario
                 echo "Modificando al usuario con ID: {$usuario->getId()}\n";
                 echo "Nombre actual: " . $usuario->getNombreApellido() . "\n";
                 echo "DNI actual: " . $usuario->getDni() . "\n";
                 echo "Email actual: " . $usuario->getEmail() . "\n";
                 echo "Teléfono actual: " . $usuario->getTelefono() . "\n";
             
-                // Pedir nuevos datos (o mantener los actuales si no se ingresan)
+                
                 echo "Introduce el nuevo nombre (deja vacío para mantener el actual): ";
-                $nombreApellido = trim(fgets(STDIN)); // Capturar entrada del usuario
+                $nombreApellido = trim(fgets(STDIN)); 
             
                 echo "Introduce el nuevo DNI (deja vacío para mantener el actual): ";
                 $dni = trim(fgets(STDIN));
@@ -307,15 +285,15 @@ function menuAdminUsuarios()
                 echo "Introduce el nuevo teléfono (deja vacío para mantener el actual): ";
                 $telefono = trim(fgets(STDIN));
             
-                //  array de nuevos datos
+              
                 $nuevosDatos = [
-                    'nombre' => $nombreApellido ?: null,  // Si está vacío, se deja null
+                    'nombre' => $nombreApellido ?: null,  
                     'dni' => $dni ?: null,
                     'email' => $email ?: null,
                     'telefono' => $telefono ?: null,
                 ];
             
-                // llama a la función para actualizar el usuario
+     
                 if ($usuariosGestor->actualizarUsuario($id, $nuevosDatos)) {
                     echo "Usuario actualizado correctamente.\n";
                 } else {
@@ -356,17 +334,17 @@ function menuAdminHabitaciones()
         $opcion = trim(fgets(STDIN));
 
         switch ($opcion) {
-            case 1: //mostrar habs
+            case 1: 
                 verHabitaciones();
                 break;
             case 2:
-                // agregar una habitacion
+           
                 echo "Ingrese el número de la habitación: ";
                 $numero = trim(fgets(STDIN));
                 foreach ($habitacionesGestor->obtenerHabitaciones() as $h) {
                     if ($h->getNumero() == $numero) {
                         echo "La habitación con el número $numero ya existe. No se puede duplicar.\n";
-                        break 2;  // Salir del foreach y del case para regresar al menú
+                        break 2;   //esto sale del for y vuelve al menu de adm habs
                     }
                 }
                 echo "Ingrese el tipo de habitación: ";
@@ -382,7 +360,6 @@ function menuAdminHabitaciones()
                 echo "Ingrese el número de la habitación que desea modificar: ";
                 $numero = trim(fgets(STDIN));
                 
-                // Verificar si la habitación existe
                 $habitacion = null;
                 foreach ($habitacionesGestor->obtenerHabitaciones() as $h) {
                     if ($h->getNumero() == $numero) {
@@ -403,9 +380,8 @@ function menuAdminHabitaciones()
                     echo "¿Está disponible? (Deje vacío para mantener el actual): ";
                     $nuevaDisponibilidad = trim(fgets(STDIN));
 
-                    // Actualizar los datos de la habitación
                     $nuevosDatos = [
-                        'tipo' => $nuevoTipo ?: $habitacion->getTipo(),
+                        'tipo' => $nuevoTipo ?: $habitacion->getTipo(), //?:revisa si es null
                         'precio' => $nuevoPrecio ?: $habitacion->getPrecio(),
                         'disponibilidad' => $nuevaDisponibilidad ?: $habitacion->getDisponibilidad(),
                     ];
@@ -415,9 +391,7 @@ function menuAdminHabitaciones()
                     } else {
                         echo "Error al actualizar la habitación.\n";
                    
-                } //else {
-                  //  echo "Habitación no encontrada.\n";
-                //}
+                } 
                 break;
                 }
             case 4:
