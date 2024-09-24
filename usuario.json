@@ -1,25 +1,25 @@
 {
     "usuarios": [
         {
-            "id": 3,
-            "nombre": "laalalal",
+            "id": 1,
+            "nombre": "Josefa Perez",
             "dni": "111111",
-            "email": "22222",
+            "email": "lala@hotmail.com",
             "telefono": "2494673455"
         },
         {
-            "id": 4,
-            "nombre": "josesito",
+            "id": 2,
+            "nombre": "Jose Rodriguez",
             "dni": "24567890",
-            "email": "mariano@gmail.com",
+            "email": "Jose@gmail.com",
             "telefono": "2494698754"
         },
         {
-            "id": 5,
-            "nombre": "Roberto Rodriguez",
-            "dni": "34538690",
-            "email": "skljghdljgb",
-            "telefono": "24353656"
+            "id": 3,
+            "nombre": "Mariela Sanchez",
+            "dni": "24567890",
+            "email": "MS@gmail.com",
+            "telefono": "2494698754"
         }
     ]
 }
