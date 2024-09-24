@@ -1,6 +1,6 @@
 <?php 
-class Habitacion
-{
+class Habitacion{
+
     protected $numero;
     protected $tipo;
     protected $precio;
@@ -60,16 +60,15 @@ class Habitacion
 
             
     
-            public function __toString()
-            {
-                // Asegúrate de que 'diasReservado' sea un array antes de utilizar implode.
-                $diasReservadosStr = is_array($this->diasReservado) ? implode(', ', $this->diasReservado) : 'Ninguno';
-            
-                return "Habitación Número: {$this->numero}, Tipo: {$this->tipo}, Precio: {$this->precio}, Disponibilidad: {$this->disponibilidad}, Días reservados: {$diasReservadosStr}";
-            }
-            
-             
-            }
+     public function __toString(){
+        // diasReservado es un array por eso el implode.
+        $diasReservadosStr = is_array($this->diasReservado) ? implode(' hasta ', $this->diasReservado) : 'Ninguno';
+    
+        return "Habitación Número: {$this->numero}, Tipo: {$this->tipo}, Precio: {$this->precio}, Disponibilidad: {$this->disponibilidad}, Días reservados: {$diasReservadosStr}";
+    }
+    
+        
+}
     
             
     
