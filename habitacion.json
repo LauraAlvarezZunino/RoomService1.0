@@ -10,21 +10,21 @@
         {
             "numero": "4",
             "tipo": "simple",
-            "precio": "40",
+            "precio": "40000",
             "disponibilidad": "Disponible",
             "diasReservado": []
         },
         {
             "numero": "34",
             "tipo": "simple",
-            "precio": "45",
+            "precio": "47000",
             "disponibilidad": "Disponible",
             "diasReservado": []
         },
         {
             "numero": "5",
             "tipo": "simple",
-            "precio": "9876",
+            "precio": "35000",
             "disponibilidad": "Reservada",
             "diasReservado": [
                 "1",
@@ -34,21 +34,21 @@
         {
             "numero": "99",
             "tipo": "simple",
-            "precio": "00",
+            "precio": "37000",
             "disponibilidad": "Disponible",
             "diasReservado": []
         },
         {
             "numero": "98",
             "tipo": "simple",
-            "precio": "34",
+            "precio": "34000",
             "disponibilidad": "Disponible",
             "diasReservado": []
         },
         {
             "numero": "12",
             "tipo": "simple",
-            "precio": "4500",
+            "precio": "41000",
             "disponibilidad": "Reservada",
             "diasReservado": [
                 "1",
@@ -58,7 +58,7 @@
         {
             "numero": "13",
             "tipo": "doble",
-            "precio": "34",
+            "precio": "34000",
             "disponibilidad": "Disponible",
             "diasReservado": []
         }
