@@ -6,24 +6,25 @@ class HabitacionGestor  {
 
     private $habitaciones = [];
     private $archivoJson = 'habitacion.json';
- 
+   
+    public function __construct()
+    {
+        $this->cargarDesdeJSON();
+    }
     // CRUD
 
-    public function agregarHabitacion($habitacion)
-    {
+    public function agregarHabitacion($habitacion){
         $this->habitaciones[] = $habitacion;
         $this->guardarEnJSON();
       
     }
 
-    public function obtenerHabitaciones()
-    {
+    public function obtenerHabitaciones(){
         return $this->habitaciones;
     }
-    // Añadir días reservados
 
-    public function buscarHabitacionPorNumero($numero)
-    {
+
+    public function buscarHabitacionPorNumero($numero){
         foreach ($this->habitaciones as $habitacion) {
             if ($habitacion->getNumero() == $numero) {
                 return $habitacion;
@@ -31,31 +32,29 @@ class HabitacionGestor  {
         }
         return null; // Retorna null si no se encuentra la habitación
     }
-public function agregarDiasReservados($diasReservado,$habitacion)
-{
+    
+    public function agregarDiasReservados($diasReservado,$habitacion){
     $habitacion->setdiasReservados($diasReservado);
-}
-
-
-public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo)
-{
-    $resultados = [];
-    foreach ($this->habitaciones as $habitacion) {
-        if ($habitacion->getDisponibilidad() == $disponibilidad && $habitacion->getTipo() == $tipo) {
-            $resultados[] = $habitacion;
-        }
     }
-    return $resultados;
-}
+
+
+    public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo){
+        $resultados = [];
+        foreach ($this->habitaciones as $habitacion) {
+            if ($habitacion->getDisponibilidad() == $disponibilidad && $habitacion->getTipo() == $tipo) {
+                $resultados[] = $habitacion;
+            }
+        }
+        return $resultados;
+    }
 
 
 
 
-    public function actualizarHabitacion($numero, $nuevosDatos)
-    {
+    public function actualizarHabitacion($numero, $nuevosDatos){
         foreach ($this->habitaciones as &$habitacion) {
             if ($habitacion->getNumero() == $numero) {
-                if (isset($nuevosDatos['tipo'])) {
+                if (isset($nuevosDatos['tipo'])) { //isset chequea que no es nulo
                     $habitacion->setTipo($nuevosDatos['tipo']);
                 } else {
                     $habitacion->setTipo($habitacion->getTipo());
@@ -82,13 +81,12 @@ public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo)
 
 
 
-    public function eliminarHabitacion($numero)
-    {
+    public function eliminarHabitacion($numero){
         $nuevasHabitaciones = [];
 
         foreach ($this->habitaciones as $habitacion) {
             if ($habitacion->getNumero() != $numero) {
-                $nuevasHabitaciones[] = $habitacion; // Añade las habitaciones que no son la que queremos eliminar
+                $nuevasHabitaciones[] = $habitacion; // Agrega las hab que no queremos borrar
             }
         }
 
@@ -100,8 +98,7 @@ public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo)
 
     // Json
 
-    function guardarEnJSON()
-    {
+    function guardarEnJSON(){
         $habitacionesArray = [];
 
         foreach ($this->habitaciones as $habitacion) {
@@ -112,13 +109,23 @@ public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo)
         file_put_contents($this->archivoJson, $jsonHabitacion);
     }
 
+    
+    function habitacionToArray($habitacion){
+        return [
+            'numero' => $habitacion->getNumero(),
+            'tipo' => $habitacion->getTipo(),
+            'precio' => $habitacion->getPrecio(),
+            'disponibilidad' => $habitacion->getDisponibilidad(),
+            'diasReservado'=>$habitacion->getDiasReservados()
+        ];
+    }
 
-    function cargarDesdeJSON()
-    {
-        if (file_exists($this->archivoJson)) {
-            $jsonHabitacion = file_get_contents($this->archivoJson);
-            $habitacionesArray = json_decode($jsonHabitacion, true)['habitacion'] ?? [];
+    function cargarDesdeJSON(){
+        if (file_exists($this->archivoJson)) { //existe?
+            $jsonHabitacion = file_get_contents($this->archivoJson);//lo lee y lo guarda
+            $habitacionesArray = json_decode($jsonHabitacion, true)['habitacion'];
             $this->habitaciones = []; // Asegura que se vacie el array antes de cargar los datos
+           
             foreach ($habitacionesArray as $habitacionData) {
                 $habitacion = new Habitacion();
                 $habitacion->setNumero($habitacionData['numero']);
@@ -131,15 +138,5 @@ public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo)
         }
     }
 
-    function habitacionToArray($habitacion)
-    {
-        return [
-            'numero' => $habitacion->getNumero(),
-            'tipo' => $habitacion->getTipo(),
-            'precio' => $habitacion->getPrecio(),
-            'disponibilidad' => $habitacion->getDisponibilidad(),
-            'diasReservado'=>$habitacion->getDiasReservados()
-        ];
-    }
 }
    

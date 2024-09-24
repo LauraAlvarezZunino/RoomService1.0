@@ -10,56 +10,10 @@ class Usuarios
         $this->cargarDesdeJSON();
     }
 
-    // Cargar datos desde JSON
-    private function cargarDesdeJSON()
-    {
-        if (file_exists($this->usuarioJson)) {
-            $jsonUsuarios = file_get_contents($this->usuarioJson);
+   
 
-            $data = json_decode($jsonUsuarios, true);
+    
 
-            if (isset($data['usuarios'])) {  // Verifica si existe la clave 'usuarios'
-                $usuariosArray = $data['usuarios'];
-
-                foreach ($usuariosArray as $usuarioData) {
-                    $usuario = new Usuario(
-                        $usuarioData['id'],
-                        $usuarioData['nombre'],
-                        $usuarioData['dni'],
-                        $usuarioData['email'],
-                        $usuarioData['telefono']
-                    );
-                    $this->usuarios[] = $usuario;
-                }
-            } else {
-                echo "No se encontró la clave 'usuarios' en el archivo JSON.\n";
-            }
-        } else {
-            echo "No se encontró el archivo JSON.\n";
-        }
-    }
-
-    // Guardar datos en JSON
-    private function guardarEnJSON()
-    {
-        $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios);
-        $jsonUsuario = json_encode(['usuarios' => $usuariosArray], JSON_PRETTY_PRINT);
-        file_put_contents($this->usuarioJson, $jsonUsuario);
-    }
-
-    // Pasasr Usuario en array
-    private function usuarioToArray($usuario)
-    {
-        return [
-            'id' => $usuario->getId(),
-            'nombre' => $usuario->getNombreApellido(),
-            'dni' => $usuario->getDni(),
-            'email' => $usuario->getEmail(),
-            'telefono' => $usuario->getTelefono()
-        ];
-    }
-
-    // Crear (Agregar) un nuevo usuario con ID autogenerado
     public function crearUsuario($nombreApellido, $dni, $email, $telefono)
     {
         $nuevoId = $this->generarNuevoId();
@@ -160,5 +114,47 @@ class Usuarios
     
         return false;
     }
-}
 
+// Guardar datos en JSON
+    private function guardarEnJSON()
+    {
+        $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios);//aplica la funcion en el arreglo sin usar for array map
+        $jsonUsuario = json_encode(['usuarios' => $usuariosArray], JSON_PRETTY_PRINT);
+        file_put_contents($this->usuarioJson, $jsonUsuario);
+    }
+
+
+    private function usuarioToArray($usuario)
+    {
+        return [
+            'id' => $usuario->getId(),
+            'nombre' => $usuario->getNombreApellido(),
+            'dni' => $usuario->getDni(),
+            'email' => $usuario->getEmail(),
+            'telefono' => $usuario->getTelefono()
+        ];
+    }
+
+    private function cargarDesdeJSON(){
+        if (file_exists($this->usuarioJson)) {
+            $jsonUsuarios = file_get_contents($this->usuarioJson);
+
+            $data = json_decode($jsonUsuarios, true)['usuarios'];
+
+       
+            $usuariosArray = $data['usuarios'];
+
+                foreach ($usuariosArray as $usuarioData) {
+                    $usuario = new Usuario(
+                        $usuarioData['id'],
+                        $usuarioData['nombre'],
+                        $usuarioData['dni'],
+                        $usuarioData['email'],
+                        $usuarioData['telefono']
+                    );
+                    $this->usuarios[] = $usuario;
+                }
+    
+        }
+    }
+}

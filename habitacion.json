@@ -47,7 +47,7 @@
         },
         {
             "numero": "12",
-            "tipo": "simple",
+            "tipo": "doble",
             "precio": "41000",
             "disponibilidad": "Reservada",
             "diasReservado": [
@@ -59,7 +59,7 @@
             "numero": "13",
             "tipo": "doble",
             "precio": "34000",
-            "disponibilidad": "Disponible",
+            "disponibilidad": "Reservada",
             "diasReservado": []
         }
     ]
