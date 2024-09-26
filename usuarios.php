@@ -135,15 +135,19 @@ class Usuarios
         ];
     }
 
-    private function cargarDesdeJSON(){
+    private function cargarDesdeJSON()
+    {
         if (file_exists($this->usuarioJson)) {
             $jsonUsuarios = file_get_contents($this->usuarioJson);
-
-            $data = json_decode($jsonUsuarios, true)['usuarios'];
-
-       
-            $usuariosArray = $data['usuarios'];
-
+    
+            // Decodificamos el JSON en un array a
+            $data = json_decode($jsonUsuarios, true);
+    
+            // Verificamos si el JSON tiene la clave 'usuarios'
+            if (isset($data['usuarios'])) {
+                $usuariosArray = $data['usuarios'];
+    
+                // Recorremos el array de usuarios y creamos instancias de Usuario
                 foreach ($usuariosArray as $usuarioData) {
                     $usuario = new Usuario(
                         $usuarioData['id'],
@@ -154,7 +158,7 @@ class Usuarios
                     );
                     $this->usuarios[] = $usuario;
                 }
-    
+            }
         }
     }
-}
+}    
