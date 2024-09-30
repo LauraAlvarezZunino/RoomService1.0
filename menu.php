@@ -152,17 +152,12 @@ $habitacionesGestor = new HabitacionGestor();
 $habitacionesGestor->cargarDesdeJSON();
 $habitaciones = $habitacionesGestor->obtenerHabitaciones();
 foreach ($habitaciones as $habitacion) {
+
     echo $habitacion . "\n";
 }
 }
 
-{
-    $habitaciones = $habitacionesGestor->obtenerHabitaciones(); 
-        echo "=== Habitaciones Disponibles ===\n";
-foreach ($habitaciones as $habitacion) {
-        echo $habitacion . "\n";
-    }
-} 
+
 
 function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
 {
