@@ -26,26 +26,26 @@ class ReservaControlador
         // Obtenemos la habitación asociada a la reserva desde el archivo JSON
         $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
 
-        if ($habitacion && $habitacion->getDisponibilidad() === 'Disponible') {
+       // if ($habitacion && $habitacion->getDisponibilidad() === 'Disponible') {
          
-            $fechaInicio = new DateTime($reserva->getFechaInicio());//datetime representacion de fechas 
-            $fechaFin = new DateTime($reserva->getFechaFin());
+         //   $fechaInicio = new DateTime($reserva->getFechaInicio());//datetime representacion de fechas 
+           // $fechaFin = new DateTime($reserva->getFechaFin());
          
-            $diasReservados = [];
-            $diasReservados[] = ["Reservada ",$fechaInicio,"a",$fechaFin] ;
+            //$diasReservados = [];
+            //$diasReservados[] = ["Reservada ",$fechaInicio,"a",$fechaFin] ;
             // Actualizar los días reservados y la disponibilidad en la habitación
-            $this->habitacionesGestor->agregarDiasReservados($diasReservados,$habitacion);
-            $habitacion->setDisponibilidad('Reservada');
+           // $this->habitacionesGestor->agregarDiasReservados($diasReservados,$habitacion);
+            //$habitacion->setDisponibilidad('Reservada');
             // Guardar la reserva y actualizar las habitaciones en el JSON
             $this->reservas[] = $reserva;
             $this->guardarEnJSON();
-            $this->habitacionesGestor ->actualizarHabitacion($habitacion,$diasReservados);
+            //$this->habitacionesGestor ->actualizarHabitacion($habitacion,$diasReservados);
 
             echo "Reserva agregada exitosamente y la habitación ahora está no disponible.\n";
         
-        } else {
-            echo "La habitación ya está reservada o no está disponible.\n";
-         }
+        //// else {
+          //  echo "La habitación ya está reservada o no está disponible.\n";
+         //}
     }
 
     public function obtenerReservas()
