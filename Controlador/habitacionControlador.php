@@ -1,11 +1,11 @@
 <?php
 
-require_once 'Habitacion.php';
+require_once 'Modelo/Habitacion.php';
 
-class HabitacionGestor  {
+class HabitacionControlador  {
 
     private $habitaciones = [];
-    private $archivoJson = 'habitacion.json';
+    private $archivoJson = 'Modelo/habitacion.json';
    
     public function __construct()
     {
@@ -33,15 +33,12 @@ class HabitacionGestor  {
         return null; // Retorna null si no se encuentra la habitación
     }
     
-    public function agregarDiasReservados($diasReservado,$habitacion){
-    $habitacion->setdiasReservados($diasReservado);
-    }
+  
 
-
-    public function buscarPorDisponibilidadYTipo($disponibilidad, $tipo){
+    public function buscarPorTipo($tipo){
         $resultados = [];
         foreach ($this->habitaciones as $habitacion) {
-            if ($habitacion->getDisponibilidad() == $disponibilidad && $habitacion->getTipo() == $tipo) {
+            if ( $habitacion->getTipo() == $tipo) {
                 $resultados[] = $habitacion;
             }
         }
@@ -66,11 +63,7 @@ class HabitacionGestor  {
                     $habitacion->setPrecio($habitacion->getPrecio());
                 }
 
-                if (isset($nuevosDatos['disponibilidad'])) {
-                    $habitacion->setDisponibilidad($nuevosDatos['disponibilidad']);
-                } else {
-                    $habitacion->setDisponibilidad($habitacion->getDisponibilidad());
-                }
+            
 
                 $this->guardarEnJSON();
                 return true;
@@ -115,8 +108,7 @@ class HabitacionGestor  {
             'numero' => $habitacion->getNumero(),
             'tipo' => $habitacion->getTipo(),
             'precio' => $habitacion->getPrecio(),
-            'disponibilidad' => $habitacion->getDisponibilidad(),
-            'diasReservado'=>$habitacion->getDiasReservados()
+        
         ];
     }
 
@@ -131,8 +123,6 @@ class HabitacionGestor  {
                 $habitacion->setNumero($habitacionData['numero']);
                 $habitacion->setTipo($habitacionData['tipo']);
                 $habitacion->setPrecio($habitacionData['precio']);
-                $habitacion->setDisponibilidad($habitacionData['disponibilidad']);
-                $habitacion->setDiasReservados($habitacionData['diasReservado']);
                 $this->habitaciones[] = $habitacion;
             }
         }

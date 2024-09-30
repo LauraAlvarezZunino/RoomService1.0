@@ -1,12 +1,12 @@
 <?php
-include_once 'reserva.php';
-include_once 'usuarios.php';
-include_once 'habitacionesGestor.php';
+include_once 'Modelo/reserva.php';
+include_once 'usuarioControlador.php';
+include_once 'habitacionControlador.php';
 
-class ReservasGestor
+class ReservaControlador
 {
     private $reservas = [];
-    private $reservaJson = 'reservas.json';
+    private $reservaJson = 'Modelo/reservas.json';
     private $id = 1; // ID inicial
     private $habitacionesGestor;
 
