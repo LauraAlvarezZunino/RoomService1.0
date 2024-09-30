@@ -1,6 +1,4 @@
-
 <?php
-
 /*
 include_once 'Controlador/usuarioControlador.php';
 include_once 'Controlador/habitacionControlador.php';
