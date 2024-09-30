@@ -1,0 +1,44 @@
+{
+    "habitacion": [
+        {
+            "numero": "2",
+            "tipo": "simple",
+            "precio": "44000"
+        },
+        {
+            "numero": "4",
+            "tipo": "simple",
+            "precio": "40000"
+        },
+        {
+            "numero": "34",
+            "tipo": "simple",
+            "precio": "47000"
+        },
+        {
+            "numero": "5",
+            "tipo": "simple",
+            "precio": "35000"
+        },
+        {
+            "numero": "99",
+            "tipo": "simple",
+            "precio": "37000"
+        },
+        {
+            "numero": "98",
+            "tipo": "simple",
+            "precio": "34000"
+        },
+        {
+            "numero": "12",
+            "tipo": "doble",
+            "precio": "41000"
+        },
+        {
+            "numero": "13",
+            "tipo": "doble",
+            "precio": "34000"
+        }
+    ]
+}

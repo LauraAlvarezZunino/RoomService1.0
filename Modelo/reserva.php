@@ -1,5 +1,5 @@
 <?php
-include_once 'habitacionesGestor.php';
+include_once 'Controlador/habitacionControlador.php';
 class Reserva {
 
     private $id;
