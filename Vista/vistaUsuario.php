@@ -86,9 +86,9 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             exit;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
-            menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
             break;
-    }
+    }  menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
+
 }
 
 function verHabitaciones()
