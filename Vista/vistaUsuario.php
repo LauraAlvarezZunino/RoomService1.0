@@ -158,7 +158,7 @@ function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche) {
     return $diferencia->days * $precioPorNoche;
 }
     
-//NUEVO LUZ*
+
     function mostrarReservasUsuario($usuario, $reservasGestor)
 {
     global $dniGuardado;
