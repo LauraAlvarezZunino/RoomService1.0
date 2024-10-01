@@ -103,14 +103,7 @@ class HabitacionControlador  {
     }
 
     
-    function habitacionToArray($habitacion){
-        return [
-            'numero' => $habitacion->getNumero(),
-            'tipo' => $habitacion->getTipo(),
-            'precio' => $habitacion->getPrecio(),
-        
-        ];
-    }
+
 
     function cargarDesdeJSON(){
         if (file_exists($this->archivoJson)) { //existe?

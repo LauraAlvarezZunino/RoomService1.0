@@ -1,108 +1,12 @@
 {
     "reservas": [
-    {
-        "id": 1,
-        "fechaInicio": "2024-05-23",
-        "fechaFin": "2024-05-24",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 2,
-        "fechaInicio": "2024-09-16",
-        "fechaFin": "2024-09-17",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 3,
-        "fechaInicio": "24-05-2025",
-        "fechaFin": "27-05-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 4,
-        "fechaInicio": "24-05-2025",
-        "fechaFin": "27-05-2025",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 5,
-        "fechaInicio": "24-05-2025",
-        "fechaFin": "27-05-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 6,
-        "fechaInicio": "24-05-2025",
-        "fechaFin": "27-05-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 7,
-        "fechaInicio": "24-05-2024",
-        "fechaFin": "27-05-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 8,
-        "fechaInicio": "24-05-2024",
-        "fechaFin": "27-05-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 9,
-        "fechaInicio": "12-05-2024",
-        "fechaFin": "14-05-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 10,
-        "fechaInicio": "2-10-2023",
-        "fechaFin": "4-10-2023",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 11,
-        "fechaInicio": "4-10-2023",
-        "fechaFin": "6-10-2023",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": null
-    },
-    {
-        "id": 12,
-        "fechaInicio": "6-10-2024",
-        "fechaFin": "10-10-2024",
-        "habitacion": null,
-        "costo": null,
-        "usuarioDni": 180000
-    },
-    {
-        "id": 13,
-        "fechaInicio": "6-10-2025",
-        "fechaFin": "16-10-2025",
-        "habitacion": {},
-        "costo": 450000,
-        "usuarioDni": {}
-    }
-]
+        {
+            "id": 1,
+            "fechaInicio": "2024-10-10",
+            "fechaFin": "2024-10-20",
+            "habitacion": "13",
+            "costo": 340000,
+            "usuarioDni": "111111"
+        }
+    ]
 }

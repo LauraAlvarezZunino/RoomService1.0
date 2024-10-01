@@ -21,33 +21,63 @@ class ReservaControlador
         return $this->id++;
     }
 
-    public function agregarReserva(Reserva $reserva)
+        public function agregarReserva(Reserva $reserva)
     {
-        // Obtenemos la habitación asociada a la reserva desde el archivo JSON
+        // Obtenemos la habitación asociada a la reserva
         $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
 
-       // if ($habitacion && $habitacion->getDisponibilidad() === 'Disponible') {
-         
-         //   $fechaInicio = new DateTime($reserva->getFechaInicio());//datetime representacion de fechas 
-           // $fechaFin = new DateTime($reserva->getFechaFin());
-         
-            //$diasReservados = [];
-            //$diasReservados[] = ["Reservada ",$fechaInicio,"a",$fechaFin] ;
-            // Actualizar los días reservados y la disponibilidad en la habitación
-           // $this->habitacionesGestor->agregarDiasReservados($diasReservados,$habitacion);
-            //$habitacion->setDisponibilidad('Reservada');
-            // Guardar la reserva y actualizar las habitaciones en el JSON
+        if ($habitacion) {
+            // Verificar si ya existe una reserva para la misma habitación en las mismas fechas
+            foreach ($this->reservas as $existingReserva) {
+                // Comprobar si la habitación es la misma
+                if ($existingReserva->getHabitacion()->getNumero() === $habitacion->getNumero()) {
+                    $fechaInicioExistente = new DateTime($existingReserva->getFechaInicio());
+                    $fechaFinExistente = new DateTime($existingReserva->getFechaFin());
+                    $fechaInicioNueva = new DateTime($reserva->getFechaInicio());
+                    $fechaFinNueva = new DateTime($reserva->getFechaFin());
+
+                    // Comprobar si las fechas se superponen
+                    if (
+                        ($fechaInicioNueva >= $fechaInicioExistente && $fechaInicioNueva < $fechaFinExistente) || // La nueva reserva comienza durante la existente
+                        ($fechaFinNueva > $fechaInicioExistente && $fechaFinNueva <= $fechaFinExistente) || // La nueva reserva termina durante la existente
+                        ($fechaInicioNueva <= $fechaInicioExistente && $fechaFinNueva >= $fechaFinExistente) // La nueva reserva envuelve la existente
+                    ) {
+                        echo "La habitación ya está reservada en esas fechas.\n";
+                        return; // No se agrega la reserva si hay un conflicto
+                    }
+                }
+            }
+
+            // Si no hay conflictos en la habitación, permitir que el usuario reserve múltiples habitaciones
+            // Verificar si el usuario ya tiene una reserva en las fechas solicitadas
+            foreach ($this->reservas as $existingReserva) {
+                // Comprobar si el DNI del usuario coincide
+                if ($existingReserva->getUsuarioDni() === $reserva->getUsuarioDni()) {
+                    $fechaInicioExistente = new DateTime($existingReserva->getFechaInicio());
+                    $fechaFinExistente = new DateTime($existingReserva->getFechaFin());
+                    $fechaInicioNueva = new DateTime($reserva->getFechaInicio());
+                    $fechaFinNueva = new DateTime($reserva->getFechaFin());
+
+                    // Comprobar si las fechas se superponen
+                    if (
+                        ($fechaInicioNueva >= $fechaInicioExistente && $fechaInicioNueva < $fechaFinExistente) || // La nueva reserva comienza durante la existente
+                        ($fechaFinNueva > $fechaInicioExistente && $fechaFinNueva <= $fechaFinExistente) || // La nueva reserva termina durante la existente
+                        ($fechaInicioNueva <= $fechaInicioExistente && $fechaFinNueva >= $fechaFinExistente) // La nueva reserva envuelve la existente
+                    ) {
+                        echo "El usuario ya tiene una reserva en esas fechas.\n";
+                        return; // No se agrega la reserva si hay un conflicto para el mismo usuario
+                    }
+                }
+            }
+
+            // Si no hay conflictos, agregar la reserva y guardar en JSON
             $this->reservas[] = $reserva;
             $this->guardarEnJSON();
-            //$this->habitacionesGestor ->actualizarHabitacion($habitacion,$diasReservados);
-
-            echo "Reserva agregada exitosamente y la habitación ahora está no disponible.\n";
-        
-        //// else {
-          //  echo "La habitación ya está reservada o no está disponible.\n";
-         //}
+            echo "Reserva creada exitosamente.\n"; // Mensaje de éxito
+        } else {
+            echo "Habitación no encontrada.\n"; // Manejo de error si la habitación no se encuentra
+        }
     }
-
     public function obtenerReservas()
     {
         return $this->reservas;
@@ -90,18 +120,7 @@ class ReservaControlador
     }
     
  
-    function reservaToArray($reserva) 
-    {
-        return [
-            'id' => $reserva->getId(),
-            'Fecha inicio' => $reserva->getFechaInicio(),
-            'Fecha fin' => $reserva->getFechaFin(),
-            'Estado' => $reserva->getEstado(),
-            'Habitacion'=>$reserva->getHabitacion(),
-            'Costo'=>$reserva->getCosto(),
-            'Reservado por DNI'=>$reserva->getUsuarioDni()
-        ];
-    }
+    
 
     // Guardar reservas en el archivo JSON
     private function guardarEnJSON()
@@ -113,19 +132,23 @@ class ReservaControlador
                 'id' => $reserva->getId(),
                 'fechaInicio' => $reserva->getFechaInicio(),
                 'fechaFin' => $reserva->getFechaFin(),
-                'habitacion' => $reserva->getHabitacion(), // Guardamos solo el número de la habitación
+                'habitacion' => $reserva->getHabitacion()->getNumero(), // Guardamos solo el número de la habitación
                 'costo' => $reserva->getCosto(),
                 'usuarioDni' => $reserva->getUsuarioDni(), // Cambiado a 'usuarioDni'
             ];
         }
 
-        file_put_contents($this->reservaJson, json_encode($reservasArray, JSON_PRETTY_PRINT));
+        // Envolver el array de reservas en un objeto
+        $dataToSave = ['reservas' => $reservasArray];
+        file_put_contents($this->reservaJson, json_encode($dataToSave, JSON_PRETTY_PRINT));
+
+        //file_put_contents($this->reservaJson, json_encode($reservasArray, JSON_PRETTY_PRINT));
     }
 
     // Cargar reservas desde el archivo JSON
     private function cargarDesdeJSON()
 {
-    if (file_exists($this->reservaJson)) {
+    /*if (file_exists($this->reservaJson)) {
         $json = file_get_contents($this->reservaJson);
         $reservasArray = json_decode($json, true)['reservas'];
 
@@ -141,6 +164,55 @@ class ReservaControlador
                $habitacion, // Pasamos la habitación completa
                 $reservaData['costo'],
                 $usuarioDni // Asignamos el DNI del usuario o null si no existe
+            );
+            $this->reservas[] = $reserva;
+
+            // Asegurar que el ID esté actualizado
+            if ($this->id < $reserva->getId() + 1) {
+                $this->id = $reserva->getId() + 1;
+            }
+        }
+    }*/
+    if (file_exists($this->reservaJson)) {
+        $json = file_get_contents($this->reservaJson);
+        $data = json_decode($json, true);
+
+        if (isset($data['reservas'])) {
+            $reservasArray = $data['reservas'];
+        } else {
+            $reservasArray = []; // Inicializa como un array vacío si no existe
+        }
+
+        foreach ($reservasArray as $reservaData) {
+            $usuarioDni = isset($reservaData['usuarioDni']) ? $reservaData['usuarioDni'] : null;
+
+            // Verificamos si 'habitacion' es un array con la información completa
+            if (is_array($reservaData['habitacion'])) {
+                // Creamos la instancia de Habitacion usando los datos dentro del array
+                $habitacionData = $reservaData['habitacion'];
+                $habitacion = new Habitacion(
+                    $habitacionData['numero'],
+                    $habitacionData['tipo'],
+                    $habitacionData['precio']
+                );
+            } else {
+                // En caso contrario, asumimos que es un número y buscamos la habitación
+                $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reservaData['habitacion']);
+            }
+
+            // Verificamos si se encontró o creó la habitación
+            if ($habitacion === null) {
+                echo "Advertencia: La habitación número {$reservaData['habitacion']} no fue encontrada. Se omitirá esta reserva.\n";
+                continue;
+            }
+
+            $reserva = new Reserva(
+                $reservaData['id'],
+                $reservaData['fechaInicio'],
+                $reservaData['fechaFin'],
+                $habitacion, 
+                $reservaData['costo'],
+                $usuarioDni
             );
             $this->reservas[] = $reserva;
 

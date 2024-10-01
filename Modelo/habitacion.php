@@ -38,7 +38,14 @@ class Habitacion{
         $this->precio = $precio; 
     }
 
-
+    function habitacionToArray($habitacion){
+        return [
+            'numero' => $habitacion->getNumero(),
+            'tipo' => $habitacion->getTipo(),
+            'precio' => $habitacion->getPrecio(),
+        
+        ];
+    }
  
 
 
