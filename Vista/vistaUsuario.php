@@ -117,39 +117,50 @@ function crearReserva($usuario, $habitacionesGestor, $reservasGestor)
 {
     global $dniGuardado; // Hacer uso de la variable global
 
-    // Usa $dniGuardado en lugar de $usuario->getDni() si es necesario
     echo "Ingrese el tipo de habitación para la reserva (simple / doble): ";
     $tipoHabitacion = trim(fgets(STDIN));
 
     $habitacionesDisponibles = $habitacionesGestor->buscarPorTipo($tipoHabitacion);
 
     if (!empty($habitacionesDisponibles)) {
-        //$habitacion = $habitacionesDisponibles[0];
         // Mostrar las habitaciones disponibles
         echo "Habitaciones disponibles:\n";
         foreach ($habitacionesDisponibles as $index => $habitacion) {
-            echo "Número: " . $habitacion->getNumero() . " - Precio por noche: " . $habitacion->getPrecio() . "\n"; // Ajusta según tu método de obtener el nombre
+            echo $index . ". Número: " . $habitacion->getNumero() . " - Precio por noche: " . $habitacion->getPrecio() . "\n";
         }
 
         echo "Seleccione una habitación (número): ";
         $eleccionHabitacion = trim(fgets(STDIN));
 
-        echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
-        $fechaInicio = trim(fgets(STDIN));
-        echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
-        $fechaFin = trim(fgets(STDIN));
+        // Buscar la habitación seleccionada por el número ingresado
+        $habitacionSeleccionada = null;
+        foreach ($habitacionesDisponibles as $habitacion) {
+            if ($habitacion->getNumero() == $eleccionHabitacion) {
+                $habitacionSeleccionada = $habitacion;
+                break;
+            }
+        }
 
-        $costo = calcularCostoReserva($fechaInicio, $fechaFin, $habitacion->getPrecio());
-        $reservaId = $reservasGestor->generarNuevoId();
-        $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacion, $costo, $dniGuardado);
-        //$reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacion, 0, $usuario);
-        //$reserva->calcularCosto($habitacion->getPrecio());
+        if ($habitacionSeleccionada) {
+            echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
+            $fechaInicio = trim(fgets(STDIN));
+            echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
+            $fechaFin = trim(fgets(STDIN));
 
-        $reservasGestor->agregarReserva($reserva);
+            $costo = calcularCostoReserva($fechaInicio, $fechaFin, $habitacionSeleccionada->getPrecio());
+            $reservaId = $reservasGestor->generarNuevoId();
+            $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacionSeleccionada, $costo, $dniGuardado);
+
+            $reservasGestor->agregarReserva($reserva);
+            echo "Reserva creada con éxito.\n";
+        } else {
+            echo "No se encontró una habitación con ese número.\n";
+        }
     } else {
         echo "No se encontró una habitación disponible de ese tipo.\n";
     }
 }
+
 
 function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche) {
     $fechaInicio = new DateTime($fechaInicio);

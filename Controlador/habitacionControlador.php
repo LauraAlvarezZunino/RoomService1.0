@@ -102,7 +102,14 @@ class HabitacionControlador  {
         file_put_contents($this->archivoJson, $jsonHabitacion);
     }
 
-    
+    function habitacionToArray($habitacion){
+        return [
+            'numero' => $habitacion->getNumero(),
+            'tipo' => $habitacion->getTipo(),
+            'precio' => $habitacion->getPrecio(),
+        
+        ];
+    }    
 
 
     function cargarDesdeJSON(){
