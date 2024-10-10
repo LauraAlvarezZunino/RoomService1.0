@@ -47,7 +47,7 @@ function menuAdminUsuarios()
 
         switch ($opcion) {
             case 1:
-                $usuarios = $usuariosGestor->obtenerUsuarios();
+                $usuarios = $usuariosGestor->obtenerUsuarios(); // aca podemos hacerla funcion y que solo la llame arriba 
                 foreach ($usuarios as $usuario) {
                     echo $usuario . "\n";
                 }

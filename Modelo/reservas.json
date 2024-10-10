@@ -49,14 +49,6 @@
             "usuarioDni": "111111"
         },
         {
-            "id": 8,
-            "fechaInicio": "23-03-2025",
-            "fechaFin": "25-03-2025",
-            "habitacion": "2",
-            "costo": 88000,
-            "usuarioDni": "111111"
-        },
-        {
             "id": 9,
             "fechaInicio": "23-03-2025",
             "fechaFin": "25-03-2025",
