@@ -47,14 +47,11 @@ function menuAdminUsuarios()
 
         switch ($opcion) {
             case 1:
-                $usuarios = $usuariosGestor->obtenerUsuarios(); // aca podemos hacerla funcion y que solo la llame arriba 
-                foreach ($usuarios as $usuario) {
-                    echo $usuario . "\n";
-                }
+                mostrarUsuarios($usuariosGestor);
                 break;
             case 2:
-
-                echo 'Ingrese el ID del usuario que quiere modificar: ';
+                modificarUsuario($usuariosGestor,true);
+               /* echo 'Ingrese el ID del usuario que quiere modificar: ';
                 $id= trim(fgets(STDIN));
                 $usuario= $usuariosGestor->obtenerUsuarioPorId($id);
 
@@ -96,7 +93,7 @@ function menuAdminUsuarios()
                 } else {
                     echo "No se pudo actualizar el usuario.\n";
                 }
-            
+            */
                 break;
             case 3:
                 echo 'Ingrese el ID a eliminar: ';
@@ -243,6 +240,14 @@ function menuAdminReservas()
                 echo "Opción no válida. Inténtelo de nuevo.\n";
                 break;
         }
+    }
+}
+
+
+function mostrarUsuarios($usuariosGestor){
+$usuarios = $usuariosGestor->obtenerUsuarios(); // aca podemos hacerla funcion y que solo la llame arriba 
+    foreach ($usuarios as $usuario) {
+        echo $usuario . "\n";
     }
 }
 ?>

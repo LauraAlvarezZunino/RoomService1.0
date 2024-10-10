@@ -1,3 +1,4 @@
+
 <?php
 $dniGuardado = null; // variable global
 function menuUsuario()
@@ -87,19 +88,19 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             crearReserva($usuario, $habitacionesGestor, $reservasGestor);
             break;
         case 3:
-            mostrarReservasUsuario($usuario, $reservasGestor);
+            mostrarReservas($reservasGestor, false, $usuario);
             break;
         case 4:
-            modificarReservaUsuario($usuario, $reservasGestor, $habitacionesGestor);
+            modificarReserva($reservasGestor, $habitacionesGestor, false, $usuario);
             break;
         case 5:
-            eliminarReservaUsuario($usuario, $reservasGestor, $habitacionesGestor);
+            eliminarReserva($reservasGestor, $usuario);
             break;
         case 6:
-            echo "Saliendo del sistema...\n";//ver datos
+            mostrarDatosUsuario($usuario);
             exit;
         case 7:
-            echo "Saliendo del sistema...\n";//modificar datos
+            modificarUsuario($reservasGestor, $usuario);
             exit;    
         case 8:
             echo "Saliendo del sistema...\n";
