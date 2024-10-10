@@ -57,12 +57,12 @@
             "usuarioDni": "24567890"
         },
         {
-            "id": 10,
-            "fechaInicio": "23-05-2025",
-            "fechaFin": "25-05-2025",
-            "habitacion": "2",
-            "costo": 88000,
-            "usuarioDni": "111111"
+            "id": 11,
+            "fechaInicio": "2024-10-12",
+            "fechaFin": "2024-10-14",
+            "habitacion": "4",
+            "costo": 80000,
+            "usuarioDni": {}
         }
     ]
 }

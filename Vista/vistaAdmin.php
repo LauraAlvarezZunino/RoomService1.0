@@ -47,7 +47,7 @@ function menuAdminUsuarios()
 
         switch ($opcion) {
             case 1:
-                mostrarUsuarios($usuariosGestor);
+                mostrarUsuarios($usuariosGestor);// ver porque ya hay una funcion para esto 
                 break;
             case 2:
                 modificarUsuario($usuariosGestor,true);
@@ -96,7 +96,7 @@ function menuAdminUsuarios()
             */
                 break;
             case 3:
-                echo 'Ingrese el ID a eliminar: ';
+                echo 'Ingrese el ID a eliminar: ';  // hacemos la funcion aparte?
                 $idEliminado= trim(fgets(STDIN));
                 $usuariosGestor->eliminarUsuario($idEliminado);
                 echo "Usuario {$idEliminado} eliminado correctamente.\n";
@@ -133,7 +133,7 @@ function menuAdminHabitaciones()
                 break;
             case 2:
            
-                echo "Ingrese el número de la habitación: ";
+                echo "Ingrese el número de la habitación: ";   // hacerla funcion y desp llamarla 
                 $numero = trim(fgets(STDIN));
                 foreach ($habitacionesGestor->obtenerHabitaciones() as $h) {
                     if ($h->getNumero() == $numero) {
