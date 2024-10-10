@@ -1,18 +1,19 @@
 <?php
-include_once 'habitacionesGestor.php';
+include_once 'Controlador/habitacionControlador.php';
 class Reserva {
 
     private $id;
     private $fechaInicio;
     private $fechaFin;
-    private $habitacion;
+    private Habitacion $habitacion; // LUZ: Asegurarse de que la propiedad habitacion de la clase Reserva se establece correctamente.
     private $costo;
     private $usuarioDni;
 
-    public function __construct($id, $fechaInicio, $fechaFin, $costo,$usuarioDni) {
+    public function __construct($id, $fechaInicio, $fechaFin, Habitacion $habitacion, $costo, $usuarioDni) {
         $this->id = $id;
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
+        $this->habitacion = $habitacion; 
         $this->costo = $costo;
         $this->usuarioDni = $usuarioDni; 
     }
@@ -79,10 +80,22 @@ class Reserva {
         // Calcular el costo total
         $this->costo = $dias * $precioPorNoche;
     }
+    function reservaToArray($reserva) 
+    {
+        return [
+            'id' => $reserva->getId(),
+            'Fecha inicio' => $reserva->getFechaInicio(),
+            'Fecha fin' => $reserva->getFechaFin(),
+            'Estado' => $reserva->getEstado(),
+            'Habitacion'=>$reserva->getHabitacion(),
+            'Costo'=>$reserva->getCosto(),
+            'Reservado por DNI'=>$reserva->getUsuarioDni()
+        ];
+    }
 
-
+    //Habitación: {$this->habitacion->getNumero()} se agrega para mostrar hab en vez de objeto *LUZ
     public function __toString() {
-      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin},Habitacion:{$this->habitacion}, Costo: $ . $this->costo, Reservado por dni:{$this->usuarioDni}";
+      return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin}, Habitación: {$this->habitacion->getNumero()}, Costo: $ . $this->costo, Reservado por dni:{$this->usuarioDni}";
     }
 }
 

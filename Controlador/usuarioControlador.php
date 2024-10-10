@@ -1,9 +1,9 @@
 <?php
-require_once 'usuario.php';
-class Usuarios 
-{
+require_once 'Modelo/usuario.php';
+class UsuarioControlador {
+
     private $usuarios = [];
-    private $usuarioJson = 'usuario.json';
+    private $usuarioJson = 'Modelo/usuario.json';
 
     public function __construct()
     {
@@ -161,4 +161,5 @@ class Usuarios
             }
         }
     }
+    
 }    

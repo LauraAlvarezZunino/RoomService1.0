@@ -20,6 +20,13 @@
             "dni": "24567890",
             "email": "MS@gmail.com",
             "telefono": "2494698754"
+        },
+        {
+            "id": 4,
+            "nombre": "florencia monzon",
+            "dni": "35562583",
+            "email": "florymonzon@gmail.com",
+            "telefono": "24866328638"
         }
     ]
 }
