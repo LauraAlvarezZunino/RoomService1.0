@@ -1,8 +1,8 @@
 <?php
-$dniGuardado = null; // Definir una variable global al inicio del archivo
+$dniGuardado = null; // variable global
 function menuUsuario()
 {
-    global $dniGuardado;  // Hacer uso de la variable global
+    global $dniGuardado;  
     $usuariosGestor = new UsuarioControlador(); 
     $habitacionesGestor = new HabitacionControlador(); 
     $reservasGestor = new ReservaControlador($habitacionesGestor);
@@ -74,7 +74,8 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
     echo "5. Eliminar Reserva\n";
     echo "6. Salir\n";
     echo "Seleccione una opción: ";
-
+    //ver mis datos
+    //modificar mis datos
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
@@ -103,8 +104,7 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
 
 }
 
-function verHabitaciones()
-{
+function verHabitaciones(){
     $habitacionesGestor = new HabitacionControlador();
     $habitacionesGestor->cargarDesdeJSON();
     $habitaciones = $habitacionesGestor->obtenerHabitaciones();
@@ -112,54 +112,81 @@ function verHabitaciones()
         echo $habitacion . "\n";
     }
 }
-
-function crearReserva($usuario, $habitacionesGestor, $reservasGestor)
+function solicitarTipoHabitacion()
 {
-    global $dniGuardado; // Hacer uso de la variable global
-
     echo "Ingrese el tipo de habitación para la reserva (simple / doble): ";
-    $tipoHabitacion = trim(fgets(STDIN));
+    return trim(fgets(STDIN));
+}
 
+function mostrarHabitacionesDisponibles($habitaciones)
+{
+    echo "Habitaciones disponibles:\n";
+    foreach ($habitaciones as $index => $habitacion) {
+        echo $index . ". Número: " . $habitacion->getNumero() . " - Precio por noche: " . $habitacion->getPrecio() . "\n";
+    }
+}
+
+function seleccionarHabitacion($habitaciones)
+{
+    echo "Seleccione una habitación (número): ";
+    $eleccionHabitacion = trim(fgets(STDIN));
+
+    foreach ($habitaciones as $habitacion) {
+        if ($habitacion->getNumero() == $eleccionHabitacion) {
+            return $habitacion;
+        }
+    }
+    echo "No se encontró una habitación con ese número.\n";
+    return null;
+}
+
+function solicitarFechasReserva()
+{
+    $fechaValida = false;
+    while (!$fechaValida) {
+        echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
+        $fechaInicio = trim(fgets(STDIN));
+        $fechaActual = date('Y-m-d');
+
+        if (strtotime($fechaInicio) > strtotime($fechaActual)) {
+            $fechaValida = true;
+        } else {
+            echo "La fecha de inicio debe ser posterior a la fecha actual. Por favor, ingrese una fecha válida.\n";
+        }
+    }
+
+    echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
+    $fechaFin = trim(fgets(STDIN));
+
+    return [$fechaInicio, $fechaFin];
+}
+
+function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
+{
+    global $dniGuardado;
+
+    $tipoHabitacion = solicitarTipoHabitacion();
     $habitacionesDisponibles = $habitacionesGestor->buscarPorTipo($tipoHabitacion);
 
     if (!empty($habitacionesDisponibles)) {
-        // Mostrar las habitaciones disponibles
-        echo "Habitaciones disponibles:\n";
-        foreach ($habitacionesDisponibles as $index => $habitacion) {
-            echo $index . ". Número: " . $habitacion->getNumero() . " - Precio por noche: " . $habitacion->getPrecio() . "\n";
-        }
-
-        echo "Seleccione una habitación (número): ";
-        $eleccionHabitacion = trim(fgets(STDIN));
-
-        // Buscar la habitación seleccionada por el número ingresado
-        $habitacionSeleccionada = null;
-        foreach ($habitacionesDisponibles as $habitacion) {
-            if ($habitacion->getNumero() == $eleccionHabitacion) {
-                $habitacionSeleccionada = $habitacion;
-                break;
-            }
-        }
+        mostrarHabitacionesDisponibles($habitacionesDisponibles);
+        $habitacionSeleccionada = seleccionarHabitacion($habitacionesDisponibles);
 
         if ($habitacionSeleccionada) {
-            echo "Ingrese la fecha de inicio (YYYY-MM-DD): ";
-            $fechaInicio = trim(fgets(STDIN));
-            echo "Ingrese la fecha de fin (YYYY-MM-DD): ";
-            $fechaFin = trim(fgets(STDIN));
-
+            list($fechaInicio, $fechaFin) = solicitarFechasReserva();
             $costo = calcularCostoReserva($fechaInicio, $fechaFin, $habitacionSeleccionada->getPrecio());
             $reservaId = $reservasGestor->generarNuevoId();
             $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacionSeleccionada, $costo, $dniGuardado);
 
             $reservasGestor->agregarReserva($reserva);
             echo "Reserva creada con éxito.\n";
-        } else {
-            echo "No se encontró una habitación con ese número.\n";
         }
     } else {
         echo "No se encontró una habitación disponible de ese tipo.\n";
     }
 }
+
+
 
 
 function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche) {
@@ -170,8 +197,7 @@ function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche) {
 }
     
 
-    function mostrarReservasUsuario($usuario, $reservasGestor)
-{
+function mostrarReservasUsuario($usuario, $reservasGestor){
     global $dniGuardado;
     $reservas = $reservasGestor->obtenerReservas();
     $tieneReservas = false;
@@ -193,8 +219,7 @@ function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche) {
         echo "No tienes reservas registradas.\n";
     }
 }
-
-function modificarReservaUsuario($usuario, $reservasGestor, $habitacionesGestor)
+function modificarReservaUsuario($usuario,$reservasGestor, $habitacionesGestor)
 {
     global $dniGuardado;
     echo "Ingrese el ID de la reserva que desea modificar: ";
@@ -232,17 +257,21 @@ function modificarReservaUsuario($usuario, $reservasGestor, $habitacionesGestor)
         $nuevaHabitacion = $reserva->getHabitacion();
     }
 
-    // Calcular nuevo costo
+    // Calcular el nuevo costo utilizando la función calcularCostoReserva()
+    $nuevoCosto = calcularCostoReserva($nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion->getPrecio());
+
+    // Actualizar la reserva con los nuevos valores
     $reserva->setFechaInicio($nuevaFechaInicio);
     $reserva->setFechaFin($nuevaFechaFin);
     $reserva->setHabitacion($nuevaHabitacion);
-    $reserva->calcularCosto($nuevaHabitacion->getPrecio());
+    $reserva->setCosto($nuevoCosto);
 
     $reservasGestor->guardarEnJSON();
-    echo "Reserva actualizada correctamente.\n";
+    echo "Reserva actualizada correctamente. Nuevo costo: $" . $nuevoCosto . "\n";
 }
 
-function eliminarReservaUsuario($usuario, $reservasGestor, $habitacionesGestor)
+
+function eliminarReservaUsuario($usuario, $reservasGestor)
 {
     echo "Ingrese el ID de la reserva que desea eliminar: ";
     $idEliminar = trim(fgets(STDIN));

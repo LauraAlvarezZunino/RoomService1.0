@@ -436,3 +436,8 @@ function menuAdminReservas()
     }
 }
 */
+//funciones usadas opr ambos ver habs 
+//ver reservas uno con filtro otro sin
+//modificar reservas uno con filtro de dni otro sin
+//eliminar reserva por id uno con dni otro sin
+//

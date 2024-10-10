@@ -230,7 +230,8 @@ function menuAdminReservas()
                     echo $reserva . "\n";
                 }
                 break;
-            case 2:
+            case 2://modificar reserva
+                //eliminar reserva
                 return;
             default:
                 echo "Opción no válida. Inténtelo de nuevo.\n";
