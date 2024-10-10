@@ -72,10 +72,11 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
     echo "3. Mostrar Reservas\n";
     echo "4. Modificar Reserva\n";
     echo "5. Eliminar Reserva\n";
-    echo "6. Salir\n";
+    echo "6. Ver mis datos\n";
+    echo "7. Modificar mis datos\n";
+    echo "8. Salir\n";
     echo "Seleccione una opción: ";
-    //ver mis datos
-    //modificar mis datos
+
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
@@ -95,6 +96,12 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             eliminarReservaUsuario($usuario, $reservasGestor, $habitacionesGestor);
             break;
         case 6:
+            echo "Saliendo del sistema...\n";//ver datos
+            exit;
+        case 7:
+            echo "Saliendo del sistema...\n";//modificar datos
+            exit;    
+        case 8:
             echo "Saliendo del sistema...\n";
             exit;
         default:
@@ -161,9 +168,9 @@ function solicitarFechasReserva()
     return [$fechaInicio, $fechaFin];
 }
 
-function crearReserva($usuario,$habitacionesGestor, $reservasGestor)
+function crearReserva($dniGuardado,$habitacionesGestor, $reservasGestor)
 {
-    global $dniGuardado;
+   // global $dniGuardado;
 
     $tipoHabitacion = solicitarTipoHabitacion();
     $habitacionesDisponibles = $habitacionesGestor->buscarPorTipo($tipoHabitacion);

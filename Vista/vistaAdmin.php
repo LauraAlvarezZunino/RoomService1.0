@@ -218,7 +218,9 @@ function menuAdminReservas()
     while (true) {
         echo "=== Menú Administrar Reservas ===\n";
         echo "1. Mostrar Reservas\n";
-        echo "2. Volver al Menú Principal\n";
+        echo "2. Modificar Reserva\n";
+        echo "3. Eliminar Reserva\n";
+        echo "4. Volver al Menú Principal\n";
         echo "Seleccione una opción: ";
 
         $opcion = trim(fgets(STDIN));
@@ -230,8 +232,12 @@ function menuAdminReservas()
                     echo $reserva . "\n";
                 }
                 break;
-            case 2://modificar reserva
-                //eliminar reserva
+                case 2://modificar reserva
+                break;    
+                case 3:
+                    //eliminar reserva
+                    return;
+                case 4:
                 return;
             default:
                 echo "Opción no válida. Inténtelo de nuevo.\n";
