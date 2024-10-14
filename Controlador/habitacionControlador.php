@@ -22,8 +22,9 @@ class HabitacionControlador  {
     public function obtenerHabitaciones(){
         return $this->habitaciones;
     }
-
-
+   
+    
+ 
     public function buscarHabitacionPorNumero($numero){
         foreach ($this->habitaciones as $habitacion) {
             if ($habitacion->getNumero() == $numero) {

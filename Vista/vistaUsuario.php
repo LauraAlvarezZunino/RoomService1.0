@@ -3,32 +3,35 @@
 $dniGuardado = null; // variable global
 function menuUsuario()
 {
-    global $dniGuardado;  
-    $usuariosGestor = new UsuarioControlador(); 
-    $habitacionesGestor = new HabitacionControlador(); 
+    global $dniGuardado;
+
+    // Inicializar los gestores necesarios
+    $usuariosGestor = new UsuarioControlador();
+    $habitacionesGestor = new HabitacionControlador();
     $reservasGestor = new ReservaControlador($habitacionesGestor);
 
+    // Cargar las habitaciones desde JSON
     $habitacionesGestor->cargarDesdeJSON();
 
+    // Mostrar el menú de usuario
     echo "=== Menú Usuario ===\n";
     echo "1. Registrarme\n";
     echo "2. Soy Usuario\n";
     echo "Seleccione una opción: ";
 
+    // Leer la opción ingresada por el usuario
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
         case 1:
             registrarse($usuariosGestor);
             break;
+
         case 2:
             echo "Ingrese su DNI para continuar: ";
             $dni = trim(fgets(STDIN));
-            $dniGuardado = $dni; // Guardar el DNI en la variable global
-
-
+            $dniGuardado = $dni; 
             $usuario = $usuariosGestor->obtenerUsuarioPorDni($dni);
-
             if ($usuario) {
                 menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
             } else {
@@ -36,12 +39,15 @@ function menuUsuario()
                 menuUsuario();
             }
             break;
+
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
             menuUsuario();
+           
             break;
     }
 }
+
 
 
 function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
@@ -64,7 +70,7 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             verHabitaciones();
             break;
         case 2:
-            crearReserva($usuario, $habitacionesGestor, $reservasGestor);// me esta cargando el dni como json
+            crearReserva($usuario, $habitacionesGestor, $reservasGestor);
             break;
         case 3:
             mostrarReservas($reservasGestor, false, $usuario);
@@ -83,7 +89,7 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             exit;    
         case 8:
             echo "Saliendo del sistema...\n";
-            exit;
+            return;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
             break;
@@ -91,13 +97,6 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
 
 }
 
-function verHabitaciones(){
-    $habitacionesGestor = new HabitacionControlador();
-    $habitacionesGestor->cargarDesdeJSON();
-    $habitaciones = $habitacionesGestor->obtenerHabitaciones();
-    foreach ($habitaciones as $habitacion) {
-        echo $habitacion . "\n";
-    }
-}
+
 
 ?>

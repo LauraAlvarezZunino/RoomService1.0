@@ -40,6 +40,7 @@ class UsuarioControlador {
         return $this->usuarios;
     }
 
+
     //  un usuario por ID para el menu de admin
     public function obtenerUsuarioPorId($id)
     {
