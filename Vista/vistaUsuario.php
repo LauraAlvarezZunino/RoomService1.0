@@ -85,7 +85,7 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             mostrarDatosUsuario($usuario);/// no anda ver! capaz esta mal invocado
             exit;
         case 7:
-        modificarUsuario($usuario, false);
+            modificarUsuario($usuario); 
             exit;    
         case 8:
             echo "Saliendo del sistema...\n";

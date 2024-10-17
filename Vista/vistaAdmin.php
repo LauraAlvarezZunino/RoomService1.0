@@ -47,7 +47,7 @@ function menuAdminUsuarios()
 
         switch ($opcion) {
             case 1:
-                mostrarUsuarios($usuariosGestor);// ver porque ya hay una funcion para esto 
+                mostrarUsuarios($usuariosGestor);
                 break;
             case 2:
                 modificarUsuario($usuariosGestor,true);
@@ -132,10 +132,10 @@ function menuAdminReservas()
                     echo $reserva . "\n";
                 }
                 break;
-                case 2://modificar reserva
+                case 2: modificarReserva($reservasGestor, $habitacionesGestor, true);
                 break;    
                 case 3:
-                    //eliminar reserva
+                    eliminarReserva($reservasGestor, $habitacionesGestor, true);
                     return;
                 case 4:
                 return;

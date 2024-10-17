@@ -80,7 +80,7 @@ function mostrarDatosUsuario($usuariosGestor)
     global $dniGuardado;
 
     // Obtener la lista completa de usuarios
-    $usuarios = $usuariosGestor->obtenerUsuarioporDni();///  VEEEEEEEEEEEEEEEEEEEEEEERRRRRR
+    $usuarios = $usuariosGestor->obtenerUsuarioPorDni();///  VEEEEEEEEEEEEEEEEEEEEEEERRRRRR
 
     // Buscar al usuario con el DNI guardado
     foreach ($usuarios as $usuario) {

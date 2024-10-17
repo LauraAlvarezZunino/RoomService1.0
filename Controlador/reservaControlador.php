@@ -47,7 +47,7 @@ class ReservaControlador
     }
 
     public function modificarReserva($id, $nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion, $nuevoCosto){
-        $reserva = $this->buscarReservaPorId($id); //pendienteeeeee 
+        $reserva = $this->buscarReservaPorId($id); //pendienteeeeee ?
         if ($reserva) {
             $reserva->setFechaInicio($nuevaFechaInicio);
             $reserva->setFechaFin($nuevaFechaFin);

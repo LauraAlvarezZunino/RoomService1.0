@@ -20,6 +20,13 @@
             "dni": "24567890",
             "email": "MS@gmail.com",
             "telefono": "2494698754"
+        },
+        {
+            "id": 4,
+            "nombre": "lala Suarez",
+            "dni": "35657865",
+            "email": "lala@mail.com",
+            "telefono": "2494232323"
         }
     ]
 }

@@ -10,10 +10,10 @@
         },
         {
             "id": 2,
-            "fechaInicio": "12-05-2024",
+            "fechaInicio": "11-05-2024",
             "fechaFin": "14-05-2024",
             "habitacion": "98",
-            "costo": 68000,
+            "costo": 102000,
             "usuarioDni": "111111"
         },
         {
@@ -55,6 +55,14 @@
             "habitacion": "98",
             "costo": 68000,
             "usuarioDni": "111111"
+        },
+        {
+            "id": 12,
+            "fechaInicio": "25-11-2024",
+            "fechaFin": "27-11-2024",
+            "habitacion": "2",
+            "costo": 88000,
+            "usuarioDni": "35657865"
         }
     ]
 }
