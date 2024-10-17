@@ -26,23 +26,19 @@ class ReservaControlador
         // Obtenemos la habitación asociada a la reserva desde el archivo JSON
         $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
 
-       // if ($habitacion && $habitacion->getDisponibilidad() === 'Disponible') {
-         
-         //   $fechaInicio = new DateTime($reserva->getFechaInicio());//datetime representacion de fechas 
-           // $fechaFin = new DateTime($reserva->getFechaFin());
-         
-            //$diasReservados = [];
-            //$diasReservados[] = ["Reservada ",$fechaInicio,"a",$fechaFin] ;
-            // Actualizar los días reservados y la disponibilidad en la habitación
-           // $this->habitacionesGestor->agregarDiasReservados($diasReservados,$habitacion);
-            //$habitacion->setDisponibilidad('Reservada');
-            // Guardar la reserva y actualizar las habitaciones en el JSON
+        foreach ($this->reservas as $existingReserva) {
+            if ($existingReserva->getHabitacion()->getNumero() == $habitacion->getNumero() &&
+                !($reserva->getFechaFin() < $existingReserva->getFechaInicio() || 
+                  $reserva->getFechaInicio() > $existingReserva->getFechaFin())) {
+                echo "La habitación ya está reservada en las fechas solicitadas.\n";
+                return; // Salimos del método si ya hay una reserva
+            }
+        }
+
+        echo "Reserva creada con éxito.\n";
+
             $this->reservas[] = $reserva;
             $this->guardarEnJSON();
-            //$this->habitacionesGestor ->actualizarHabitacion($habitacion,$diasReservados);
-        //// else {
-          //  echo "La habitación ya está reservada o no está disponible.\n";
-         //}
     }
 
     public function obtenerReservas()
