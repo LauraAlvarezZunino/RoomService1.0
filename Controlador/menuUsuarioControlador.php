@@ -17,7 +17,6 @@ function crearReserva($dniGuardado,$habitacionesGestor, $reservasGestor)
             $reserva = new Reserva($reservaId, $fechaInicio, $fechaFin, $habitacionSeleccionada, $costo, $dniGuardado);
 
             $reservasGestor->agregarReserva($reserva);
-            echo "Reserva creada con éxito.\n";
         }
     } else {
         echo "No se encontró una habitación disponible de ese tipo.\n";
