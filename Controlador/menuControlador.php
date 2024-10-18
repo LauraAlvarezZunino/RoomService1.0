@@ -103,13 +103,13 @@ function eliminarReserva($reservasGestor, $usuario = null, $esAdmin = false)
 function modificarUsuario($usuariosGestor, $esAdministrador = false)
 {
     global $dniGuardado;
+    $usuariosGestor = new UsuarioControlador();
+    $usuario = $usuariosGestor->obtenerUsuarioPorDni($dniGuardado);
 
     if ($esAdministrador) {
         echo 'Ingrese el ID del usuario que quiere modificar: ';
         $id = trim(fgets(STDIN));
     } else {
-        // Si no es administrador, buscar el usuario por el DNI global
-        $usuario = $usuariosGestor->obtenerUsuarioPorDni($dniGuardado);
         if (!$usuario) {
             echo "Usuario no encontrado o no autorizado.\n";
             return false;

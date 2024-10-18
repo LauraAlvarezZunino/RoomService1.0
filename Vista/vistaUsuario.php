@@ -82,11 +82,11 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             eliminarReserva($reservasGestor, $usuario);
             break;
         case 6:
-            mostrarDatosUsuario($usuario);/// no anda ver! capaz esta mal invocado
-            exit;
+            mostrarDatosUsuario($usuario);
+            break;
         case 7:
             modificarUsuario($usuario); 
-            exit;    
+            break;    
         case 8:
             echo "Saliendo del sistema...\n";
             return;
