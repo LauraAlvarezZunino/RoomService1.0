@@ -79,24 +79,19 @@ function mostrarDatosUsuario($usuariosGestor)
     global $dniGuardado;
 
     // Obtener la lista completa de usuarios
-    $usuarios = $usuariosGestor->obtenerUsuarioPorDni();///  VEEEEEEEEEEEEEEEEEEEEEEERRRRRR
-
+    $usuarioControlador = new UsuarioControlador();
+    $usuario = $usuarioControlador->obtenerUsuarioPorDni($dniGuardado);
     // Buscar al usuario con el DNI guardado
-    foreach ($usuarios as $usuario) {
-        if ($usuario->getDni() === $dniGuardado) {
-            echo "-------------------------\n";
-            echo "DNI: " . $usuario->getDni() . "\n";
-            echo "Nombre: " . $usuario->getNombre() . "\n";
-            echo "Correo electrónico: " . $usuario->getEmail() . "\n";
-            echo "Teléfono: " . $usuario->getTelefono() . "\n";
-            echo "Dirección: " . $usuario->getDireccion() . "\n";
-            echo "-------------------------\n";
-            return; // Salimos del bucle después de encontrar y mostrar al usuario
-        }
+    if ($usuario) {
+        echo "-------------------------\n";
+        echo "DNI: " . $usuario->getDni() . "\n";
+        echo "Nombre: " . $usuario->getNombreApellido() . "\n";
+        echo "Correo electrónico: " . $usuario->getEmail() . "\n";
+        echo "Teléfono: " . $usuario->getTelefono() . "\n";
+        echo "-------------------------\n";
+    } else {
+        echo "No se encontraron datos para el usuario con el DNI proporcionado.\n";
     }
-
-    // Si no se encuentra el usuario, mostramos un mensaje
-    echo "No se encontraron datos para el usuario con el DNI proporcionado.\n";
 }
 
 function registrarse($usuariosGestor)
