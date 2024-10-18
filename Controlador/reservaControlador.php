@@ -26,10 +26,10 @@ class ReservaControlador
         // Obtenemos la habitación asociada a la reserva desde el archivo JSON
         $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
 
-        foreach ($this->reservas as $existingReserva) {
-            if ($existingReserva->getHabitacion()->getNumero() == $habitacion->getNumero() &&
-                !($reserva->getFechaFin() < $existingReserva->getFechaInicio() || 
-                  $reserva->getFechaInicio() > $existingReserva->getFechaFin())) {
+        foreach ($this->reservas as $existeReserva) {
+            if ($existeReserva->getHabitacion()->getNumero() == $habitacion->getNumero() &&
+                !($reserva->getFechaFin() < $existeReserva->getFechaInicio() || 
+                  $reserva->getFechaInicio() > $existeReserva->getFechaFin())) {
                 echo "La habitación ya está reservada en las fechas solicitadas.\n";
                 return; // Salimos del método si ya hay una reserva
             }

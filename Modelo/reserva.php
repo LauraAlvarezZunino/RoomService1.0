@@ -69,17 +69,6 @@ class Reserva {
         return $this->usuarioDni;
     }
 
-    public function calcularCosto($precioPorNoche) {
-        $inicio = new DateTime($this->fechaInicio);
-        $fin = new DateTime($this->fechaFin);
-
-        // Calcular la diferencia en días
-        $diferencia = $inicio->diff($fin);
-        $dias = $diferencia->days;
-
-        // Calcular el costo total
-        $this->costo = $dias * $precioPorNoche;
-    }
     function reservaToArray($reserva) 
     {
         return [
