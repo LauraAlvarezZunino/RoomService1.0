@@ -13,11 +13,11 @@ class HabitacionControlador  {
     }
     // CRUD
 
-    public function agregarHabitacion($habitacion){
-        $this->habitaciones[] = $habitacion;
+   public function agregarHabitacion($habitacion){
+       $this->habitaciones[] = $habitacion;
         $this->guardarEnJSON();
       
-    }
+   }
 
     public function obtenerHabitaciones(){
         return $this->habitaciones;
@@ -45,8 +45,6 @@ class HabitacionControlador  {
         }
         return $resultados;
     }
-
-
 
 
     public function actualizarHabitacion($numero, $nuevosDatos){

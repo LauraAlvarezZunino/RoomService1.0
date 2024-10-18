@@ -63,6 +63,14 @@
             "habitacion": "2",
             "costo": 88000,
             "usuarioDni": "35657865"
+        },
+        {
+            "id": 13,
+            "fechaInicio": "2024-10-22",
+            "fechaFin": "2024-10-26",
+            "habitacion": "2",
+            "costo": 176000,
+            "usuarioDni": "111111"
         }
     ]
 }
