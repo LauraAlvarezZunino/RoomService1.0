@@ -111,7 +111,6 @@ class ReservaControlador
     // Cargar reservas desde el archivo JSON
     public function cargarDesdeJSON()
 {
-    
     if (file_exists($this->reservaJson)) {
         $json = file_get_contents($this->reservaJson);
         $data = json_decode($json, true);
