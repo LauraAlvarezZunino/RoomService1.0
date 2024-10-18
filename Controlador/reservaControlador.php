@@ -111,31 +111,7 @@ class ReservaControlador
     // Cargar reservas desde el archivo JSON
     public function cargarDesdeJSON()
 {
-    /*if (file_exists($this->reservaJson)) {
-        $json = file_get_contents($this->reservaJson);
-        $reservasArray = json_decode($json, true)['reservas'];
 
-        foreach ($reservasArray as $reservaData) {
-            // Verificamos si la clave 'usuarioDni' existe antes de usarla
-            $usuarioDni = isset($reservaData['usuarioDni']) ? $reservaData['usuarioDni'] : null;
-
-            $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reservaData['habitacion']);
-            $reserva = new Reserva(
-                $reservaData['id'],
-                $reservaData['fechaInicio'],
-                $reservaData['fechaFin'],
-               $habitacion, // Pasamos la habitación completa
-                $reservaData['costo'],
-                $usuarioDni // Asignamos el DNI del usuario o null si no existe
-            );
-            $this->reservas[] = $reserva;
-
-            // Asegurar que el ID esté actualizado
-            if ($this->id < $reserva->getId() + 1) {
-                $this->id = $reserva->getId() + 1;
-            }
-        }
-    }*/
     if (file_exists($this->reservaJson)) {
         $json = file_get_contents($this->reservaJson);
         $data = json_decode($json, true);
