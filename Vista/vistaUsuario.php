@@ -1,13 +1,13 @@
-
 <?php
+
 $dniGuardado = null; // variable global
 function menuUsuario()
 {
     global $dniGuardado;
 
     // Inicializar los gestores necesarios
-    $usuariosGestor = new UsuarioControlador();
-    $habitacionesGestor = new HabitacionControlador();
+    $usuariosGestor = new UsuarioControlador;
+    $habitacionesGestor = new HabitacionControlador;
     $reservasGestor = new ReservaControlador($habitacionesGestor);
 
     // Cargar las habitaciones desde JSON
@@ -17,7 +17,7 @@ function menuUsuario()
     echo "=== Menú Usuario ===\n";
     echo "1. Registrarme\n";
     echo "2. Soy Usuario\n";
-    echo "Seleccione una opción: ";
+    echo 'Seleccione una opción: ';
 
     // Leer la opción ingresada por el usuario
     $opcion = trim(fgets(STDIN));
@@ -28,9 +28,9 @@ function menuUsuario()
             break;
 
         case 2:
-            echo "Ingrese su DNI para continuar: ";
+            echo 'Ingrese su DNI para continuar: ';
             $dni = trim(fgets(STDIN));
-            $dniGuardado = $dni; 
+            $dniGuardado = $dni;
             $usuario = $usuariosGestor->obtenerUsuarioPorDni($dni);
             if ($usuario) {
                 menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
@@ -43,12 +43,10 @@ function menuUsuario()
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
             menuUsuario();
-           
+
             break;
     }
 }
-
-
 
 function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
 {
@@ -61,7 +59,7 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
     echo "6. Ver mis datos\n";
     echo "7. Modificar mis datos\n";
     echo "8. Salir\n";
-    echo "Seleccione una opción: ";
+    echo 'Seleccione una opción: ';
 
     $opcion = trim(fgets(STDIN));
 
@@ -85,10 +83,11 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
             mostrarDatosUsuario($usuario);
             break;
         case 7:
-            modificarUsuario($usuario); 
-            break;    
+            modificarUsuario($usuario);
+            break;
         case 8:
             echo "Saliendo del sistema...\n";
+
             return;
         default:
             echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -96,7 +95,3 @@ function menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor)
     }  menuUsuarioRegistrado($usuario, $habitacionesGestor, $reservasGestor);
 
 }
-
-
-
-?>

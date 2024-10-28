@@ -1,20 +1,22 @@
 <?php
+
 //menuadminhabitacion
 function agregarHabitacion($habitacionesGestor)
 {
-    echo "Ingrese el número de la habitación: ";
+    echo 'Ingrese el número de la habitación: ';
     $numero = trim(fgets(STDIN));
 
     foreach ($habitacionesGestor->obtenerHabitaciones() as $h) {
         if ($h->getNumero() == $numero) {
             echo "La habitación con el número $numero ya existe. No se puede duplicar.\n";
+
             return;
         }
     }
 
-    echo "Ingrese el tipo de habitación: ";
+    echo 'Ingrese el tipo de habitación: ';
     $tipo = trim(fgets(STDIN));
-    echo "Ingrese el precio por noche: ";
+    echo 'Ingrese el precio por noche: ';
     $precio = trim(fgets(STDIN));
 
     $habitacionesGestor->agregarHabitacion(new Habitacion($numero, $tipo, $precio));
@@ -23,7 +25,7 @@ function agregarHabitacion($habitacionesGestor)
 
 function modificarHabitacion($habitacionesGestor)
 {
-    echo "Ingrese el número de la habitación que desea modificar: ";
+    echo 'Ingrese el número de la habitación que desea modificar: ';
     $numero = trim(fgets(STDIN));
 
     $habitacion = null;
@@ -58,7 +60,7 @@ function modificarHabitacion($habitacionesGestor)
 
 function eliminarHabitacion($habitacionesGestor)
 {
-    echo "Ingrese el número de la habitación que desea eliminar: ";
+    echo 'Ingrese el número de la habitación que desea eliminar: ';
     $numero = trim(fgets(STDIN));
 
     if ($habitacionesGestor->eliminarHabitacion($numero)) {
@@ -68,10 +70,11 @@ function eliminarHabitacion($habitacionesGestor)
     }
 }
 
-//admin usuarios 
-function mostrarUsuarios($usuariosGestor){
-    $usuarios = $usuariosGestor->obtenerUsuarios(); 
-        foreach ($usuarios as $usuario) {
-            echo $usuario . "\n";
-        }
+//admin usuarios
+function mostrarUsuarios($usuariosGestor)
+{
+    $usuarios = $usuariosGestor->obtenerUsuarios();
+    foreach ($usuarios as $usuario) {
+        echo $usuario . "\n";
     }
+}

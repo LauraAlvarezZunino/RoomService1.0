@@ -1,10 +1,15 @@
 <?php
+
 class Usuario
 {
     private $id;
+
     private $nombreApellido;
+
     private $dni;
+
     private $email;
+
     private $telefono;
 
     public function __construct($id, $nombreApellido, $dni, $email, $telefono)
@@ -18,7 +23,7 @@ class Usuario
 
     public function __toString()
     {
-        return "ID: " . $this->id . ", Nombre: " . $this->nombreApellido . ", DNI: " . $this->dni . ", Email: " . $this->email . ", Teléfono: " . $this->telefono;
+        return 'ID: ' . $this->id . ', Nombre: ' . $this->nombreApellido . ', DNI: ' . $this->dni . ', Email: ' . $this->email . ', Teléfono: ' . $this->telefono;
     }
 
     // Getters y Setters

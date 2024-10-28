@@ -1,4 +1,5 @@
-<?php
+ <?php
+
 include_once 'Controlador/usuarioControlador.php';
 include_once 'Controlador/habitacionControlador.php';
 include_once 'Modelo/reserva.php';
@@ -20,7 +21,7 @@ while (true) {
 
     switch ($opcion) {
         case 1:
-            echo "Ingrese la clave: ";
+            echo 'Ingrese la clave: ';
             $claveAdmin = trim(fgets(STDIN));
             if ($clave == $claveAdmin) {
                 menuAdmin();

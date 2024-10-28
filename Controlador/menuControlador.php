@@ -1,46 +1,48 @@
 <?php
+
 //RESERVAS
 
 function modificarReserva($reservasGestor, $habitacionesGestor, $esAdmin = false, $usuario = null)
 {
     global $dniGuardado;
-    echo "Ingrese el ID de la reserva que desea modificar: ";
+    echo 'Ingrese el ID de la reserva que desea modificar: ';
     $id = trim(fgets(STDIN));
     $reserva = $reservasGestor->buscarReservaPorId($id);
 
     // Verificar si la reserva existe y si el usuario es el dueño, a menos que sea un administrador
-    if (!$reserva || (!$esAdmin && $reserva->getUsuarioDni() !== $dniGuardado)) {
+    if (! $reserva || (! $esAdmin && $reserva->getUsuarioDni() !== $dniGuardado)) {
         echo "Reserva no encontrada o no tiene permisos para modificar esta reserva.\n";
+
         return;
     }
 
     echo "Modificando Reserva ID: {$reserva->getId()}\n";
-    echo "Fecha Inicio actual: " . $reserva->getFechaInicio() . "\n";
-    echo "Fecha Fin actual: " . $reserva->getFechaFin() . "\n";
-    echo "Habitación actual: " . $reserva->getHabitacion()->getNumero() . "\n";
-    echo "Costo actual: $" . $reserva->getCosto() . "\n";
+    echo 'Fecha Inicio actual: ' . $reserva->getFechaInicio() . "\n";
+    echo 'Fecha Fin actual: ' . $reserva->getFechaFin() . "\n";
+    echo 'Habitación actual: ' . $reserva->getHabitacion()->getNumero() . "\n";
+    echo 'Costo actual: $' . $reserva->getCosto() . "\n";
 
-    echo "Ingrese la nueva fecha de inicio (YYYY-MM-DD) o deje vacío para mantener la actual: ";
+    echo 'Ingrese la nueva fecha de inicio (YYYY-MM-DD) o deje vacío para mantener la actual: ';
     $nuevaFechaInicio = trim(fgets(STDIN));
     $nuevaFechaInicio = $nuevaFechaInicio ?: $reserva->getFechaInicio();
 
-    echo "Ingrese la nueva fecha de fin (YYYY-MM-DD) o deje vacío para mantener la actual: ";
+    echo 'Ingrese la nueva fecha de fin (YYYY-MM-DD) o deje vacío para mantener la actual: ';
     $nuevaFechaFin = trim(fgets(STDIN));
     $nuevaFechaFin = $nuevaFechaFin ?: $reserva->getFechaFin();
 
-    echo "Ingrese el nuevo número de habitación o deje vacío para mantener la actual: ";
+    echo 'Ingrese el nuevo número de habitación o deje vacío para mantener la actual: ';
     $nuevoNumeroHabitacion = trim(fgets(STDIN));
     if ($nuevoNumeroHabitacion) {
         $nuevaHabitacion = $habitacionesGestor->buscarHabitacionPorNumero($nuevoNumeroHabitacion);
-        if (!$nuevaHabitacion) {
+        if (! $nuevaHabitacion) {
             echo "Habitación no encontrada.\n";
+
             return;
         }
     } else {
         $nuevaHabitacion = $reserva->getHabitacion();
     }
 
- 
     $nuevoCosto = calcularCostoReserva($nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion->getPrecio());
 
     // Actualizar la reserva con los nuevos valores
@@ -50,10 +52,8 @@ function modificarReserva($reservasGestor, $habitacionesGestor, $esAdmin = false
     $reserva->setCosto($nuevoCosto);
 
     $reservasGestor->guardarEnJSON();
-    echo "Reserva actualizada correctamente. Nuevo costo: $" . $nuevoCosto . "\n";
+    echo 'Reserva actualizada correctamente. Nuevo costo: $' . $nuevoCosto . "\n";
 }
-
-
 
 function mostrarReservas($reservasGestor, $esAdmin = false, $usuario = null)
 {
@@ -65,31 +65,32 @@ function mostrarReservas($reservasGestor, $esAdmin = false, $usuario = null)
         // Si no es administrador, mostramos solo las reservas del usuario actual
         if ($esAdmin || ($usuario && $reserva->getUsuarioDni() === $dniGuardado)) {
             echo "-------------------------\n";
-            echo "ID: " . $reserva->getId() . "\n";
-            echo "Fecha Inicio: " . $reserva->getFechaInicio() . "\n";
-            echo "Fecha Fin: " . $reserva->getFechaFin() . "\n";
-            echo "Habitación: " . $reserva->getHabitacion()->getNumero() . " (" . $reserva->getHabitacion()->getTipo() . ")\n";
-            echo "Costo Total: \$" . $reserva->getCosto() . "\n";
-            echo "Usuario DNI: " . $reserva->getUsuarioDni() . "\n";
+            echo 'ID: ' . $reserva->getId() . "\n";
+            echo 'Fecha Inicio: ' . $reserva->getFechaInicio() . "\n";
+            echo 'Fecha Fin: ' . $reserva->getFechaFin() . "\n";
+            echo 'Habitación: ' . $reserva->getHabitacion()->getNumero() . ' (' . $reserva->getHabitacion()->getTipo() . ")\n";
+            echo 'Costo Total: $' . $reserva->getCosto() . "\n";
+            echo 'Usuario DNI: ' . $reserva->getUsuarioDni() . "\n";
             echo "-------------------------\n";
             $tieneReservas = true;
         }
     }
 
-    if (!$tieneReservas) {
+    if (! $tieneReservas) {
         echo $esAdmin ? "No hay reservas registradas.\n" : "No tienes reservas registradas.\n";
     }
 }
 
 function eliminarReserva($reservasGestor, $usuario = null, $esAdmin = false)
 {
-    echo "Ingrese el ID de la reserva que desea eliminar: ";
+    echo 'Ingrese el ID de la reserva que desea eliminar: ';
     $idEliminar = trim(fgets(STDIN));
     $reserva = $reservasGestor->buscarReservaPorId($idEliminar);
 
     // Si no es administrador, verificamos que la reserva pertenezca al usuario
-    if (!$reserva || (!$esAdmin && $reserva->getUsuarioDni() !== $usuario->getDni())) {
+    if (! $reserva || (! $esAdmin && $reserva->getUsuarioDni() !== $usuario->getDni())) {
         echo "Reserva no encontrada o no pertenece a este usuario.\n";
+
         return;
     }
 
@@ -97,21 +98,21 @@ function eliminarReserva($reservasGestor, $usuario = null, $esAdmin = false)
     echo "Reserva eliminada con éxito.\n";
 }
 
-
 //USUARIOS
 
 function modificarUsuario($usuariosGestor, $esAdministrador = false)
 {
     global $dniGuardado;
-    $usuariosGestor = new UsuarioControlador();
+    $usuariosGestor = new UsuarioControlador;
     $usuario = $usuariosGestor->obtenerUsuarioPorDni($dniGuardado);
 
     if ($esAdministrador) {
         echo 'Ingrese el ID del usuario que quiere modificar: ';
         $id = trim(fgets(STDIN));
     } else {
-        if (!$usuario) {
+        if (! $usuario) {
             echo "Usuario no encontrado o no autorizado.\n";
+
             return false;
         }
         $id = $usuario->getId();
@@ -119,31 +120,32 @@ function modificarUsuario($usuariosGestor, $esAdministrador = false)
 
     $usuario = $usuariosGestor->obtenerUsuarioPorId($id);
 
-    if (!$usuario) {
+    if (! $usuario) {
         echo "Usuario no encontrado.\n";
+
         return false;
     }
 
     echo "Modificando al usuario con ID: {$usuario->getId()}\n";
-    echo "Nombre actual: " . $usuario->getNombreApellido() . "\n";
-    echo "DNI actual: " . $usuario->getDni() . "\n";
-    echo "Email actual: " . $usuario->getEmail() . "\n";
-    echo "Teléfono actual: " . $usuario->getTelefono() . "\n";
+    echo 'Nombre actual: ' . $usuario->getNombreApellido() . "\n";
+    echo 'DNI actual: ' . $usuario->getDni() . "\n";
+    echo 'Email actual: ' . $usuario->getEmail() . "\n";
+    echo 'Teléfono actual: ' . $usuario->getTelefono() . "\n";
 
-    echo "Introduce el nuevo nombre (deja vacío para mantener el actual): ";
-    $nombreApellido = trim(fgets(STDIN)); 
+    echo 'Introduce el nuevo nombre (deja vacío para mantener el actual): ';
+    $nombreApellido = trim(fgets(STDIN));
 
-    echo "Introduce el nuevo DNI (deja vacío para mantener el actual): ";
+    echo 'Introduce el nuevo DNI (deja vacío para mantener el actual): ';
     $dni = trim(fgets(STDIN));
 
-    echo "Introduce el nuevo email (deja vacío para mantener el actual): ";
+    echo 'Introduce el nuevo email (deja vacío para mantener el actual): ';
     $email = trim(fgets(STDIN));
 
-    echo "Introduce el nuevo teléfono (deja vacío para mantener el actual): ";
+    echo 'Introduce el nuevo teléfono (deja vacío para mantener el actual): ';
     $telefono = trim(fgets(STDIN));
 
     $nuevosDatos = [
-        'nombre' => $nombreApellido ?: null,  
+        'nombre' => $nombreApellido ?: null,
         'dni' => $dni ?: null,
         'email' => $email ?: null,
         'telefono' => $telefono ?: null,
@@ -158,8 +160,9 @@ function modificarUsuario($usuariosGestor, $esAdministrador = false)
 
 //HABITACIONES
 
-function verHabitaciones(){
-    $habitacionesGestor = new HabitacionControlador();
+function verHabitaciones()
+{
+    $habitacionesGestor = new HabitacionControlador;
     $habitacionesGestor->cargarDesdeJSON();
     $habitaciones = $habitacionesGestor->obtenerHabitaciones();
     foreach ($habitaciones as $habitacion) {
@@ -170,6 +173,6 @@ function mostrarHabitacionesDisponibles($habitaciones)
 {
     echo "Habitaciones disponibles:\n";
     foreach ($habitaciones as $index => $habitacion) {
-        echo $index . ". Número: " . $habitacion->getNumero() . " - Precio por noche: " . $habitacion->getPrecio() . "\n";
+        echo $index . '. Número: ' . $habitacion->getNumero() . ' - Precio por noche: ' . $habitacion->getPrecio() . "\n";
     }
 }

@@ -9,41 +9,17 @@
             "usuarioDni": "111111"
         },
         {
-            "id": 2,
-            "fechaInicio": "11-05-2024",
-            "fechaFin": "14-05-2024",
-            "habitacion": "98",
-            "costo": 102000,
-            "usuarioDni": "111111"
-        },
-        {
-            "id": 3,
-            "fechaInicio": "2023-04-23",
-            "fechaFin": "2023-04-25",
-            "habitacion": "98",
-            "costo": 68000,
-            "usuarioDni": "111111"
-        },
-        {
             "id": 5,
-            "fechaInicio": "2024-05-23",
-            "fechaFin": "2024-05-25",
+            "fechaInicio": "2024-12-23",
+            "fechaFin": "2024-12-25",
             "habitacion": "2",
             "costo": 88000,
             "usuarioDni": "111111"
         },
         {
-            "id": 6,
-            "fechaInicio": "2023-05-25",
-            "fechaFin": "2023-05-27",
-            "habitacion": "98",
-            "costo": 68000,
-            "usuarioDni": "111111"
-        },
-        {
             "id": 9,
-            "fechaInicio": "23-03-2025",
-            "fechaFin": "25-03-2025",
+            "fechaInicio": "2025-03-23",
+            "fechaFin": "2025-03-23",
             "habitacion": "2",
             "costo": 88000,
             "usuarioDni": "24567890"
@@ -58,8 +34,8 @@
         },
         {
             "id": 12,
-            "fechaInicio": "25-11-2024",
-            "fechaFin": "27-11-2024",
+            "fechaInicio": "2024-11-25",
+            "fechaFin": "2024-11-27",
             "habitacion": "2",
             "costo": 88000,
             "usuarioDni": "35657865"

@@ -1,53 +1,56 @@
 <?php
 
-require_once 'Modelo/Habitacion.php';
+require_once 'Modelo/habitacion.php';
 
-class HabitacionControlador  {
-
+class HabitacionControlador
+{
     private $habitaciones = [];
-    private $archivoJson = 'Modelo/habitacion.json';
-   
+
+    private $archivoJson = 'habitacion.json';
+
     public function __construct()
     {
         $this->cargarDesdeJSON();
     }
     // CRUD
 
-   public function agregarHabitacion($habitacion){
-       $this->habitaciones[] = $habitacion;
+    public function agregarHabitacion($habitacion)
+    {
+        $this->habitaciones[] = $habitacion;
         $this->guardarEnJSON();
-      
-   }
 
-    public function obtenerHabitaciones(){
+    }
+
+    public function obtenerHabitaciones()
+    {
         return $this->habitaciones;
     }
-   
-    
- 
-    public function buscarHabitacionPorNumero($numero){
+
+    public function buscarHabitacionPorNumero($numero)
+    {
         foreach ($this->habitaciones as $habitacion) {
             if ($habitacion->getNumero() == $numero) {
                 return $habitacion;
             }
         }
+
         return null; // Retorna null si no se encuentra la habitación
     }
-    
-  
 
-    public function buscarPorTipo($tipo){
+    public function buscarPorTipo($tipo)
+    {
         $resultados = [];
         foreach ($this->habitaciones as $habitacion) {
-            if ( $habitacion->getTipo() == $tipo) {
+            if ($habitacion->getTipo() == $tipo) {
                 $resultados[] = $habitacion;
             }
         }
+
         return $resultados;
     }
 
-
-    public function actualizarHabitacion($numero, $nuevosDatos){
+    public function actualizarHabitacion($numero, $nuevosDatos)
+    {
         foreach ($this->habitaciones as &$habitacion) {
             if ($habitacion->getNumero() == $numero) {
                 if (isset($nuevosDatos['tipo'])) { //isset chequea que no es nulo
@@ -62,18 +65,17 @@ class HabitacionControlador  {
                     $habitacion->setPrecio($habitacion->getPrecio());
                 }
 
-            
-
                 $this->guardarEnJSON();
+
                 return true;
             }
         }
+
         return false;
     }
 
-
-
-    public function eliminarHabitacion($numero){
+    public function eliminarHabitacion($numero)
+    {
         $nuevasHabitaciones = [];
 
         foreach ($this->habitaciones as $habitacion) {
@@ -82,7 +84,7 @@ class HabitacionControlador  {
             }
         }
 
-        $this->habitaciones = $nuevasHabitaciones; 
+        $this->habitaciones = $nuevasHabitaciones;
         $this->guardarEnJSON();
 
         return true;
@@ -90,7 +92,8 @@ class HabitacionControlador  {
 
     // Json
 
-    function guardarEnJSON(){
+    public function guardarEnJSON()
+    {
         $habitacionesArray = [];
 
         foreach ($this->habitaciones as $habitacion) {
@@ -101,24 +104,25 @@ class HabitacionControlador  {
         file_put_contents($this->archivoJson, $jsonHabitacion);
     }
 
-    function habitacionToArray($habitacion){
+    public function habitacionToArray($habitacion)
+    {
         return [
             'numero' => $habitacion->getNumero(),
             'tipo' => $habitacion->getTipo(),
             'precio' => $habitacion->getPrecio(),
-        
+
         ];
-    }    
+    }
 
-
-    function cargarDesdeJSON(){
+    public function cargarDesdeJSON()
+    {
         if (file_exists($this->archivoJson)) { //existe?
-            $jsonHabitacion = file_get_contents($this->archivoJson);//lo lee y lo guarda
+            $jsonHabitacion = file_get_contents($this->archivoJson); //lo lee y lo guarda
             $habitacionesArray = json_decode($jsonHabitacion, true)['habitacion'];
             $this->habitaciones = []; // Asegura que se vacie el array antes de cargar los datos
-           
+
             foreach ($habitacionesArray as $habitacionData) {
-                $habitacion = new Habitacion();
+                $habitacion = new Habitacion;
                 $habitacion->setNumero($habitacionData['numero']);
                 $habitacion->setTipo($habitacionData['tipo']);
                 $habitacion->setPrecio($habitacionData['precio']);
@@ -126,6 +130,4 @@ class HabitacionControlador  {
             }
         }
     }
-
 }
-   

@@ -1,18 +1,16 @@
 <?php
-require_once 'Modelo/usuario.php';
-class UsuarioControlador {
 
+require_once 'Modelo/usuario.php';
+class UsuarioControlador
+{
     private $usuarios = [];
-    private $usuarioJson = 'Modelo/usuario.json';
+
+    private $usuarioJson = 'usuario.json';
 
     public function __construct()
     {
         $this->cargarDesdeJSON();
     }
-
-   
-
-    
 
     public function crearUsuario($nombreApellido, $dni, $email, $telefono)
     {
@@ -22,24 +20,23 @@ class UsuarioControlador {
         $this->guardarEnJSON();
     }
 
-    // Generar un nuevo ID basado en el último ID existente 
+    // Generar un nuevo ID basado en el último ID existente
     private function generarNuevoId()
     {
         if (empty($this->usuarios)) {
             return 1; // Si no hay usuarios, el primer ID es 1
         } else {
             $ultimoUsuario = end($this->usuarios);
+
             return $ultimoUsuario->getId() + 1;
         }
     }
-
 
     // mostrar todos los usuarios
     public function obtenerUsuarios()
     {
         return $this->usuarios;
     }
-
 
     //  un usuario por ID para el menu de admin
     public function obtenerUsuarioPorId($id)
@@ -49,10 +46,10 @@ class UsuarioControlador {
                 return $usuario;
             }
         }
+
         return null;
     }
-  
-    
+
     public function obtenerUsuarioPorDni($dni)
     {
         foreach ($this->usuarios as $usuario) {
@@ -60,9 +57,11 @@ class UsuarioControlador {
                 return $usuario;
             }
         }
+
         return null;
     }
-    // Actualizar un usuario existente, el isset es para ver si existe el valor  
+
+    // Actualizar un usuario existente, el isset es para ver si existe el valor
     public function actualizarUsuario($id, $nuevosDatos)
     {
         foreach ($this->usuarios as &$usuario) {
@@ -72,31 +71,31 @@ class UsuarioControlador {
                 } else {
                     $usuario->setNombreApellido($usuario->getNombreApellido());
                 }
-        
+
                 if (isset($nuevosDatos['dni'])) {
                     $usuario->setDni($nuevosDatos['dni']);
                 } else {
                     $usuario->setDni($usuario->getDni());
                 }
-        
+
                 if (isset($nuevosDatos['email'])) {
                     $usuario->setEmail($nuevosDatos['email']);
                 } else {
                     $usuario->setEmail($usuario->getEmail());
                 }
-        
+
                 if (isset($nuevosDatos['telefono'])) {
                     $usuario->setTelefono($nuevosDatos['telefono']);
                 } else {
                     $usuario->setTelefono($usuario->getTelefono());
                 }
-        
+
                 $this->guardarEnJSON();
+
                 return true;
             }
         }
-        
-        
+
         return false;
     }
 
@@ -105,25 +104,24 @@ class UsuarioControlador {
     {
         foreach ($this->usuarios as $idEliminar => $usuario) {
             if ($usuario->getId() == $id) {
-                unset($this->usuarios[$idEliminar]); 
-                $this->guardarEnJSON();  
+                unset($this->usuarios[$idEliminar]);
+                $this->guardarEnJSON();
+
                 return true;
             }
-        
 
-            }
-    
+        }
+
         return false;
     }
 
-// Guardar datos en JSON
+    // Guardar datos en JSON
     private function guardarEnJSON()
     {
-        $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios);//aplica la funcion en el arreglo sin usar for array map
+        $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios); //aplica la funcion en el arreglo sin usar for array map
         $jsonUsuario = json_encode(['usuarios' => $usuariosArray], JSON_PRETTY_PRINT);
         file_put_contents($this->usuarioJson, $jsonUsuario);
     }
-
 
     private function usuarioToArray($usuario)
     {
@@ -132,7 +130,7 @@ class UsuarioControlador {
             'nombre' => $usuario->getNombreApellido(),
             'dni' => $usuario->getDni(),
             'email' => $usuario->getEmail(),
-            'telefono' => $usuario->getTelefono()
+            'telefono' => $usuario->getTelefono(),
         ];
     }
 
@@ -140,14 +138,14 @@ class UsuarioControlador {
     {
         if (file_exists($this->usuarioJson)) {
             $jsonUsuarios = file_get_contents($this->usuarioJson);
-    
+
             // Decodificamos el JSON en un array a
             $data = json_decode($jsonUsuarios, true);
-    
+
             // Verificamos si el JSON tiene la clave 'usuarios'
             if (isset($data['usuarios'])) {
                 $usuariosArray = $data['usuarios'];
-    
+
                 // Recorremos el array de usuarios y creamos instancias de Usuario
                 foreach ($usuariosArray as $usuarioData) {
                     $usuario = new Usuario(
@@ -162,5 +160,4 @@ class UsuarioControlador {
             }
         }
     }
-    
-}    
+}

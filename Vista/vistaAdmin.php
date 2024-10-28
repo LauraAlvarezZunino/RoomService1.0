@@ -8,7 +8,7 @@ function menuAdmin()
         echo "2. Administrar Habitaciones\n";
         echo "3. Administrar Reservas\n";
         echo "4. Salir\n";
-        echo "Seleccione una opción: ";
+        echo 'Seleccione una opción: ';
 
         $opcion = trim(fgets(STDIN));
 
@@ -34,14 +34,14 @@ function menuAdmin()
 
 function menuAdminUsuarios()
 {
-    $usuariosGestor = new UsuarioControlador(); 
+    $usuariosGestor = new UsuarioControlador;
     while (true) {
         echo "=== Menú Administrar Usuarios ===\n";
         echo "1. Mostrar Usuarios\n";
         echo "2. Modificar Usuario\n";
         echo "3. Eliminar Usuario\n";
         echo "4. Volver al Menú Principal\n";
-        echo "Seleccione una opción: ";
+        echo 'Seleccione una opción: ';
 
         $opcion = trim(fgets(STDIN));
 
@@ -50,11 +50,11 @@ function menuAdminUsuarios()
                 mostrarUsuarios($usuariosGestor);
                 break;
             case 2:
-                modificarUsuario($usuariosGestor,true);
+                modificarUsuario($usuariosGestor, true);
                 break;
             case 3:
                 echo 'Ingrese el ID a eliminar: ';  // hacemos la funcion aparte?
-                $idEliminado= trim(fgets(STDIN));
+                $idEliminado = trim(fgets(STDIN));
                 $usuariosGestor->eliminarUsuario($idEliminado);
                 echo "Usuario {$idEliminado} eliminado correctamente.\n";
                 break;
@@ -69,7 +69,7 @@ function menuAdminUsuarios()
 
 function menuAdminHabitaciones()
 {
-    $habitacionesGestor = new HabitacionControlador();
+    $habitacionesGestor = new HabitacionControlador;
     $habitacionesGestor->cargarDesdeJSON();
 
     while (true) {
@@ -79,7 +79,7 @@ function menuAdminHabitaciones()
         echo "3. Modificar Habitación\n";
         echo "4. Eliminar Habitación\n";
         echo "5. Volver al Menú Principal\n";
-        echo "Seleccione una opción: ";
+        echo 'Seleccione una opción: ';
 
         $opcion = trim(fgets(STDIN));
 
@@ -105,13 +105,9 @@ function menuAdminHabitaciones()
     }
 }
 
-
-
-
 function menuAdminReservas()
-
 {
-    $habitacionesGestor = new HabitacionControlador();
+    $habitacionesGestor = new HabitacionControlador;
     $habitacionesGestor->cargarDesdeJSON();
     $reservasGestor = new ReservaControlador($habitacionesGestor);
 
@@ -121,7 +117,7 @@ function menuAdminReservas()
         echo "2. Modificar Reserva\n";
         echo "3. Eliminar Reserva\n";
         echo "4. Volver al Menú Principal\n";
-        echo "Seleccione una opción: ";
+        echo 'Seleccione una opción: ';
 
         $opcion = trim(fgets(STDIN));
 
@@ -132,12 +128,13 @@ function menuAdminReservas()
                     echo $reserva . "\n";
                 }
                 break;
-                case 2: modificarReserva($reservasGestor, $habitacionesGestor, true);
-                break;    
-                case 3:
-                    eliminarReserva($reservasGestor, $habitacionesGestor, true);
-                    return;
-                case 4:
+            case 2: modificarReserva($reservasGestor, $habitacionesGestor, true);
+                break;
+            case 3:
+                eliminarReserva($reservasGestor, $habitacionesGestor, true);
+
+                return;
+            case 4:
                 return;
             default:
                 echo "Opción no válida. Inténtelo de nuevo.\n";
@@ -145,6 +142,3 @@ function menuAdminReservas()
         }
     }
 }
-
-
-?>
