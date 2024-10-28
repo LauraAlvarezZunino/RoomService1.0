@@ -8,7 +8,7 @@ include_once 'Vista/vistaUsuario.php';
 include_once 'Vista/vistaAdmin.php';
 include_once 'Controlador/menuControlador.php';
 include_once 'Controlador/menuUsuarioControlador.php';
-include_once 'Controlador/menuadminControlador.php';
+include_once 'Controlador/menuAdminControlador.php';
 
 while (true) {
     $clave = 111;
