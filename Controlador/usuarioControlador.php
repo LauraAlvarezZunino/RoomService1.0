@@ -123,6 +123,7 @@ class UsuarioControlador
         file_put_contents($this->usuarioJson, $jsonUsuario);
     }
 
+    
     private function usuarioToArray($usuario)
     {
         return [
@@ -133,7 +134,7 @@ class UsuarioControlador
             'telefono' => $usuario->getTelefono(),
         ];
     }
-
+    
     private function cargarDesdeJSON()
     {
         if (file_exists($this->usuarioJson)) {

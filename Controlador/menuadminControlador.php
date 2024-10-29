@@ -58,7 +58,7 @@ function modificarHabitacion($habitacionesGestor)
     }
 }
 
-function eliminarHabitacion($habitacionesGestor)
+function eliminaHabitacion($habitacionesGestor)
 {
     echo 'Ingrese el número de la habitación que desea eliminar: ';
     $numero = trim(fgets(STDIN));

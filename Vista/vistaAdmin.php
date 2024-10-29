@@ -94,7 +94,7 @@ function menuAdminHabitaciones()
                 modificarHabitacion($habitacionesGestor);
                 break;
             case 4:
-                eliminarHabitacion($habitacionesGestor);
+                eliminaHabitacion($habitacionesGestor);
                 break;
             case 5:
                 return;

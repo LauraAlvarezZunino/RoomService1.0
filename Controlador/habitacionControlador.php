@@ -34,7 +34,7 @@ class HabitacionControlador
             }
         }
 
-        return null; // Retorna null si no se encuentra la habitación
+        return null; // si no se encuentra la habitación
     }
 
     public function buscarPorTipo($tipo)
