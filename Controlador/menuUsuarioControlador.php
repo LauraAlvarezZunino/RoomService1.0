@@ -26,11 +26,11 @@ function crearReserva($dniGuardado, $habitacionesGestor, $reservasGestor)
 
 function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche)
 {
-    $fechaInicio = new DateTime($fechaInicio);
+    $fechaInicio = new DateTime($fechaInicio);// datetime clase de php 
     $fechaFin = new DateTime($fechaFin);
     $diferencia = $fechaInicio->diff($fechaFin);
 
-    return $diferencia->days * $precioPorNoche;
+    return $diferencia->days * $precioPorNoche; 
 }
 function solicitarTipoHabitacion()
 {
@@ -60,9 +60,9 @@ function solicitarFechasReserva()
     while (! $fechaValida) {
         echo 'Ingrese la fecha de inicio (YYYY-MM-DD): ';
         $fechaInicio = trim(fgets(STDIN));
-        $fechaActual = date('Y-m-d');
+        $fechaActual = date('Y-m-d');//date formatoespecifico
 
-        if (strtotime($fechaInicio) > strtotime($fechaActual)) {
+        if (strtotime($fechaInicio) > strtotime($fechaActual)) { //strtotime convierte el string en marca de tiempo
             $fechaValida = true;
         } else {
             echo "La fecha de inicio debe ser posterior a la fecha actual. Por favor, ingrese una fecha válida.\n";
@@ -117,5 +117,5 @@ function registrarse($usuariosGestor)
     $usuariosGestor->crearUsuario($nombreApellido, $dni, $email, $telefono);
     echo "Usuario agregado exitosamente.\n";
 
-    menuUsuario(); // Volver al menú principal
+    menuUsuario(); // vuelve al menu principal
 }
