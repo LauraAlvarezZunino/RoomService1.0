@@ -26,19 +26,17 @@ class UsuarioControlador
         if (empty($this->usuarios)) {
             return 1; // Si no hay usuarios, el primer ID es 1
         } else {
-            $ultimoUsuario = end($this->usuarios);
+            $ultimoUsuario = end($this->usuarios); //end busca el ultimo elemento del arreglo
 
             return $ultimoUsuario->getId() + 1;
         }
     }
 
-    // mostrar todos los usuarios
     public function obtenerUsuarios()
     {
         return $this->usuarios;
     }
 
-    //  un usuario por ID para el menu de admin
     public function obtenerUsuarioPorId($id)
     {
         foreach ($this->usuarios as $usuario) {
@@ -61,7 +59,6 @@ class UsuarioControlador
         return null;
     }
 
-    // Actualizar un usuario existente, el isset es para ver si existe el valor
     public function actualizarUsuario($id, $nuevosDatos)
     {
         foreach ($this->usuarios as &$usuario) {
@@ -99,7 +96,7 @@ class UsuarioControlador
         return false;
     }
 
-    // Eliminar un usuario
+ 
     public function eliminarUsuario($id)
     {
         foreach ($this->usuarios as $idEliminar => $usuario) {
@@ -118,7 +115,7 @@ class UsuarioControlador
     // Guardar datos en JSON
     private function guardarEnJSON()
     {
-        $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios); //aplica la funcion en el arreglo sin usar for array map
+        $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios); //aplica una funcion a cada elemento de uno o mas arrays
         $jsonUsuario = json_encode(['usuarios' => $usuariosArray], JSON_PRETTY_PRINT);
         file_put_contents($this->usuarioJson, $jsonUsuario);
     }
@@ -140,14 +137,14 @@ class UsuarioControlador
         if (file_exists($this->usuarioJson)) {
             $jsonUsuarios = file_get_contents($this->usuarioJson);
 
-            // Decodificamos el JSON en un array a
+            // hacemos un array del json 
             $data = json_decode($jsonUsuarios, true);
 
-            // Verificamos si el JSON tiene la clave 'usuarios'
+            //  json tiene la clave usuarios?
             if (isset($data['usuarios'])) {
                 $usuariosArray = $data['usuarios'];
 
-                // Recorremos el array de usuarios y creamos instancias de Usuario
+              
                 foreach ($usuariosArray as $usuarioData) {
                     $usuario = new Usuario(
                         $usuarioData['id'],
