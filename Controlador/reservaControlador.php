@@ -10,7 +10,7 @@ class ReservaControlador
 
     private $reservaJson = 'reservas.json';
 
-    private $id = 1; // ID inicial
+    private $id = 1; 
 
     private $habitacionesGestor;
 
@@ -27,16 +27,16 @@ class ReservaControlador
 
     public function agregarReserva(Reserva $reserva)
     {
-        // Obtenemos la habitación asociada a la reserva desde el archivo JSON
+        // trae la habitación asociada a la reserva desde el archivo JSON
         $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reserva->getHabitacion()->getNumero());
 
-        foreach ($this->reservas as $existingReserva) {
-            if ($existingReserva->getHabitacion()->getNumero() == $habitacion->getNumero() &&
-                ! ($reserva->getFechaFin() < $existingReserva->getFechaInicio() ||
-                  $reserva->getFechaInicio() > $existingReserva->getFechaFin())) {
+        foreach ($this->reservas as $existeReserva) {
+            if ($existeReserva->getHabitacion()->getNumero() == $habitacion->getNumero() &&
+                ! ($reserva->getFechaFin() < $existeReserva->getFechaInicio() ||
+                  $reserva->getFechaInicio() > $existeReserva->getFechaFin())) {
                 echo "La habitación ya está reservada en las fechas solicitadas.\n";
 
-                return; // Salimos del método si ya hay una reserva
+                return; 
             }
         }
 
@@ -53,7 +53,7 @@ class ReservaControlador
 
     public function modificarReserva($id, $nuevaFechaInicio, $nuevaFechaFin, $nuevaHabitacion, $nuevoCosto)
     {
-        $reserva = $this->buscarReservaPorId($id); //pendienteeeeee ?
+        $reserva = $this->buscarReservaPorId($id); 
         if ($reserva) {
             $reserva->setFechaInicio($nuevaFechaInicio);
             $reserva->setFechaFin($nuevaFechaFin);
@@ -101,25 +101,22 @@ class ReservaControlador
                 'id' => $reserva->getId(),
                 'fechaInicio' => $reserva->getFechaInicio(),
                 'fechaFin' => $reserva->getFechaFin(),
-                'habitacion' => $reserva->getHabitacion()->getNumero(), // Guardamos solo el número de la habitación
+                'habitacion' => $reserva->getHabitacion()->getNumero(), // guardamos solo el número de la habitación
                 'costo' => $reserva->getCosto(),
-                'usuarioDni' => $reserva->getUsuarioDni(), // Cambiado a 'usuarioDni'
+                'usuarioDni' => $reserva->getUsuarioDni(), 
             ];
         }
+        
+        $datosNuevos = ['reservas' => $reservasArray]; //creo arreglo para guardar
+        file_put_contents($this->reservaJson, json_encode($datosNuevos, JSON_PRETTY_PRINT)); //lo convierto a json y guardo
 
-        // Envolver el array de reservas en un objeto
-        $dataToSave = ['reservas' => $reservasArray];
-        file_put_contents($this->reservaJson, json_encode($dataToSave, JSON_PRETTY_PRINT));
-
-        //file_put_contents($this->reservaJson, json_encode($reservasArray, JSON_PRETTY_PRINT));
     }
 
-    // Cargar reservas desde el archivo JSON
     public function cargarDesdeJSON()
     {
         if (file_exists($this->reservaJson)) {
-            $json = file_get_contents($this->reservaJson);
-            $data = json_decode($json, true);
+            $json = file_get_contents($this->reservaJson); //lee contenido del archvo
+            $data = json_decode($json, true); //convierte el json en array
 
             if (isset($data['reservas'])) {
                 $reservasArray = $data['reservas'];
@@ -130,8 +127,7 @@ class ReservaControlador
             foreach ($reservasArray as $reservaData) {
                 $usuarioDni = isset($reservaData['usuarioDni']) ? $reservaData['usuarioDni'] : null;
 
-                // Verificamos si 'habitacion' es un array con la información completa
-                if (is_array($reservaData['habitacion'])) {
+                if (is_array($reservaData['habitacion'])) { //is_array se fija si hab es un arreglo
                     // Creamos la instancia de Habitacion usando los datos dentro del array
                     $habitacionData = $reservaData['habitacion'];
                     $habitacion = new Habitacion(
