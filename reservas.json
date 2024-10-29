@@ -1,0 +1,52 @@
+{
+    "reservas": [
+        {
+            "id": 1,
+            "fechaInicio": "2024-10-10",
+            "fechaFin": "2024-10-20",
+            "habitacion": "13",
+            "costo": 340000,
+            "usuarioDni": "111111"
+        },
+        {
+            "id": 5,
+            "fechaInicio": "2024-12-23",
+            "fechaFin": "2024-12-25",
+            "habitacion": "2",
+            "costo": 88000,
+            "usuarioDni": "111111"
+        },
+        {
+            "id": 9,
+            "fechaInicio": "2025-03-23",
+            "fechaFin": "2025-03-23",
+            "habitacion": "2",
+            "costo": 88000,
+            "usuarioDni": "24567890"
+        },
+        {
+            "id": 10,
+            "fechaInicio": "2024-12-24",
+            "fechaFin": "2024-12-26",
+            "habitacion": "98",
+            "costo": 68000,
+            "usuarioDni": "111111"
+        },
+        {
+            "id": 12,
+            "fechaInicio": "2024-11-25",
+            "fechaFin": "2024-11-27",
+            "habitacion": "2",
+            "costo": 88000,
+            "usuarioDni": "35657865"
+        },
+        {
+            "id": 13,
+            "fechaInicio": "2024-10-22",
+            "fechaFin": "2024-10-26",
+            "habitacion": "2",
+            "costo": 176000,
+            "usuarioDni": "111111"
+        }
+    ]
+}

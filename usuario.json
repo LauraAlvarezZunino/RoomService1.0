@@ -2,7 +2,7 @@
     "usuarios": [
         {
             "id": 1,
-            "nombre": "Josefa Perez",
+            "nombre": "Josela Suarez",
             "dni": "111111",
             "email": "lala@hotmail.com",
             "telefono": "2494673455"
@@ -23,10 +23,10 @@
         },
         {
             "id": 4,
-            "nombre": "florencia monzon",
-            "dni": "35562583",
-            "email": "florymonzon@gmail.com",
-            "telefono": "24866328638"
+            "nombre": "lala Suarez",
+            "dni": "35657865",
+            "email": "lala@mail.com",
+            "telefono": "2494232323"
         }
     ]
 }
