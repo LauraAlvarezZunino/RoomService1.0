@@ -102,17 +102,16 @@ class UsuarioControlador
     foreach ($this->usuarios as $indice => $usuario) {
         if ($usuario->getId() == $id) {
             unset($this->usuarios[$indice]);
-            $this->usuarios = array_values($this->usuarios); // Reindexar el array para eliminar cualquier hueco
-            $this->guardarEnJSON(); // Guardar los cambios en el archivo JSON
+            $this->usuarios = array_values($this->usuarios); 
+            $this->guardarEnJSON(); 
 
             return true;
         }
     }
 
-    return false; // Si no se encontró el usuario, retornar false
+    return false; 
 }
 
-    // Guardar datos en JSON
     private function guardarEnJSON()
     {
         $usuariosArray = array_map([$this, 'usuarioToArray'], $this->usuarios); //aplica una funcion a cada elemento de uno o mas arrays
