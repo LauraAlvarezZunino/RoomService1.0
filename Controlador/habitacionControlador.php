@@ -79,14 +79,14 @@ class HabitacionControlador
     foreach ($this->habitaciones as $indice => $habitacion) {
         if ($habitacion->getNumero() == $numero) {
             unset($this->habitaciones[$indice]);
-            $this->habitaciones = array_values($this->habitaciones); // Reindexar el array para eliminar cualquier hueco
-            $this->guardarEnJSON(); // Guardar los cambios en el archivo JSON
+            $this->habitaciones = array_values($this->habitaciones); // Reacomoda los indices del array  
+            $this->guardarEnJSON(); 
 
             return true;
         }
     }
 
-    return false; // Si no se encontró la habitación, retornar false
+    return false; 
 }
 
     // Json
