@@ -1,6 +1,6 @@
 <?php
 
-//menuadminhabitacion
+//admin habitacion
 function agregarHabitacion($habitacionesGestor)
 {
     echo 'Ingrese el número de la habitación: ';
