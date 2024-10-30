@@ -13,13 +13,6 @@
             "dni": "24567890",
             "email": "Jose@gmail.com",
             "telefono": "2494698754"
-        },
-        {
-            "id": 3,
-            "nombre": "Mariela Sanchez",
-            "dni": "24567890",
-            "email": "MS@gmail.com",
-            "telefono": "2494698754"
         }
     ]
 }
