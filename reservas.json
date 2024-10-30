@@ -1,52 +1,60 @@
 {
     "reservas": [
         {
-            "id": 1,
-            "fechaInicio": "2024-10-10",
-            "fechaFin": "2024-10-20",
-            "habitacion": "13",
-            "costo": 340000,
-            "usuarioDni": "111111"
-        },
-        {
-            "id": 5,
-            "fechaInicio": "2024-12-23",
-            "fechaFin": "2024-12-25",
-            "habitacion": "2",
-            "costo": 88000,
-            "usuarioDni": "111111"
-        },
-        {
-            "id": 9,
-            "fechaInicio": "2025-03-23",
-            "fechaFin": "2025-03-23",
-            "habitacion": "2",
-            "costo": 88000,
-            "usuarioDni": "24567890"
-        },
-        {
-            "id": 10,
-            "fechaInicio": "2024-12-24",
-            "fechaFin": "2024-12-26",
-            "habitacion": "98",
-            "costo": 68000,
-            "usuarioDni": "111111"
-        },
-        {
             "id": 12,
             "fechaInicio": "2024-11-25",
             "fechaFin": "2024-11-27",
             "habitacion": "2",
-            "costo": 88000,
+            "costo": 140000, 
             "usuarioDni": "35657865"
         },
         {
             "id": 13,
-            "fechaInicio": "2024-10-22",
-            "fechaFin": "2024-10-26",
-            "habitacion": "2",
-            "costo": 176000,
-            "usuarioDni": "111111"
+            "fechaInicio": "2024-11-28",
+            "fechaFin": "2024-11-30",
+            "habitacion": "4",
+            "costo": 80000,
+            "usuarioDni": "35657866"
+        },
+        {
+            "id": 14,
+            "fechaInicio": "2024-11-29",
+            "fechaFin": "2024-12-01",
+            "habitacion": "3",
+            "costo": 94000,
+            "usuarioDni": "35657867"
+        },
+        {
+            "id": 15,
+            "fechaInicio": "2024-12-01",
+            "fechaFin": "2024-12-03",
+            "habitacion": "5",
+            "costo": 70000, 
+            "usuarioDni": "35657868"
+        },
+        {
+            "id": 16,
+            "fechaInicio": "2024-12-05",
+            "fechaFin": "2024-12-07",
+            "habitacion": "9",
+            "costo": 68000,
+            "usuarioDni": "35657869"
+        },
+        {
+            "id": 17,
+            "fechaInicio": "2024-12-08",
+            "fechaFin": "2024-12-10",
+            "habitacion": "12",
+            "costo": 82000, 
+            "usuarioDni": "35657870"
+        },
+        {
+            "id": 18,
+            "fechaInicio": "2024-12-12",
+            "fechaFin": "2024-12-14",
+            "habitacion": "13",
+            "costo": 68000, 
+            "usuarioDni": "35657871"
         }
     ]
 }
