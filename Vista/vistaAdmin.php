@@ -53,7 +53,6 @@ function menuAdminUsuarios()
                 modificarUsuario($usuariosGestor, true);
                 break;
             case 3:
-                echo 'Ingrese el ID a eliminar: ';  // hacemos la funcion aparte?
                 eliminaUsuario($usuariosGestor);
                 break;
             case 4:
@@ -130,7 +129,6 @@ function menuAdminReservas()
                 break;
             case 3:
                 eliminarReserva($reservasGestor, $habitacionesGestor, true);
-
                 return;
             case 4:
                 return;
