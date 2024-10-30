@@ -13,13 +13,13 @@ function menuUsuario()
     // Cargar las habitaciones desde JSON
     $habitacionesGestor->cargarDesdeJSON();
 
-    // Mostrar el menú de usuario
+
     echo "=== Menú Usuario ===\n";
     echo "1. Registrarme\n";
     echo "2. Soy Usuario\n";
     echo 'Seleccione una opción: ';
 
-    // Leer la opción ingresada por el usuario
+    
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
