@@ -98,19 +98,19 @@ class UsuarioControlador
 
  
     public function eliminarUsuario($id)
-    {
-        foreach ($this->usuarios as $idEliminar => $usuario) {
-            if ($usuario->getId() == $id) {
-                unset($this->usuarios[$idEliminar]);
-                $this->guardarEnJSON();
+{
+    foreach ($this->usuarios as $indice => $usuario) {
+        if ($usuario->getId() == $id) {
+            unset($this->usuarios[$indice]);
+            $this->usuarios = array_values($this->usuarios); // Reindexar el array para eliminar cualquier hueco
+            $this->guardarEnJSON(); // Guardar los cambios en el archivo JSON
 
-                return true;
-            }
-
+            return true;
         }
-
-        return false;
     }
+
+    return false; // Si no se encontró el usuario, retornar false
+}
 
     // Guardar datos en JSON
     private function guardarEnJSON()

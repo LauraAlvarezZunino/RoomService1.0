@@ -75,20 +75,19 @@ class HabitacionControlador
     }
 
     public function eliminarHabitacion($numero)
-    {
-        $nuevasHabitaciones = [];
+{
+    foreach ($this->habitaciones as $indice => $habitacion) {
+        if ($habitacion->getNumero() == $numero) {
+            unset($this->habitaciones[$indice]);
+            $this->habitaciones = array_values($this->habitaciones); // Reindexar el array para eliminar cualquier hueco
+            $this->guardarEnJSON(); // Guardar los cambios en el archivo JSON
 
-        foreach ($this->habitaciones as $habitacion) {
-            if ($habitacion->getNumero() != $numero) {
-                $nuevasHabitaciones[] = $habitacion; // Agrega las hab que no queremos borrar
-            }
+            return true;
         }
-
-        $this->habitaciones = $nuevasHabitaciones;
-        $this->guardarEnJSON();
-
-        return true;
     }
+
+    return false; // Si no se encontró la habitación, retornar false
+}
 
     // Json
 
