@@ -16,42 +16,42 @@
         },
         {
             "id": 3,
-            "nombre": "Ana Martínez",
+            "nombre": "Ana Mart\u00ednez",
             "dni": "34567891",
             "email": "ana.martinez@example.com",
             "telefono": "2494789654"
         },
         {
             "id": 4,
-            "nombre": "Carlos López",
+            "nombre": "Carlos L\u00f3pez",
             "dni": "45678912",
             "email": "carlos.lopez@example.com",
             "telefono": "2494867531"
         },
         {
             "id": 5,
-            "nombre": "Lucía Fernández",
+            "nombre": "Luc\u00eda Fern\u00e1ndez",
             "dni": "56789123",
             "email": "lucia.fernandez@example.com",
             "telefono": "2494938671"
         },
         {
             "id": 6,
-            "nombre": "Diego Pérez",
+            "nombre": "Diego P\u00e9rez",
             "dni": "67891234",
             "email": "diego.perez@example.com",
             "telefono": "2494512365"
         },
         {
             "id": 7,
-            "nombre": "María García",
+            "nombre": "Mar\u00eda Garc\u00eda",
             "dni": "78912345",
             "email": "maria.garcia@example.com",
             "telefono": "2494671234"
         },
         {
             "id": 8,
-            "nombre": "Fernando Gómez",
+            "nombre": "Fernando G\u00f3mez",
             "dni": "89123456",
             "email": "fernando.gomez@example.com",
             "telefono": "2494567890"
@@ -65,10 +65,10 @@
         },
         {
             "id": 10,
-            "nombre": "Santiago Ruiz",
-            "dni": "12345678",
-            "email": "santiago.ruiz@example.com",
-            "telefono": "2494892345"
+            "nombre": "Gabriela Lopez",
+            "dni": "222222",
+            "email": "lpez@gmail.com",
+            "telefono": "2494678590"
         }
     ]
 }

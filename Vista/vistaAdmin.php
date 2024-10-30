@@ -129,7 +129,7 @@ function menuAdminReservas()
                 break;
             case 3:
                 eliminarReserva($reservasGestor, $habitacionesGestor, true);
-                return;
+                break;
             case 4:
                 return;
             default:
