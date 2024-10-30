@@ -3,7 +3,7 @@
         {
             "numero": "2",
             "tipo": "Familiar",
-            "precio": "44000"
+            "precio": "70000"
         },
         {
             "numero": "4",
@@ -11,7 +11,7 @@
             "precio": "40000"
         },
         {
-            "numero": "34",
+            "numero": "3",
             "tipo": "simple",
             "precio": "47000"
         },
@@ -21,7 +21,7 @@
             "precio": "35000"
         },
         {
-            "numero": "98",
+            "numero": "9",
             "tipo": "simple",
             "precio": "34000"
         },
