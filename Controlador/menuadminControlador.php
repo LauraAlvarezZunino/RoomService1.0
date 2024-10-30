@@ -78,3 +78,14 @@ function mostrarUsuarios($usuariosGestor)
         echo $usuario . "\n";
     }
 }
+
+function eliminaUsuario($usuariosGestor) {
+    echo 'Ingrese el ID a eliminar: ';
+    $idEliminado = trim(fgets(STDIN)); // Captura el ID del usuario a eliminar
+
+    if ($usuariosGestor->eliminarUsuario($idEliminado)) {
+        echo "Usuario {$idEliminado} eliminado correctamente.\n";
+    } else {
+        echo "No se pudo eliminar el usuario {$idEliminado}. Puede que no exista.\n";
+    }
+}

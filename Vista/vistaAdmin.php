@@ -54,9 +54,7 @@ function menuAdminUsuarios()
                 break;
             case 3:
                 echo 'Ingrese el ID a eliminar: ';  // hacemos la funcion aparte?
-                $idEliminado = trim(fgets(STDIN));
-                $usuariosGestor->eliminarUsuario($idEliminado);
-                echo "Usuario {$idEliminado} eliminado correctamente.\n";
+                eliminaUsuario($usuariosGestor);
                 break;
             case 4:
                 return;
