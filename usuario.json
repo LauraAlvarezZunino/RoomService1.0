@@ -11,8 +11,64 @@
             "id": 2,
             "nombre": "Jose Rodriguez",
             "dni": "24567890",
-            "email": "Jose@gmail.com",
+            "email": "jose@gmail.com",
             "telefono": "2494698754"
+        },
+        {
+            "id": 3,
+            "nombre": "Ana Martínez",
+            "dni": "34567891",
+            "email": "ana.martinez@example.com",
+            "telefono": "2494789654"
+        },
+        {
+            "id": 4,
+            "nombre": "Carlos López",
+            "dni": "45678912",
+            "email": "carlos.lopez@example.com",
+            "telefono": "2494867531"
+        },
+        {
+            "id": 5,
+            "nombre": "Lucía Fernández",
+            "dni": "56789123",
+            "email": "lucia.fernandez@example.com",
+            "telefono": "2494938671"
+        },
+        {
+            "id": 6,
+            "nombre": "Diego Pérez",
+            "dni": "67891234",
+            "email": "diego.perez@example.com",
+            "telefono": "2494512365"
+        },
+        {
+            "id": 7,
+            "nombre": "María García",
+            "dni": "78912345",
+            "email": "maria.garcia@example.com",
+            "telefono": "2494671234"
+        },
+        {
+            "id": 8,
+            "nombre": "Fernando Gómez",
+            "dni": "89123456",
+            "email": "fernando.gomez@example.com",
+            "telefono": "2494567890"
+        },
+        {
+            "id": 9,
+            "nombre": "Isabel Torres",
+            "dni": "91234567",
+            "email": "isabel.torres@example.com",
+            "telefono": "2494789123"
+        },
+        {
+            "id": 10,
+            "nombre": "Santiago Ruiz",
+            "dni": "12345678",
+            "email": "santiago.ruiz@example.com",
+            "telefono": "2494892345"
         }
     ]
 }
