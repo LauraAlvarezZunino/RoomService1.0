@@ -107,7 +107,7 @@ class ReservaControlador
             ];
         }
         
-        $datosNuevos = ['reservas' => $reservasArray]; //creo arreglo para guardar
+        $datosNuevos = ['reservas' => $reservasArray]; //creo arreglo asociativo para guardar las reservas
         file_put_contents($this->reservaJson, json_encode($datosNuevos, JSON_PRETTY_PRINT)); //lo convierto a json y guardo
 
     }
@@ -125,26 +125,11 @@ class ReservaControlador
             }
 
             foreach ($reservasArray as $reservaData) {
-                $usuarioDni = isset($reservaData['usuarioDni']) ? $reservaData['usuarioDni'] : null;
-
-                if (is_array($reservaData['habitacion'])) { //is_array se fija si hab es un arreglo
-                    // Creamos la instancia de Habitacion usando los datos dentro del array
-                    $habitacionData = $reservaData['habitacion'];
-                    $habitacion = new Habitacion(
-                        $habitacionData['numero'],
-                        $habitacionData['tipo'],
-                        $habitacionData['precio']
-                    );
-                } else {
-                    // En caso contrario, asumimos que es un número y buscamos la habitación
-                    $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reservaData['habitacion']);
-                }
-
-                // Verificamos si se encontró o creó la habitación
+                $usuarioDni = isset($reservaData['usuarioDni']) ? $reservaData['usuarioDni'] : null;// si isset true carga usuarioDni, false es null
+                $habitacion = $this->habitacionesGestor->buscarHabitacionPorNumero($reservaData['habitacion']);
                 if (null === $habitacion) {
                     echo "Advertencia: La habitación número {$reservaData['habitacion']} no fue encontrada. Se omitirá esta reserva.\n";
-
-                    continue;
+                    continue;// omite la reserva que no tiene habitacion y continua por la sig
                 }
 
                 $reserva = new Reserva(
@@ -157,7 +142,7 @@ class ReservaControlador
                 );
                 $this->reservas[] = $reserva;
 
-                // Asegurar que el ID esté actualizado
+                // Asegurar que el ID este actualizado
                 if ($this->id < $reserva->getId() + 1) {
                     $this->id = $reserva->getId() + 1;
                 }
