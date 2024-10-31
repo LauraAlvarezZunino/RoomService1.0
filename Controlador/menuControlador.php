@@ -24,7 +24,7 @@ function modificarReserva($reservasGestor, $habitacionesGestor, $esAdmin = false
 
     echo 'Ingrese la nueva fecha de inicio (YYYY-MM-DD) o deje vacío para mantener la actual: ';
     $nuevaFechaInicio = trim(fgets(STDIN));
-    $nuevaFechaInicio = $nuevaFechaInicio ?: $reserva->getFechaInicio();
+    $nuevaFechaInicio = $nuevaFechaInicio ?: $reserva->getFechaInicio();  // ?: operador de fusión de valores nulos  
 
     echo 'Ingrese la nueva fecha de fin (YYYY-MM-DD) o deje vacío para mantener la actual: ';
     $nuevaFechaFin = trim(fgets(STDIN));
@@ -77,7 +77,7 @@ function mostrarReservas($reservasGestor, $esAdmin = false, $usuario = null)
     }
 
     if (! $tieneReservas) {
-        echo $esAdmin ? "No hay reservas registradas.\n" : "No tienes reservas registradas.\n";
+        echo $esAdmin ? "No hay reservas registradas.\n" : "No tienes reservas registradas.\n";   //condición ? valorSiVerdadero : valorSiFalso;
     }
 }
 
