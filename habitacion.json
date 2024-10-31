@@ -2,7 +2,7 @@
     "habitacion": [
         {
             "numero": "2",
-            "tipo": "Familiar",
+            "tipo": "familiar",
             "precio": "70000"
         },
         {
