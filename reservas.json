@@ -5,7 +5,7 @@
             "fechaInicio": "2024-11-25",
             "fechaFin": "2024-11-27",
             "habitacion": "2",
-            "costo": 140000, 
+            "costo": 140000,
             "usuarioDni": "111111"
         },
         {
@@ -29,7 +29,7 @@
             "fechaInicio": "2024-12-01",
             "fechaFin": "2024-12-03",
             "habitacion": "5",
-            "costo": 70000, 
+            "costo": 70000,
             "usuarioDni": "12345678"
         },
         {
@@ -39,22 +39,6 @@
             "habitacion": "9",
             "costo": 68000,
             "usuarioDni": "91234567"
-        },
-        {
-            "id": 17,
-            "fechaInicio": "2024-12-08",
-            "fechaFin": "2024-12-10",
-            "habitacion": "12",
-            "costo": 82000, 
-            "usuarioDni": "111111"
-        },
-        {
-            "id": 18,
-            "fechaInicio": "2024-12-12",
-            "fechaFin": "2024-12-14",
-            "habitacion": "13",
-            "costo": 68000, 
-            "usuarioDni": "56789123"
         }
     ]
 }

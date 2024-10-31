@@ -102,6 +102,6 @@ class Reserva
     //Habitación: {$this->habitacion->getNumero()} se agrega para mostrar hab en vez de objeto 
     public function __toString()
     {
-        return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin}, Habitación: {$this->habitacion->getNumero()}, Costo: $ . $this->costo, Reservado por dni:{$this->usuarioDni}";
+        return "ID: {$this->id}, Fecha Inicio: {$this->fechaInicio}, Fecha Fin: {$this->fechaFin}, Habitación: {$this->habitacion->getNumero()}, Costo: $ $this->costo, Reservado por dni:{$this->usuarioDni}";
     }
 }
