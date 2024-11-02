@@ -34,6 +34,11 @@
             "numero": "13",
             "tipo": "doble",
             "precio": "34000"
+        },
+        {
+            "numero": "34",
+            "tipo": "doble",
+            "precio": "55000"
         }
     ]
 }

@@ -40,8 +40,10 @@ class HabitacionControlador
     public function buscarPorTipo($tipo)
     {
         $resultados = [];
+        $tipo = strtolower($tipo); // starlower pasa a minuscula
+
         foreach ($this->habitaciones as $habitacion) {
-            if ($habitacion->getTipo() == $tipo) {
+            if (strtolower($habitacion->getTipo()) == $tipo) { 
                 $resultados[] = $habitacion;
             }
         }
