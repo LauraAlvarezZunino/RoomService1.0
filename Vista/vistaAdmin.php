@@ -105,7 +105,7 @@ function menuAdminHabitaciones()
 function menuAdminReservas()
 {
     $habitacionesGestor = new HabitacionControlador;
-    $habitacionesGestor->cargarDesdeJSON();
+    //$habitacionesGestor->cargarDesdeJSON();
     $reservasGestor = new ReservaControlador($habitacionesGestor);
 
     while (true) {

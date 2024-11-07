@@ -11,7 +11,7 @@ function menuUsuario()
     $reservasGestor = new ReservaControlador($habitacionesGestor);
 
     // Cargar las habitaciones desde JSON
-    $habitacionesGestor->cargarDesdeJSON();
+    //$habitacionesGestor->cargarDesdeJSON();
 
 
     echo "=== Menú Usuario ===\n";
