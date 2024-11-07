@@ -92,7 +92,7 @@ class ReservaControlador
     }
 
     // Guardar reservas en el archivo JSON
-    public function guardarEnJSON()
+    private function guardarEnJSON()
     {
         $reservasArray = [];
 
@@ -112,7 +112,7 @@ class ReservaControlador
 
     }
 
-    public function cargarDesdeJSON()
+    private function cargarDesdeJSON()
     {
         if (file_exists($this->reservaJson)) {
             $json = file_get_contents($this->reservaJson); //lee contenido del archvo

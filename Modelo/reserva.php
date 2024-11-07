@@ -31,7 +31,7 @@ class Reserva
         return $this->id;
     }
 
-    public function setId($id)
+    protected function setId($id)
     {
         $this->id = $id;
     }
@@ -76,7 +76,7 @@ class Reserva
         $this->habitacion = $habitacion;
     }
 
-    public function setUsuarioDni($dni)
+    protected function setUsuarioDni($dni)
     {
         $this->usuarioDni = $dni;
     }
@@ -86,7 +86,7 @@ class Reserva
         return $this->usuarioDni;
     }
 
-    public function reservaToArray($reserva)
+    protected function reservaToArray($reserva)
     {
         return [
             'id' => $reserva->getId(),

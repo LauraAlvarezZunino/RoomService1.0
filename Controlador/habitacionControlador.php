@@ -12,6 +12,7 @@ class HabitacionControlador
     {
         $this->cargarDesdeJSON();
     }
+    
     // CRUD
 
     public function agregarHabitacion($habitacion)
@@ -57,15 +58,11 @@ class HabitacionControlador
             if ($habitacion->getNumero() == $numero) {
                 if (isset($nuevosDatos['tipo'])) { //isset chequea que no es nulo
                     $habitacion->setTipo($nuevosDatos['tipo']);
-                } else {
-                    $habitacion->setTipo($habitacion->getTipo());
-                }
+                } 
 
                 if (isset($nuevosDatos['precio'])) {
                     $habitacion->setPrecio($nuevosDatos['precio']);
-                } else {
-                    $habitacion->setPrecio($habitacion->getPrecio());
-                }
+                } 
 
                 $this->guardarEnJSON();
 
@@ -115,7 +112,7 @@ class HabitacionControlador
         ];
     }
 
-    public function cargarDesdeJSON()
+    protected function cargarDesdeJSON()
     {
         if (file_exists($this->archivoJson)) { //existe?
             $jsonHabitacion = file_get_contents($this->archivoJson); //lo lee y lo guarda

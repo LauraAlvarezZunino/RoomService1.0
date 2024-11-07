@@ -28,7 +28,7 @@ class Usuario
         return $this->id;
     }
 
-    public function setId($id)
+    protected function setId($id)
     {
         $this->id = $id;
     }

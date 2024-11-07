@@ -1,5 +1,6 @@
 <?php
 
+
 function crearReserva($dniGuardado, $habitacionesGestor, $reservasGestor)
 {
     global $dniGuardado;
@@ -90,7 +91,7 @@ function solicitarFechasReserva()
 }
 
 //usuario
-function mostrarDatosUsuario($usuariosGestor)
+function mostrarDatosUsuario($usuario)
 {
     global $dniGuardado;
 
@@ -172,6 +173,6 @@ function registrarse($usuariosGestor)
     $usuariosGestor->crearUsuario($nombreApellido, $dni, $email, $telefono, $direccion);
     echo "Usuario agregado exitosamente.\n";
 
-    menuUsuario(); // vuelve al menú principal
+   // menuUsuario(); // vuelve al menú principal
 }
 

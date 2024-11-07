@@ -51,7 +51,7 @@ function modificarReserva($reservasGestor, $habitacionesGestor, $esAdmin = false
     $reserva->setHabitacion($nuevaHabitacion);
     $reserva->setCosto($nuevoCosto);
 
-    $reservasGestor->guardarEnJSON();
+   // $reservasGestor->guardarEnJSON();
     echo 'Reserva actualizada correctamente. Nuevo costo: $' . $nuevoCosto . "\n";
 }
 
@@ -163,7 +163,7 @@ function modificarUsuario($usuariosGestor, $esAdministrador = false)
 function verHabitaciones()
 {
     $habitacionesGestor = new HabitacionControlador;
-    $habitacionesGestor->cargarDesdeJSON();
+   // $habitacionesGestor->cargarDesdeJSON();
     $habitaciones = $habitacionesGestor->obtenerHabitaciones();
     foreach ($habitaciones as $habitacion) {
         echo $habitacion . "\n";

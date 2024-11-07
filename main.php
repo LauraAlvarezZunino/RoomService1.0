@@ -17,6 +17,10 @@ while (true) {
     echo "2. Usuario\n";
     echo "3. Salir\n";
 
+    $habitacionesGestor = new HabitacionControlador();
+    $usuariosGestor = new UsuarioControlador();
+  
+    
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
@@ -24,13 +28,15 @@ while (true) {
             echo 'Ingrese la clave: ';
             $claveAdmin = trim(fgets(STDIN));
             if ($clave == $claveAdmin) {
-                menuAdmin();
+               $vistaAdmin=new VistaAdmin($habitacionesGestor,$usuariosGestor);
+               $vistaAdmin->menuAdmin();
             } else {
                 echo "Clave Erronea.\n";
             }
             break;
         case 2:
-            menuUsuario();
+            $vistaUsuario=new VistaUsuario;
+            $vistaUsuario->menuUsuario();
             break;
         case 3:
             echo "Saliendo del sistema...\n";
