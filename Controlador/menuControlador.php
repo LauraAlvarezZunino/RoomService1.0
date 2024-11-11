@@ -103,7 +103,6 @@ function eliminarReserva($reservasGestor, $usuario = null, $esAdmin = false)
 function modificarUsuario($usuariosGestor, $esAdministrador = false)
 {
     global $dniGuardado;
-    $usuariosGestor = new UsuarioControlador;
     $usuario = $usuariosGestor->obtenerUsuarioPorDni($dniGuardado);
 
     if ($esAdministrador) {
