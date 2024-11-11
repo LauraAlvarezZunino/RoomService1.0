@@ -29,7 +29,7 @@ function calcularCostoReserva($fechaInicio, $fechaFin, $precioPorNoche)
     $fechaInicio = new DateTime($fechaInicio);// datetime clase de php 
     $fechaFin = new DateTime($fechaFin);
     $diferencia = $fechaInicio->diff($fechaFin);
-//modificar los filtros
+
     return $diferencia->days * $precioPorNoche; 
 }
 function solicitarTipoHabitacion()
@@ -94,10 +94,9 @@ function mostrarDatosUsuario($usuariosGestor)
 {
     global $dniGuardado;
 
-    // Obtener la lista completa de usuarios
     $usuarioControlador = new UsuarioControlador;
     $usuario = $usuarioControlador->obtenerUsuarioPorDni($dniGuardado);
-    // Buscar al usuario con el DNI guardado
+
     if ($usuario) {
         echo "-------------------------\n";
         echo 'DNI: ' . $usuario->getDni() . "\n";
