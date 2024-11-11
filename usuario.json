@@ -2,14 +2,14 @@
     "usuarios": [
         {
             "id": 1,
-            "nombre": "Josela Suarez",
-            "dni": "111111",
+            "nombre": "Jose Suarez",
+            "dni": "333333",
             "email": "lala@hotmail.com",
             "telefono": "2494673455"
         },
         {
             "id": 2,
-            "nombre": "Jose Rodriguez",
+            "nombre": "Josesito Rodriguez",
             "dni": "24567890",
             "email": "jose@gmail.com",
             "telefono": "2494698754"
@@ -58,17 +58,10 @@
         },
         {
             "id": 9,
-            "nombre": "Isabel Torres",
-            "dni": "91234567",
+            "nombre": "Isabela Torres",
+            "dni": "23349231",
             "email": "isabel.torres@example.com",
-            "telefono": "2494789123"
-        },
-        {
-            "id": 10,
-            "nombre": "Gabriela Lopez",
-            "dni": "222222",
-            "email": "lpez@gmail.com",
-            "telefono": "2494678590"
+            "telefono": "24532211"
         }
     ]
 }

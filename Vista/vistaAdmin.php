@@ -51,7 +51,7 @@ function menuAdminUsuarios()
                 break;
             case 2:
                 modificarUsuario($usuariosGestor, true);
-                break;
+                return;
             case 3:
                 eliminaUsuario($usuariosGestor);
                 break;
@@ -64,10 +64,12 @@ function menuAdminUsuarios()
     }
 }
 
+
+
 function menuAdminHabitaciones()
 {
     $habitacionesGestor = new HabitacionControlador;
-    $habitacionesGestor->cargarDesdeJSON();
+//    $habitacionesGestor->cargarDesdeJSON();
 
     while (true) {
         echo "\n=== Menú Administrar Habitaciones ===\n";

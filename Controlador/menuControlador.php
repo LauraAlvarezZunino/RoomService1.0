@@ -100,9 +100,11 @@ function eliminarReserva($reservasGestor, $usuario = null, $esAdmin = false)
 
 //USUARIOS
 
-function modificarUsuario($usuariosGestor, $esAdministrador = false)
+function modificarUsuario($usuario, $esAdministrador = false)
 {
     global $dniGuardado;
+    $usuariosGestor = new UsuarioControlador;
+   // $usuario->cargarDesdeJSON();
     $usuario = $usuariosGestor->obtenerUsuarioPorDni($dniGuardado);
 
     if ($esAdministrador) {
