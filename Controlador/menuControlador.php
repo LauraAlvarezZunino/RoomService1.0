@@ -30,6 +30,35 @@ function modificarReserva($reservasGestor, $habitacionesGestor, $esAdmin = false
     $nuevaFechaFin = trim(fgets(STDIN));
     $nuevaFechaFin = $nuevaFechaFin ?: $reserva->getFechaFin();
 
+       $fechaActual = date('Y-m-d');
+
+    if ($nuevaFechaInicio !== $reserva->getFechaInicio()) {  // Solo validar si se cambió la fecha
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $nuevaFechaInicio)) {
+            echo "Por favor, ingrese una fecha válida.\n";
+            return;
+        }
+    
+        // Comparar con la fecha actual
+        if (strtotime($nuevaFechaInicio) < strtotime($fechaActual)) {
+            echo "Por favor, ingrese una fecha válida.\n";
+            return;
+        }
+    }
+    
+    // Validar formato de fecha de fin y que sea posterior a la fecha de inicio
+    if ($nuevaFechaFin !== $reserva->getFechaFin()) {  // Solo validar si se cambió la fecha
+        if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $nuevaFechaFin)) {
+            echo "Por favor, ingrese una fecha válida.\n";
+            return;
+        }
+    
+        // Comparar que la fecha de fin sea posterior a la de inicio
+        if (strtotime($nuevaFechaFin) < strtotime($nuevaFechaInicio)) {
+            echo "Por favor, ingrese una fecha válida.\n";
+            return;
+        }
+    }
+    
     echo 'Ingrese el nuevo número de habitación o deje vacío para mantener la actual: ';
     $nuevoNumeroHabitacion = trim(fgets(STDIN));
     if ($nuevoNumeroHabitacion) {
