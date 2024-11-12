@@ -127,6 +127,7 @@ function registrarse($usuariosGestor)
         if (preg_match("/^\d{7,8}$/", $dni)) {
             if ($usuariosGestor->obtenerUsuarioPorDni($dni)) {
                 echo "El DNI ingresado ya está registrado. Intente nuevamente con otro DNI.\n";
+                return;
             } else {
                 break; // DNI valido y no registrado
             }
