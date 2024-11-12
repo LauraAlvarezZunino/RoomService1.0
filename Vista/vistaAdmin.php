@@ -69,7 +69,7 @@ function menuAdminUsuarios()
 function menuAdminHabitaciones()
 {
     $habitacionesGestor = new HabitacionControlador;
-//    $habitacionesGestor->cargarDesdeJSON();
+
 
     while (true) {
         echo "\n=== Menú Administrar Habitaciones ===\n";

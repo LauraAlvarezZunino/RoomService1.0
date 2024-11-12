@@ -11,11 +11,6 @@
             "precio": "40000"
         },
         {
-            "numero": "3",
-            "tipo": "simple",
-            "precio": "47000"
-        },
-        {
             "numero": "5",
             "tipo": "simple",
             "precio": "35000"
@@ -44,6 +39,11 @@
             "numero": "10",
             "tipo": "simple",
             "precio": "34000"
+        },
+        {
+            "numero": "1",
+            "tipo": "simple",
+            "precio": "600000"
         }
     ]
 }

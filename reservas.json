@@ -17,14 +17,6 @@
             "usuarioDni": "12345678"
         },
         {
-            "id": 14,
-            "fechaInicio": "2024-11-29",
-            "fechaFin": "2024-12-01",
-            "habitacion": "3",
-            "costo": 94000,
-            "usuarioDni": "89123456"
-        },
-        {
             "id": 15,
             "fechaInicio": "2024-12-01",
             "fechaFin": "2024-12-03",

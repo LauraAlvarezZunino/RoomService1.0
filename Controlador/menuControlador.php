@@ -104,7 +104,6 @@ function modificarUsuario($usuario, $esAdministrador = false)
 {
     global $dniGuardado;
     $usuariosGestor = new UsuarioControlador;
-   // $usuario->cargarDesdeJSON();
     $usuario = $usuariosGestor->obtenerUsuarioPorDni($dniGuardado);
 
     if ($esAdministrador) {
@@ -136,9 +135,6 @@ function modificarUsuario($usuario, $esAdministrador = false)
     echo 'Introduce el nuevo nombre (deja vacío para mantener el actual): ';
     $nombreApellido = trim(fgets(STDIN));
 
-    echo 'Introduce el nuevo DNI (deja vacío para mantener el actual): ';
-    $dni = trim(fgets(STDIN));
-
     echo 'Introduce el nuevo email (deja vacío para mantener el actual): ';
     $email = trim(fgets(STDIN));
 
@@ -147,7 +143,6 @@ function modificarUsuario($usuario, $esAdministrador = false)
 
     $nuevosDatos = [
         'nombre' => $nombreApellido ?: null,
-        'dni' => $dni ?: null,
         'email' => $email ?: null,
         'telefono' => $telefono ?: null,
     ];

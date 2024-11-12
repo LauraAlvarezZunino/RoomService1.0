@@ -59,13 +59,13 @@ function solicitarFechasReserva()
     $fechaInicio = '';
     $fechaFin = '';
 
-    // Solicitar y validar fecha de inicio
+
     while (true) {
         echo 'Ingrese la fecha de inicio (YYYY-MM-DD): ';
         $fechaInicio = trim(fgets(STDIN));
         $fechaActual = date('Y-m-d');
 
-        // Validar formato de fecha y que sea posterior a la fecha actual
+    
         if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaInicio) && strtotime($fechaInicio) > strtotime($fechaActual)) {
             break;
         } else {
@@ -73,12 +73,10 @@ function solicitarFechasReserva()
         }
     }
 
-    // Solicitar y validar fecha de fin
     while (true) {
         echo 'Ingrese la fecha de fin (YYYY-MM-DD): ';
         $fechaFin = trim(fgets(STDIN));
 
-        // Validar formato de fecha y que sea posterior a la fecha de inicio
         if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $fechaFin) && strtotime($fechaFin) > strtotime($fechaInicio)) {
             break;
         } else {
@@ -147,7 +145,6 @@ function registrarse($usuariosGestor)
         }
     }
 
-    // Validar teléfono
     while (true) {
         echo 'Ingrese el teléfono del usuario: ';
         $telefono = trim(fgets(STDIN));

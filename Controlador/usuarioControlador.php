@@ -69,12 +69,6 @@ class UsuarioControlador
                     $usuario->setNombreApellido($usuario->getNombreApellido());
                 }
 
-                if (isset($nuevosDatos['dni'])) {
-                    $usuario->setDni($nuevosDatos['dni']);
-                } else {
-                    $usuario->setDni($usuario->getDni());
-                }
-
                 if (isset($nuevosDatos['email'])) {
                     $usuario->setEmail($nuevosDatos['email']);
                 } else {
